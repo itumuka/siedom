@@ -15,8 +15,8 @@ class MahasiswaController extends Controller
     public function index()
     {
         $title = 'Dashboard'; 
-        $parent_breadcrumb = 'B';
-        return view('dashboard', compact('title', 'parent_breadcrumb'));
+        $parent_breadcrumb = 'Dashboard';
+        return view('mahasiswa.dashboard', compact('title', 'parent_breadcrumb'));
     }
     // public function show($id)
     // {
@@ -49,7 +49,6 @@ class MahasiswaController extends Controller
     public function getKomponenPenilaian()
     {
         try {
-            // Fetching all `komponen_penilaian` data
             $komponenPenilaian = DB::table('komponen_penilaian')->get();
             return response()->json($komponenPenilaian);
         } catch (\Exception $e) {
@@ -60,7 +59,6 @@ class MahasiswaController extends Controller
     public function getSoal(Request $request)
     {
         try {
-            // Fetching all `soal` data without filtering by `id_kelas`
             $soal = DB::table('soal')->get();
             return response()->json($soal);
         } catch (\Exception $e) {

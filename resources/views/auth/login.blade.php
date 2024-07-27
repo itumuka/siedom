@@ -14,104 +14,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-{{-- <body class="hold-transition theme-primary bg-img" style="background-color: #172B4C;">
-    <section class="py-50">
-        <div class="container">
-            <div class="row justify-content-center g-0">
-                <div class="col-lg-5 col-md-5 col-12">
-                    <div class="box box-body">
-                        <div class="content-top-agile pb-0 pt-20">
-                            <h2 class="text-primary">Let's Get Started</h2>
-                            <p class="mb-0">Sign in to Quiz</p>
-                        </div>
-                        <div class="p-40">
-                            <p class="notiferror"></p>
-                            <form class="form-horizontal new-lg-form" id="form_login">
-                                @csrf
-                                <div class="form-group">
-                                    <div class="input-group mb-15">
-                                        <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-                                        <input type="text" class="form-control ps-15 bg-transparent" name="username" id="username" placeholder="Username">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group mb-15">
-                                        <span class="input-group-text bg-transparent"><i class="ti-lock"></i></span>
-                                        <input type="password" class="form-control ps-15 bg-transparent" id="password" name="password" required autocomplete="current-password" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 text-center">
-                                        <button type="button" id="login_enter" class="btn btn-info w-p100 mt-15">Sign In</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        function startSpinner() {
-            $("#login_enter").prop("disabled", true);
-            $("#login_enter").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
-        }
-
-        function stopSpinner() {
-            $("#login_enter").prop("disabled", false);
-            $("#login_enter").html('Sign In');
-        }
-
-        function aksilogin() {
-            var username = $("input[name=username]").val();
-            var password = $("input[name=password]").val();
-            startSpinner();
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('/login') }}",
-                data: {
-                    username: username,
-                    password: password
-                },
-                success: function(result) {
-                    if (result.success === 'Admin') {
-                        window.location.href = "{{ url('/home') }}"; // Redirect ke halaman home admin
-                    } else if (result.success === 'Mahasiswa') {
-                        window.location.href = "{{ url('/home') }}"; // Redirect ke halaman home mahasiswa
-                    }
-                },
-                error: function(xhr) {
-                    $(".notiferror").html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Gagal Login!! </strong><br> ' + xhr.responseJSON.error + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                },
-                complete: function() {
-                    stopSpinner();
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            $("#login_enter").click(function() {
-                aksilogin();
-            });
-
-            $(document).keypress(function(event) {
-                if (event.keyCode === 13) {
-                    $("#login_enter").click();
-                }
-            });
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        });
-    </script>
-</body>
-
-</html> --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -150,10 +52,10 @@
                     <div class="col-lg-5 col-md-5 col-12">
                         <div class="bg-white rounded30 shadow-lg">
                             <div class="content-top-agile p-20 pb-0">
-                                <img src="{{ url('imageup45/logoumuka.png') }}" alt="User Image"
+                                <img src="{{ url('images/logo_.png') }}" alt="User Image"
                                     class="h-100 align-self-end rounded-circle"><br><br>
                                 <b class="mb-0">UNIVERSITAS MUHAMMADIYAH KARANGANYAR</b>
-                                <h2 style="color: #172B4C;">Sistem Informasi Akademik</h2>
+                                <h2 style="color: #172B4C;">Kuisioner Evaluasi</h2>
                             </div>
                             <div class="p-40">
                                 {{-- <form method="post"> --}}
@@ -301,7 +203,7 @@
                             },
                             success: function(result) {
                                 // console.log(result.data.username);
-                                document.location.href = "{{ url('home') }}";
+                                document.location.href = "{{ url('/admin/dashboard') }}";
                             }
                         })
                     } else if (result.success == 'Mahasiswa') {

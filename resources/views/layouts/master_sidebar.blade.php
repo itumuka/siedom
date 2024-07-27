@@ -140,12 +140,51 @@
                     <div class="multinav-scroll" style="height: 100%;">
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
-                            @if (Session::get('role_id') == 1)
-                                @include('layouts.menu_superadmin')
-                            @elseif (Session::get('role_id') == 2)
-                                @include('layouts.menu_admin')
+                            @if (Session::get('tipe') == 'Mahasiswa')
+                            <li class="header">Menu</li>
+                            <li class="{{ Route::is('mahasiswa.dashboard') ? 'active' : '' }}">
+                                <a href="{{ route('mahasiswa.dashboard') }}">
+                                    <i class="fa fa-dashcube"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            @elseif (Session::get('tipe') == "Pegawai")
+                            <li class="header">Menu</li>
+                            <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                                <a href="{{ route('admin.dashboard') }}">
+                                    <i class="fa fa-dashcube"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-table" data-bs-toggle="tooltip" title="Post Berita Terkini">
+                                        <span class="path1"></span><span class="path2"></span>
+                                    </i>
+                                    <span>Data Master</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                  </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Route::is('komponen-penilaian.index') ? 'active' : '' }}">
+                                        <a href="{{ route('komponen-penilaian.index') }}">
+                                            <i class="fa fa-newspaper-o" data-bs-toggle="tooltip" title="Komponen Penilaian">
+                                                <span class="path1"></span><span class="path2"></span>
+                                            </i>
+                                            <span>Komponen Penilaian</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ Route::is('soal.index') ? 'active' : '' }}">
+                                        <a href="{{ route('soal.index') }}">
+                                            <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Soal">
+                                                <span class="path1"></span><span class="path2"></span>
+                                            </i>
+                                            <span>Soal</span>
+                                        </a>
+                                    </li>
+                                </ul>                          
                             @endif
-
                         </ul>
                     </div>
                 </div>

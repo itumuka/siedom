@@ -17,7 +17,7 @@ class LoginController extends Controller
         return view('auth/login', compact('title'));
     }
 
-    public function make_session_pegawai(Request $request)
+    public function make_session_pegawa(Request $request)
     {
 
         Session::put('session_tahun', $request->tahun);
@@ -30,8 +30,6 @@ class LoginController extends Controller
         Session::put('nm_module', $request->nm_module);
         Session::put('kode_fakultas', $request->kode_fakultas);
         Session::put('token', $request->token);
-
-
 
         return true;
     }
@@ -60,8 +58,6 @@ class LoginController extends Controller
 
     public function make_session_dosen(Request $request)
     {
-
-
         Session::put('session_tahun', $request->tahun);
         Session::put('session_semester', $request->semester);
         Session::put('session_nama_tahunakademik', $request->tahun_ajaran);
