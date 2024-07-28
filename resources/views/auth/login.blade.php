@@ -111,7 +111,7 @@
                         </div>
                         <br>
                         <div class="text-center">
-                            <p><a class="mt-20 text-white" href="http://sia.umuka.ac.id">UMUKA © 2023</a></p>
+                            <p><a class="mt-20 text-white" href="http://sia.umuka.ac.id">UMUKA © 2024</a></p>
                         </div>
                         {{-- <div class="text-center">
 						  <p class="mt-20 text-white">- Sign With -</p>
