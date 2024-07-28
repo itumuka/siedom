@@ -96,7 +96,7 @@
         <nav hidden class="nav-white header-fancy">
             <div class="nav-header">
                 <a href="{{ route('home')}}" class="brand">
-                    <img src="{{ URL::asset('images/logo_umuka_dark.png') }}" alt="" />
+                    <img src="{{ URL::asset('images/logo_siedom.png') }}" alt="" />
                 </a>
                 <button class="toggle-bar">
                     <span class="ti-menu"></span>
