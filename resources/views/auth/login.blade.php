@@ -52,10 +52,10 @@
                     <div class="col-lg-5 col-md-5 col-12">
                         <div class="bg-white rounded30 shadow-lg">
                             <div class="content-top-agile p-20 pb-0">
-                                <img src="{{ url('images/logo_.png') }}" alt="User Image"
-                                    class="h-100 align-self-end rounded-circle"><br><br>
-                                <b class="mb-0">UNIVERSITAS MUHAMMADIYAH KARANGANYAR</b>
-                                <h2 style="color: #172B4C;">Kuisioner Evaluasi</h2>
+                                <img src="{{ url('images/logo_siedom.png') }}" alt="User Image"
+                                    class="h-100 align-self-end"><br><br>
+                                {{-- <b class="mb-0">UNIVERSITAS MUHAMMADIYAH KARANGANYAR</b>
+                                <h2 style="color: #172B4C;">Kuisioner Evaluasi</h2> --}}
                             </div>
                             <div class="p-40">
                                 {{-- <form method="post"> --}}
@@ -111,7 +111,7 @@
                         </div>
                         <br>
                         <div class="text-center">
-                            <p><a class="mt-20 text-white" href="http://sia.umuka.ac.id">UMUKA © 2023</a></p>
+                            <p><a class="mt-20 text-white" href="http://sia.umuka.ac.id">UMUKA © 2024</a></p>
                         </div>
                         {{-- <div class="text-center">
 						  <p class="mt-20 text-white">- Sign With -</p>
