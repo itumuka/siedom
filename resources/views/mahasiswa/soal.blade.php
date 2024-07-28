@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var startIndex = (page - 1) * questionsPerPage;
             var endIndex = Math.min(page * questionsPerPage, soalData.length);
 
+            var questionCounter = startIndex + 1;
+
             var paginatedSoal = soalData.slice(startIndex, endIndex);
 
             paginatedSoal.forEach(soal => {

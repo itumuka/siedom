@@ -213,7 +213,7 @@
                             success: function(result) {
                                 showToastr('success', 'Berhasil!', 'Berhasil Login');
                                 console.log(result);
-                                document.location.href = "{{ route('home') }}";
+                                document.location.href = "{{ route('dashboard') }}";
                             }
                         })
 

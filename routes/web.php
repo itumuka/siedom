@@ -19,6 +19,7 @@ Route::get('/makesession-dosen', [LoginController::class, 'make_session_dosen'])
 
 
 Route::middleware(['cekmahasiswa'])->group(function () {
+Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
 Route::get('home', [MahasiswaController::class, 'index'])->name('home');
 Route::get('soal', [MahasiswaController::class, 'show'])->name('soal.page');
 Route::get('/get-komponen-penilaian', [MahasiswaController::class, 'getKomponenPenilaian']);

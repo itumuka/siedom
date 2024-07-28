@@ -123,6 +123,7 @@
 
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
+                        @if (Session::get('tipe') == 'Mahasiswa')
                         <li>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-right" title="Setting"
                                 class="waves-effect waves-light dropdown-toggle">
@@ -133,6 +134,7 @@
                                 Launch demo modal
                               </button> --}}
                         </li>
+                        @endif
 
                         <!-- User Account-->
                         <li class="dropdown user user-menu">
@@ -160,6 +162,7 @@
 
             </nav>
         </header>
+             @if (Session::get('tipe') == 'Mahasiswa')
                         {{-- new --}}
                 <div class="modal modal-right fade" id="modal-right" tabindex="-1">
                     <div class="modal-dialog">
@@ -196,6 +199,7 @@
                     </div>
                 </div>
                 {{-- end new  --}}
+            @endif
 
         <aside class="main-sidebar">
             <!-- sidebar-->
@@ -206,12 +210,20 @@
                         <ul class="sidebar-menu" data-widget="tree">
                             @if (Session::get('tipe') == 'Mahasiswa')
                             <li class="header">Menu</li>
-                            <li class="{{ Route::is('home') ? 'active' : '' }}">
-                                <a href="{{ route('home') }}">
+                            <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard') }}">
                                     <i class="fa fa-dashcube"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+
+                            <li class="{{ Route::is('home') ? 'active' : '' }}">
+                                <a href="{{ route('home') }}">
+                                    <i class="fa fa-table"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Kuisioner</span>
+                                </a>
+                            </li>
+
                             @elseif (Session::get('tipe') == "Pegawai")
                             <li class="header">Menu</li>
                             <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}">
