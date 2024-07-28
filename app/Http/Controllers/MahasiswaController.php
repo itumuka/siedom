@@ -49,7 +49,7 @@ class MahasiswaController extends Controller
     public function getKomponenPenilaian()
     {
         try {
-            $komponenPenilaian = DB::table('komponen_penilaian')->get();
+            $komponenPenilaian = DB::table('edom_komponen_penilaian')->get();
             return response()->json($komponenPenilaian);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Data tidak tersedia.'], 500);
@@ -59,7 +59,7 @@ class MahasiswaController extends Controller
     public function getSoal(Request $request)
     {
         try {
-            $soal = DB::table('soal')->get();
+            $soal = DB::table('edom_soal')->get();
             return response()->json($soal);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Data tidak tersedia.'], 500);
@@ -71,7 +71,7 @@ class MahasiswaController extends Controller
         $answers = $request->all();
         
         foreach ($answers as $answer) {
-            DB::table('jawaban')->insert([
+            DB::table('edom_jawaban')->insert([
                 'id_soal' => $answer['id_soal'],
                 'user_id' => $answer['user_id'],
                 'id_mreg' => $answer['id_mreg'],
@@ -89,7 +89,7 @@ class MahasiswaController extends Controller
         $id_mhs = Session::get('id_mhs');
         $id_mreg = Session::get('id_mreg');
     
-        $completedClasses = DB::table('jawaban')
+        $completedClasses = DB::table('edom_jawaban')
             ->where('user_id', $id_mhs)
             ->orWhere('id_mreg', $id_mreg)
             ->select('id_kelas')

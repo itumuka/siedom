@@ -17,9 +17,9 @@ class SoalController extends Controller
     public function getData()
     {
         try {
-            $query = DB::table('soal')
-                ->select('soal.*', 'komponen_penilaian.nama_komponen')
-                ->leftJoin('komponen_penilaian', 'soal.id_komponen_penilaian', '=', 'komponen_penilaian.id_komponen_penilaian');
+            $query = DB::table('edom_soal')
+                ->select('edom_soal.*', 'edom_komponen_penilaian.nama_komponen')
+                ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian');
 
             $totalRecords = $query->count();
     
@@ -42,7 +42,7 @@ class SoalController extends Controller
         try {
             $id_mreg = Session::get('id_mreg');
 
-            DB::table('soal')->insert([
+            DB::table('edom_soal')->insert([
                 'pertanyaan' => $request->pertanyaan,
                 'id_komponen_penilaian' => $request->id_komponen_penilaian,
                 'id_mreg' => $id_mreg,
@@ -58,7 +58,7 @@ class SoalController extends Controller
 
     public function show($id)
     {
-        $soal = DB::table('soal')->where('id_soal', $id)->first();
+        $soal = DB::table('edom_soal')->where('id_soal', $id)->first();
         return response()->json(['data' => $soal]);
     }
 
@@ -67,7 +67,7 @@ class SoalController extends Controller
         try {
             $id_mreg = Session::get('id_mreg');
 
-            DB::table('soal')
+            DB::table('edom_soal')
                 ->where('id_soal', $id)
                 ->update([
                     'pertanyaan' => $request->pertanyaan,
@@ -85,20 +85,26 @@ class SoalController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('soal')->where('id_soal', $id)->delete();
+            DB::beginTransaction();
+
+            DB::table('edom_jawaban')->where('id_soal', $id)->delete();
+
+            DB::table('edom_soal')->where('id_soal', $id)->delete();
+    
+            DB::commit();
             return response()->json(['message' => 'Data berhasil dihapus']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal menghapus data'], 500);
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
     public function getKomponenPenilaianOptions()
     {
         try {
-            $komponenPenilaian = DB::table('komponen_penilaian')->get();
-            $totalRecords = DB::table('komponen_penilaian')->count();
+            $komponenPenilaian = DB::table('edom_komponen_penilaian')->get();
+            $totalRecords = DB::table('edom_komponen_penilaian')->count();
     
-            Log::info('Komponen Penilaian:', $komponenPenilaian->toArray());
     
             return response()->json([
                 'draw' => intval(request()->get('draw')),

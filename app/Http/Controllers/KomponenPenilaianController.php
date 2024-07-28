@@ -15,8 +15,8 @@ class KomponenPenilaianController extends Controller
     public function getData()
     {
         try {
-            $komponenPenilaian = DB::table('komponen_penilaian')->get();
-            $totalRecords = DB::table('komponen_penilaian')->count();
+            $komponenPenilaian = DB::table('edom_komponen_penilaian')->get();
+            $totalRecords = DB::table('edom_komponen_penilaian')->count();
 
             return response()->json([
                 'draw' => intval(request()->get('draw')),
@@ -36,7 +36,7 @@ class KomponenPenilaianController extends Controller
                 'nama_komponen' => 'required|string|max:255',
             ]);
 
-            $id = DB::table('komponen_penilaian')->insertGetId([
+            $id = DB::table('edom_komponen_penilaian')->insertGetId([
                 'nama_komponen' => $validated['nama_komponen'],
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -51,7 +51,7 @@ class KomponenPenilaianController extends Controller
     public function show($id)
     {
         try {
-            $data = DB::table('komponen_penilaian')->where('id_komponen_penilaian', $id)->first();
+            $data = DB::table('edom_komponen_penilaian')->where('id_komponen_penilaian', $id)->first();
             return response()->json(['data' => $data]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Data tidak tersedia.'], 500);
@@ -65,7 +65,7 @@ class KomponenPenilaianController extends Controller
                 'nama_komponen' => 'required|string|max:255',
             ]);
 
-            DB::table('komponen_penilaian')->where('id_komponen_penilaian', $id)->update([
+            DB::table('edom_komponen_penilaian')->where('id_komponen_penilaian', $id)->update([
                 'nama_komponen' => $validated['nama_komponen'],
                 'updated_at' => now(),
             ]);
@@ -79,13 +79,13 @@ class KomponenPenilaianController extends Controller
     public function destroy($id)
     {
         try {
-            $count = DB::table('soal')->where('id_komponen_penilaian', $id)->count();
+            $count = DB::table('edom_soal')->where('id_komponen_penilaian', $id)->count();
             if ($count > 0) {
                 return response()->json(['error' => 'Data tidak bisa dihapus karena ada ketergantungan di tabel soal.'], 400);
             }
 
             // Delete the record
-            DB::table('komponen_penilaian')->where('id_komponen_penilaian', $id)->delete();
+            DB::table('edom_komponen_penilaian')->where('id_komponen_penilaian', $id)->delete();
             return response()->json(['success' => 'Data berhasil dihapus.']);
         } catch (\Exception $e) {
             Log::error('Error deleting komponen_penilaian: ' . $e->getMessage());

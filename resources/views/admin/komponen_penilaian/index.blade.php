@@ -169,7 +169,7 @@ $(document).ready(function() {
                 type: 'DELETE',
                 success: function(response) {
                     table.ajax.reload();
-                    showToastr('error', 'Deleted!', 'Data Berhasil Dihapus');
+                    showToastr('success', 'Deleted!', 'Data Berhasil Dihapus');
                 },
                 error: function(xhr) {
                     var error = JSON.parse(xhr.responseText);
