@@ -69,6 +69,20 @@
             var semester = $('#semester').val();
             var idMhs = "{{ Session::get('id_mhs') }}";
             var idMreg = "{{ Session::get('id_mreg') }}";
+            var completedClasses = [];
+
+            $.ajax({
+                url: "{{ route('check.kuisioner.status') }}",
+                type: "GET",
+                data: { nim: nim },
+                success: function(response) {
+                    completedClasses = response.completedClasses;
+                    console.log('Completed Classes:', completedClasses); // Debugging
+                },
+                error: function(xhr) {
+                    console.error('Failed to fetch completed classes');
+                }
+            });
 
             console.log("Token:", token);
             console.log("ID:", idMhs);
@@ -105,26 +119,11 @@
                 data: null,
                 className: 'text-center',
                 render: function(data, type, row, meta) {
-                    var buttonHtml = '<button type="button" class="btn btn-sm btn-primary btn-detail" data-id_kelas="' + row.id_kelas + '">Isi</button>';
+                    var isCompleted = completedClasses.includes(row.id_kelas);
+                    var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
+                    var buttonText = isCompleted ? 'Done' : 'Isi';
 
-
-                    $.ajax({
-                        url: "{{ route('check.kuisioner.status') }}",
-                        type: "GET",
-                        data: {
-                            id_mhs: idMhs,
-                            id_mreg: idMreg,
-                            id_kelas: row.id_kelas
-                        },
-                        success: function(response) {
-                            if (response.completed) {
-                                buttonHtml = '<button type="button" class="btn btn-sm btn-success btn-detail" data-id_kelas="' + row.id_kelas + '">Selesai</button>';
-                            }
-                            table.cell({ row: meta.row, column: 0 }).data(buttonHtml).draw();
-                        }
-                    });
-
-                    return buttonHtml;
+                    return `<button type="button" class="btn btn-sm ${buttonClass} btn-detail" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
                 }
             },
             { data: 'nama_matakuliah' },

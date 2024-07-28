@@ -86,17 +86,19 @@ class MahasiswaController extends Controller
 
     public function checkKuisionerStatus(Request $request)
     {
-        $idMhs = $request->query('id_mhs');
-        $idMreg = $request->query('id_mreg');
-        $idKelas = $request->query('id_kelas');
-        
-        $exists = DB::table('jawaban')
-            ->where('user_id', $idMhs)
-            ->where('id_mreg', $idMreg)
-            ->where('id_kelas', $idKelas)
-            ->exists();
-            $test = var_dump($exists);
-
-        return response()->json(['completed' => $test]);
+        $id_mhs = Session::get('id_mhs');
+        $id_mreg = Session::get('id_mreg');
+    
+        $completedClasses = DB::table('jawaban')
+            ->where('user_id', $id_mhs)
+            ->orWhere('id_mreg', $id_mreg)
+            ->select('id_kelas')
+            ->distinct()
+            ->pluck('id_kelas')
+            ->toArray();
+    
+        return response()->json([
+            'completedClasses' => $completedClasses
+        ]);
     }
 }
