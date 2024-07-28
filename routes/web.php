@@ -16,12 +16,17 @@ Route::get('/makesession-pegawai', [LoginController::class, 'make_session_pegawa
 Route::get('/makesession-mahasiswa', [LoginController::class, 'make_session_mahasiswa'])->name('make_session_mahasiswa');
 Route::get('/makesession-dosen', [LoginController::class, 'make_session_dosen'])->name('make_session_dosen');
 
+
+
 Route::middleware(['cekmahasiswa'])->group(function () {
 Route::get('home', [MahasiswaController::class, 'index'])->name('home');
 Route::get('soal', [MahasiswaController::class, 'show'])->name('soal.page');
 Route::get('/get-komponen-penilaian', [MahasiswaController::class, 'getKomponenPenilaian']);
 Route::get('/get-soal', [MahasiswaController::class, 'getSoal']);
 Route::post('/submit-jawaban', [MahasiswaController::class, 'store']);
+Route::get('/admin/change_session', [AdminController::class, 'change_session'])->name('change_session');
+Route::get('/admin/getsession_ta', [AdminController::class, 'getsession_ta'])->name('getsession_ta');
+Route::get('/check-kuisioner-status', [MahasiswaController::class, 'checkKuisionerStatus'])->name('check.kuisioner.status');
 });
 
 Route::middleware(['cekpegawai'])->group(function () {
@@ -31,7 +36,6 @@ Route::post('/admin/komponen-penilaian', [KomponenPenilaianController::class, 's
 Route::put('/admin/komponen-penilaian/{id}', [KomponenPenilaianController::class, 'update']);
 Route::delete('/admin/komponen-penilaian/{id}', [KomponenPenilaianController::class, 'destroy']);
 Route::get('/admin/komponen-penilaian/{id}', [KomponenPenilaianController::class, 'show']);
-
 
 
 Route::get('/admin/soal', [SoalController::class, 'index'])->name('soal.index');

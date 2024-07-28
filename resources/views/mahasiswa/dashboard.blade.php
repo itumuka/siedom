@@ -67,8 +67,11 @@
             var nim = $('#nim').val();
             var tahun = $('#tahun').val();
             var semester = $('#semester').val();
+            var idMhs = "{{ Session::get('id_mhs') }}";
+            var idMreg = "{{ Session::get('id_mreg') }}";
 
             console.log("Token:", token);
+            console.log("ID:", idMhs);
             console.log("Username:", userlogin);
             console.log("NIM:", nim);
             console.log("Tahun:", tahun);
@@ -98,26 +101,37 @@
         }
     },
     columns: [
-                    {
-                        data: null,
-                        className: 'text-center',
-                        render: function(data, type, row, meta) {
-                            return '<button type="button" class="btn btn-sm btn-primary btn-detail" data-id_kelas="' + row.id_kelas + '">Isi Kuisioner</button>';
+            {
+                data: null,
+                className: 'text-center',
+                render: function(data, type, row, meta) {
+                    var buttonHtml = '<button type="button" class="btn btn-sm btn-primary btn-detail" data-id_kelas="' + row.id_kelas + '">Isi Kuisioner</button>';
+
+
+                    $.ajax({
+                        url: "{{ route('check.kuisioner.status') }}",
+                        type: "GET",
+                        data: {
+                            id_mhs: idMhs,
+                            id_mreg: idMreg,
+                            id_kelas: row.id_kelas
+                        },
+                        success: function(response) {
+                            if (response.completed) {
+                                buttonHtml = '<button type="button" class="btn btn-sm btn-success btn-detail" data-id_kelas="' + row.id_kelas + '">Done</button>';
+                            }
+                            table.cell({ row: meta.row, column: 0 }).data(buttonHtml).draw();
                         }
-                    },
-                    {
-                        data: 'nama_matakuliah'
-                    },
-                    {
-                        data: 'kode_matakuliah'
-                    },
-                    {
-                        data: 'semester'
-                    },
-                    {
-                        data: 'dosen'
-                    }
-                ],
+                    });
+
+                    return buttonHtml;
+                }
+            },
+            { data: 'nama_matakuliah' },
+            { data: 'kode_matakuliah' },
+            { data: 'semester' },
+            { data: 'dosen' }
+        ],
                 order: []
             });
 

@@ -83,4 +83,19 @@ class MahasiswaController extends Controller
         
         return response()->json(['message' => 'Jawaban saved successfully']);
     }
+
+    public function checkKuisionerStatus(Request $request)
+    {
+        $idMhs = $request->query('id_mhs');
+        $idMreg = $request->query('id_mreg');
+        $idKelas = $request->query('id_kelas');
+        
+        $exists = DB::table('jawaban')
+            ->where('user_id', $idMhs)
+            ->where('id_mreg', $idMreg)
+            ->where('id_kelas', $idKelas)
+            ->exists();
+        
+        return response()->json(['completed' => $exists]);
+    }
 }

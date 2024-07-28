@@ -199,10 +199,11 @@
                                 semester: result.smtta[0].semester,
                                 tahun: result.smtta[0].tahun,
                                 tahun_ajaran: result.smtta[0].tahun_ajaran,
-                                token: result.token
+                                token: result.token,
+                                id_mreg: result.smtta[0].id_mreg
                             },
                             success: function(result) {
-                                // console.log(result.data.username);
+                                showToastr('success', 'Berhasil!', 'Berhasil Login');
                                 document.location.href = "{{ url('/admin/dashboard') }}";
                             }
                         })
@@ -226,6 +227,7 @@
                                 token: result.token
                             },
                             success: function(result) {
+                                showToastr('success', 'Berhasil!', 'Berhasil Login');
                                 console.log(result);
                                 document.location.href = "{{ route('home') }}";
                             }

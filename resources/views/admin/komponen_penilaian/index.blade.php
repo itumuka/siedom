@@ -123,7 +123,7 @@ $(document).ready(function() {
                     showToastr('success', 'Berhasil!', 'Data Berhasil Diperbarui');
                 },
                 error: function(xhr) {
-                    alert('Gagal memperbarui data');
+                    showToastr('error', 'Error!', 'Gagal');
                 }
             });
         } else {
@@ -137,7 +137,7 @@ $(document).ready(function() {
                     showToastr('success', 'Berhasil!', 'Data Berhasil Ditambahkan');
                 },
                 error: function(xhr) {
-                    alert('Gagal menambah data');
+                    showToastr('error', 'Error!', 'Gagal');
                 }
             });
         }
@@ -173,7 +173,7 @@ $(document).ready(function() {
                 },
                 error: function(xhr) {
                     var error = JSON.parse(xhr.responseText);
-                    alert(error.error || 'Gagal menghapus data');
+                    showToastr('error', 'Error!', 'Gagal');
                 }
             });
         }

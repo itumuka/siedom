@@ -62,6 +62,21 @@
             font-size: 0.9em;
         }
 
+        .select2-container {
+        z-index: 1050 !important; /* Ensure this is higher than the modal's z-index */
+    }
+
+    .select2-container .select2-dropdown {
+        z-index: 1051 !important; /* Ensure this is higher than the select2 container */
+    }
+
+    /* Ensure modal content has a lower z-index */
+    .modal-backdrop {
+        z-index: 1040 !important;
+    }
+    .modal {
+        z-index: 1050 !important;
+    }
         /* End Reduce vertical spacing */
     </style>
     @yield('css')
@@ -108,6 +123,16 @@
 
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-right" title="Setting"
+                                class="waves-effect waves-light dropdown-toggle">
+                                <i class="icon-Settings"><span class="path1"></span><span
+                                        class="path2"></span></i>
+                            </a>
+                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-right">
+                                Launch demo modal
+                              </button> --}}
+                        </li>
 
                         <!-- User Account-->
                         <li class="dropdown user user-menu">
@@ -126,12 +151,51 @@
                                             class="ti-lock text-muted me-2"></i> Logout</a>
                                 </li>
                             </ul>
-                        </li>
 
+                        </li>
+                    
                     </ul>
+
                 </div>
+
             </nav>
         </header>
+                        {{-- new --}}
+                <div class="modal modal-right fade" id="modal-right" tabindex="-1">
+                    <div class="modal-dialog">
+                        <form id="form_tahunakademik" method="GET">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tahun Akademik</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+        
+                                <div class="modal-body">
+                                    <p class="text-dark my-10 font-size-16">
+                                    <div class="px-25 py-10 w-100"><span class="badge badge-warning" id="ta"></span>
+                                    </div>
+                                    Sesuaikan <strong class="text-warning">Tahun Akademik</strong> pilihanmu!
+                                    </p>
+                                    <p class="mb-2 text-dark my-10 font-size-16">
+                                        <select class="form-control selecttahunakademik" style="width: 100%;"
+                                            name="tahunakademik" id="tahunakademik"></select>
+                                    </p>
+                                    {{-- <p>
+                                <button type="submit" class="btn btn-sm btn-rounded btn-primary btn-outline"><i class="ti-reload"></i> Pilih
+                                </button>
+                            </p> --}}
+                                </div>
+                                <div class="modal-footer modal-footer-uniform">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary float-right">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{-- end new  --}}
 
         <aside class="main-sidebar">
             <!-- sidebar-->
@@ -142,8 +206,8 @@
                         <ul class="sidebar-menu" data-widget="tree">
                             @if (Session::get('tipe') == 'Mahasiswa')
                             <li class="header">Menu</li>
-                            <li class="{{ Route::is('mahasiswa.dashboard') ? 'active' : '' }}">
-                                <a href="{{ route('mahasiswa.dashboard') }}">
+                            <li class="{{ Route::is('home') ? 'active' : '' }}">
+                                <a href="{{ route('home') }}">
                                     <i class="fa fa-dashcube"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Dashboard</span>
                                 </a>
@@ -291,6 +355,74 @@
             //             }
             // });
 
+            $('#form_tahunakademik').on('submit', function(event) {
+                event.preventDefault();
+                var form_data = $(this).serialize();
+                $.ajax({
+                    url: "{{ config('setting.second_url') }}akademik/change-session-tahunakademik",
+                    method: "GET",
+                    data: form_data,
+                    dataType: "json",
+                    headers: {
+                        "Authorization": 'Bearer ' + token,
+                        "username": userlogin
+                    },
+                    beforeSend: function() {
+                        $("#btsubmit").prop('disabled', true);
+                    },
+                    success: function(data) {
+                        if (data.error) {
+                            showToastr('error', 'Error!', data.error);
+                            $("#btsubmit").prop('disabled', false);
+                        } else if (data.success) {
+                            showToastr('success', 'Success!', data.success);
+                            $("#btsubmit").prop('disabled', false);
+                            make_session_depan(data);
+
+                        }
+                    }
+                })
+            });
+
+
+
+            function make_session_depan(a) {
+                $.ajax({
+                    url: "{{ route('change_session') }}",
+                    method: "GET",
+                    headers: {
+                        "Authorization": 'Bearer ' + token,
+                        "username": userlogin
+                    },
+                    data: {
+                        semester: a.smtta[0].semester,
+                        tahun: a.smtta[0].tahun,
+                        tahun_ajaran: a.smtta[0].tahun_ajaran
+                    },
+                    dataType: "json",
+                    success: function(result) {
+                        location.reload();
+                    }
+                })
+            }
+
+            $('#modal-right').on('shown.bs.modal', function() {
+                $.ajax({
+                    url: "{{ route('getsession_ta') }}",
+                    method: "GET",
+                    headers: {
+                        "Authorization": 'Bearer ' + token,
+                        "username": userlogin
+                    },
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        $("#ta").html(data.ket);
+                    }
+                });
+
+            });
 
             $('.selecttahunakademik').select2({
                 allowClear: true,
@@ -374,6 +506,10 @@
             })
 
         }
+
+        //new
+        
+
 
         // select: {
         //     style: 'multi',

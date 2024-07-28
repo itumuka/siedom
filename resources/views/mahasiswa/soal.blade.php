@@ -1,180 +1,203 @@
 @extends('layouts.master_sidebar')
 
-@section('title','Kuisioner')
+@section('title', 'Kuisioner')
 
 @section('css')
 <style type="text/css">
+    .container {
+        text-align: left;
+    }
+
+    .pagination-controls {
+        margin-top: 20px;
+        text-align: left;
+    }
 </style>
 @stop
 
 @section('content')
-    <style type="text/css">
-    </style>
-
     <div class="container mt-sm-5 my-1">
         <h1>Kuesioner Evaluasi Dosen Oleh Mahasiswa</h1>
-        <div id="detail-content">
-        </div>
+        <div id="detail-content"></div>
         <form id="evaluation-form">
             <input type="hidden" name="id_mreg" id="id_mreg" value="">
-            <div id="evaluation-content">
+            <div id="evaluation-content"></div>
+            <div class="pagination-controls">
+                <button type="button" class="btn btn-warning" id="prev-button">
+                    <i class=""></i> Previous
+                </button>
+                <button type="submit" class="btn btn-success" id="next-button">
+                    <i class=""></i> Next
+                </button>
+                <button type="submit" class="btn btn-primary" id="submit-button" style="display: none;">
+                    <i class="ti-save-alt"></i> Submit
+                </button>
             </div>
-            {{-- <button type="submit" class="btn btn-primary" id="submit-button">Submit</button> --}}
-              <button type="submit" class="btn btn-primary" id="submit-button">
-                <i class="ti-save-alt"></i> Submit
-              </button>
         </form>
     </div>
 @endsection
 
 @section('script-master')
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        var idKelas = localStorage.getItem('selectedMatkulId');
-        var allMatkulData = JSON.parse(localStorage.getItem('allMatkulData')) || [];
-        var idMhs = localStorage.getItem('selectedMhsId');
-        var idMreg = localStorage.getItem('selectedMregId');
+document.addEventListener('DOMContentLoaded', function() {
+    var idKelas = localStorage.getItem('selectedMatkulId');
+    var allMatkulData = JSON.parse(localStorage.getItem('allMatkulData')) || [];
+    var idMhs = localStorage.getItem('selectedMhsId');
+    var idMreg = localStorage.getItem('selectedMregId');
+    console.log("ID:", idMhs);
 
-        console.log('Retrieved selected ID:', idKelas);
-        console.log('Retrieved all data:', allMatkulData);
-        console.log('Retrieved user ID:', idMhs);
-        console.log('Retrieved id_mreg:', idMreg);
+    if (idKelas && allMatkulData.length > 0) {
+        var matkulData = allMatkulData.find(item => item.id_kelas === parseInt(idKelas, 10));
+        document.getElementById('detail-content').innerHTML = `
+            <p><strong>Matakuliah:</strong> ${matkulData ? matkulData.nama_matakuliah : 'N/A'}</p>
+            <p><strong>Dosen:</strong> ${matkulData ? matkulData.dosen : 'N/A'}</p>
+            <p><strong>Keterangan Penilaian : </strong></p>
+            1 = Sangat Tidak Sesuai : bila kenyataan di lapangan sangat tidak sesuai dengan komponen yang dinilai.<br>
+            2 = Tidak Sesuai : bila kenyataan di lapangan kurang sesuai dengan komponen yang dinilai<br>
+            3 = Sesuai : bila kenyataan di lapangan cukup sesuai dengan komponen yang dinilai.<br>
+            4 = Sangat Sesuai : bila kenyataan di lapangan sangat sesuai dengan komponen yang dinilai.<br>
+            0 = Tidak Belaku : bila saudara tidak pernah dibimbing oleh dosen yang bersangkutan<br><br>
+        `;
+    } else {
+        document.getElementById('detail-content').innerHTML = '<p>Data tidak tersedia.</p>';
+    }
 
-        if (idKelas && allMatkulData.length > 0) {
-            var matkulData = allMatkulData.find(item => item.id_kelas === parseInt(idKelas, 10));
+    document.getElementById('id_mreg').value = idMreg;
 
-            if (matkulData) {
-                document.getElementById('detail-content').innerHTML = `
-                    <p><strong>Matakuliah:</strong> ${matkulData.nama_matakuliah || 'N/A'}</p>
-                    <p><strong>Dosen:</strong> ${matkulData.dosen || 'N/A'}</p>
-                    <p><strong>Keterangan Penilaian : </strong></p>
-                            1 = Sangat Tidak Sesuai : bila kenyataan di lapangan sangat tidak sesuai dengan komponen yang dinilai.<br>
-                            2 = Tidak Sesuai : bila kenyataan di lapangan kurang sesuai dengan komponen yang dinilai<br>
-                            3 = Sesuai : bila kenyataan di lapangan cukup sesuai dengan komponen yang dinilai.<br>
-                            4 = Sangat Sesuai : bila kenyataan di lapangan sangat sesuai dengan komponen yang dinilai.<br>
-                            0 = Tidak Belaku : bila saudara tidak pernah dibimbing oleh dosen yang bersangkutan<br><br>
-                `;
-            } else {
-                document.getElementById('detail-content').innerHTML = '<p>Detail tidak ditemukan.</p>';
+    Promise.all([
+        fetch("/get-komponen-penilaian").then(response => response.json()),
+        fetch("/get-soal").then(response => response.json())
+    ])
+    .then(([komponenData, soalData]) => {
+        var groupedSoal = {};
+        soalData.forEach(item => {
+            if (!groupedSoal[item.id_komponen_penilaian]) {
+                groupedSoal[item.id_komponen_penilaian] = {
+                    nama_komponen: komponenData.find(comp => comp.id_komponen_penilaian === item.id_komponen_penilaian)?.nama_komponen || 'Unknown',
+                    soal: []
+                };
             }
-        } else {
-            document.getElementById('detail-content').innerHTML = '<p>Data tidak tersedia.</p>';
-        }
+            groupedSoal[item.id_komponen_penilaian].soal.push(item);
+        });
 
-        document.getElementById('id_mreg').value = idMreg;
+        var questionsPerPage = 5;
+        var currentPage = 1;
+        var totalPages = Math.ceil(soalData.length / questionsPerPage);
 
-   
-        Promise.all([
-            fetch("/get-komponen-penilaian").then(response => response.json()),
-            fetch("/get-soal").then(response => response.json())
-        ])
-        .then(([komponenData, soalData]) => {
-            console.log('Komponen Penilaian data:', komponenData);
-            console.log('Soal data:', soalData);
-            
-            var groupedSoal = {};
-            soalData.forEach(item => {
-                if (!groupedSoal[item.id_komponen_penilaian]) {
-                    groupedSoal[item.id_komponen_penilaian] = {
-                        nama_komponen: komponenData.find(comp => comp.id_komponen_penilaian === item.id_komponen_penilaian)?.nama_komponen || 'Unknown',
-                        soal: []
-                    };
-                }
-                groupedSoal[item.id_komponen_penilaian].soal.push(item);
-            });
-
+        function renderQuestions(page) {
             var evaluationContent = '';
             var questionCounter = 1;
-            for (var komponenId in groupedSoal) {
-                var komponen = groupedSoal[komponenId];
-                evaluationContent += `<h4>${komponen.nama_komponen}</h4>`;
-                komponen.soal.forEach(soal => {
-                    evaluationContent += `
-                        <div class="form-group">
-                            <label>${questionCounter}. ${soal.pertanyaan}</label>
-                                <div class="form-group ichack-input">
-                                    <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_0" value="0" required>
-                                    <label for="radio_${soal.id_soal}_0">Tidak Berlaku</label><br> 
+            var startIndex = (page - 1) * questionsPerPage;
+            var endIndex = Math.min(page * questionsPerPage, soalData.length);
 
-                                    <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_1" value="1">
-                                    <label for="radio_${soal.id_soal}_1">Sangat Tidak Sesuai</label><br> 
+            var paginatedSoal = soalData.slice(startIndex, endIndex);
 
-                                    <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_2" value="2">
-                                    <label for="radio_${soal.id_soal}_2">Tidak Sesuai</label><br> 
-
-                                    <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_3" value="3">
-                                    <label for="radio_${soal.id_soal}_3">Sesuai</label><br> 
-
-                                    <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_4" value="4">
-                                    <label for="radio_${soal.id_soal}_4">Sangat Sesuai</label><br> 
-                            </div>
-
+            paginatedSoal.forEach(soal => {
+                var komponen = groupedSoal[soal.id_komponen_penilaian];
+                evaluationContent += `
+                    <div class="form-group">
+                        <label>${questionCounter}. ${soal.pertanyaan}</label>
+                        <div class="form-group ichack-input">
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_0" value="0" required>
+                            <label for="radio_${soal.id_soal}_0">Tidak Berlaku</label><br> 
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_1" value="1">
+                            <label for="radio_${soal.id_soal}_1">Sangat Tidak Sesuai</label><br> 
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_2" value="2">
+                            <label for="radio_${soal.id_soal}_2">Tidak Sesuai</label><br> 
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_3" value="3">
+                            <label for="radio_${soal.id_soal}_3">Sesuai</label><br> 
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_4" value="4">
+                            <label for="radio_${soal.id_soal}_4">Sangat Sesuai</label><br> 
                         </div>
-                    `;
-                    questionCounter++;
+                    </div>
+                `;
+                questionCounter++;
+            });
+
+            document.getElementById('evaluation-content').innerHTML = evaluationContent;
+            document.getElementById('submit-button').style.display = (page === totalPages) ? '' : 'none';
+            document.getElementById('next-button').style.display = (page === totalPages) ? 'none' : 'inline-block';
+        }
+
+        function updatePaginationControls() {
+            document.getElementById('prev-button').disabled = (currentPage === 1);
+            document.getElementById('next-button').disabled = (currentPage === totalPages);
+        }
+
+        renderQuestions(currentPage);
+        updatePaginationControls();
+
+        document.getElementById('prev-button').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderQuestions(currentPage);
+                updatePaginationControls();
+            }
+        });
+
+        document.getElementById('next-button').addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderQuestions(currentPage);
+                updatePaginationControls();
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
+    document.getElementById('evaluation-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var submitButton = document.getElementById('submit-button');
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Submitting...';
+
+        var formData = new FormData(this);
+        var answers = [];
+
+        formData.forEach((value, key) => {
+            if (key.startsWith('soal_')) {
+                answers.push({
+                    id_soal: key.split('_')[1],
+                    user_id: idMhs,
+                    id_mreg: idMreg,
+                    id_kelas: idKelas,
+                    jawaban: value
                 });
             }
-            document.getElementById('evaluation-content').innerHTML = evaluationContent;
+        });
+
+        var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+        var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+
+        if (!csrfToken) {
+            console.error('CSRF token meta tag not found.');
+            return;
+        }
+
+        fetch('/submit-jawaban', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify(answers)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response from server:', data);
+            showToastr('success', 'Berhasil!', 'Jawaban Berhasil Disimpan');
+            window.location.href = '/home';
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
-
-        document.getElementById('evaluation-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            var submitButton = document.getElementById('submit-button');
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Submitting...';
-
-            var formData = new FormData(this);
-            var answers = [];
-
-            formData.forEach((value, key) => {
-                if (key.startsWith('soal_')) {
-                    answers.push({
-                        id_soal: key.split('_')[1],
-                        user_id: idMhs,
-                        id_mreg: idMreg,
-                        id_kelas: idKelas,
-                        jawaban: value
-                    });
-                }
-            });
-
-            console.log('Collected answers:', answers);
-
-
-            var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-            var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
-
-            if (!csrfToken) {
-                console.error('CSRF token meta tag not found.');
-                return;
-            }
-
-            fetch('/submit-jawaban', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify(answers)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Response from server:', data);
-                showToastr('success', 'Berhasil!', 'Jawaban Berhasil Disimpan');
-                window.location.href = '/home';
-            })
-            .catch(error => {
-                console.error('Error submitting answers:', error);
-                showToastr('error', 'Error!', 'Error Saat Menyimpan Jawaban');
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit';
-            });
+            console.error('Error submitting answers:', error);
+            showToastr('error', 'Error!', 'Error Saat Menyimpan Jawaban');
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Submit';
         });
     });
+});
 </script>
 @endsection

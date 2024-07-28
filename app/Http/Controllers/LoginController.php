@@ -30,6 +30,7 @@ class LoginController extends Controller
         Session::put('nm_module', $request->nm_module);
         Session::put('kode_fakultas', $request->kode_fakultas);
         Session::put('token', $request->token);
+        Session::put('id_mreg', $request->id_mreg);
 
         return true;
     }

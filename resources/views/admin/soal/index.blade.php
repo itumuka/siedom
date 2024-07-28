@@ -113,7 +113,7 @@
                 select.append(`<option value="${item.id_komponen_penilaian}">${item.nama_komponen}</option>`);
             });
 
-            if (callback) callback(); // Panggil callback setelah opsi dimuat
+            if (callback) callback();
         }).fail(function(xhr) {
             alert('Gagal memuat data komponen penilaian');
         });
@@ -123,7 +123,7 @@
             $("#cancel-btn").click(function() {
                 $("#komponenModal").modal('hide');
             });
-            // Show add modal
+
             $("#add-btn").click(function() {
                 $("#soal-id").val('');
                 $("#soal-pertanyaan").val('');
@@ -133,7 +133,7 @@
                 loadKomponenOptions();
             });
 
-            // Handle save button click (create/update)
+
             $("#save-btn").click(function() {
                 var id = $("#soal-id").val();
                 var pertanyaan = $("#soal-pertanyaan").val();
@@ -148,10 +148,10 @@
                         success: function(response) {
                             table.ajax.reload();
                             $("#soalModal").modal('hide');
-                            alert('Data berhasil diperbarui');
+                            showToastr('success', 'Berhasil!', 'Data Berhasil Diperbarui');
                         },
                         error: function(xhr) {
-                            alert('Gagal memperbarui data');
+                            showToastr('error', 'Error!', 'Gagal');
                         }
                     });
                 } else {
@@ -163,10 +163,10 @@
                         success: function(response) {
                             table.ajax.reload();
                             $("#soalModal").modal('hide');
-                            alert('Data berhasil ditambahkan');
+                            showToastr('success', 'Berhasil!', 'Data Berhasil Ditambahkan');
                         },
                         error: function(xhr) {
-                            alert('Gagal menambah data');
+                            showToastr('error', 'Error!', 'Gagal');
                         }
                     });
                 }
@@ -201,10 +201,10 @@
                         type: 'DELETE',
                         success: function(response) {
                             table.ajax.reload();
-                            alert('Data berhasil dihapus');
+                            showToastr('success', 'Berhasil!', 'Data Berhasil Dihapus');
                         },
                         error: function(xhr) {
-                            alert('Gagal menghapus data');
+                            showToastr('error', 'Error!', 'Gagal');
                         }
                     });
                 }
