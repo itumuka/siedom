@@ -95,7 +95,8 @@ class MahasiswaController extends Controller
             ->where('id_mreg', $idMreg)
             ->where('id_kelas', $idKelas)
             ->exists();
-        
-        return response()->json(['completed' => $exists]);
+            $test = var_dump($exists);
+
+        return response()->json(['completed' => $test]);
     }
 }

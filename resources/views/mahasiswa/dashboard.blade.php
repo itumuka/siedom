@@ -105,7 +105,7 @@
                 data: null,
                 className: 'text-center',
                 render: function(data, type, row, meta) {
-                    var buttonHtml = '<button type="button" class="btn btn-sm btn-primary btn-detail" data-id_kelas="' + row.id_kelas + '">Isi Kuisioner</button>';
+                    var buttonHtml = '<button type="button" class="btn btn-sm btn-primary btn-detail" data-id_kelas="' + row.id_kelas + '">Isi</button>';
 
 
                     $.ajax({
@@ -118,7 +118,7 @@
                         },
                         success: function(response) {
                             if (response.completed) {
-                                buttonHtml = '<button type="button" class="btn btn-sm btn-success btn-detail" data-id_kelas="' + row.id_kelas + '">Done</button>';
+                                buttonHtml = '<button type="button" class="btn btn-sm btn-success btn-detail" data-id_kelas="' + row.id_kelas + '">Selesai</button>';
                             }
                             table.cell({ row: meta.row, column: 0 }).data(buttonHtml).draw();
                         }

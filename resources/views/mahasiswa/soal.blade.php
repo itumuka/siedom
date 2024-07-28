@@ -18,10 +18,24 @@
 @section('content')
     <div class="container mt-sm-5 my-1">
         <h1>Kuesioner Evaluasi Dosen Oleh Mahasiswa</h1>
-        <div id="detail-content"></div>
+
+        <div class="box box-bordered border-primary">
+            <div class="box-body">
+                <div id="detail-content"></div>
+            </div>
+          </div>
         <form id="evaluation-form">
             <input type="hidden" name="id_mreg" id="id_mreg" value="">
-            <div id="evaluation-content"></div>
+			<div class="box">
+                <div class="box-header with-border">
+                  <h4 class="box-title"><strong>Isi Kuesioner</strong></h4>
+                </div>
+                <div class="box-body">
+                    <div id="evaluation-content"></div>
+                </div>
+              </div>
+
+
             <div class="pagination-controls">
                 <button type="button" class="btn btn-warning" id="prev-button">
                     <i class=""></i> Previous
