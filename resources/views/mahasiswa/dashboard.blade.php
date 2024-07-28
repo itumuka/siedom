@@ -121,9 +121,10 @@
                 render: function(data, type, row, meta) {
                     var isCompleted = completedClasses.includes(row.id_kelas);
                     var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
-                    var buttonText = isCompleted ? 'Done' : 'Isi';
+                    var buttonText = isCompleted ? 'Terisi' : 'Isi';
+                    var classIsi = isCompleted ? '' : 'btn-detail';
 
-                    return `<button type="button" class="btn btn-sm ${buttonClass} btn-detail" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
+                    return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
                 }
             },
             { data: 'nama_matakuliah' },
