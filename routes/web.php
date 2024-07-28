@@ -45,6 +45,7 @@ Route::put('/admin/soal/{id}', [SoalController::class, 'update']);
 Route::delete('/admin/soal/{id}', [SoalController::class, 'destroy']);
 Route::get('/admin/soal/{id}', [SoalController::class, 'show']);
 Route::get('/admin/soal/komponen-options', [KomponenPenilaianController::class, 'getData'])->name('soal.komponen-options');
+Route::get('/admin/mreg/data', [SoalController::class, 'getDataMreg'])->name('mreg.data');
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });

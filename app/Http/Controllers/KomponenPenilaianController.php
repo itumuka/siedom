@@ -92,4 +92,6 @@ class KomponenPenilaianController extends Controller
             return response()->json(['error' => 'Gagal menghapus data.'], 500);
         }
     }
+
+    
 }

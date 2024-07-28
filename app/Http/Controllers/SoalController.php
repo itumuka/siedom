@@ -18,9 +18,10 @@ class SoalController extends Controller
     {
         try {
             $query = DB::table('edom_soal')
-                ->select('edom_soal.*', 'edom_komponen_penilaian.nama_komponen')
-                ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian');
-
+            ->select('edom_soal.*', 'edom_komponen_penilaian.nama_komponen', DB::raw("CONCAT_WS(' ', akd_mreg.tahun_akademik, IF(akd_mreg.semester = '1', 'Ganjil', 'Genap')) AS tahun_ajaran"))
+            ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian')
+            ->leftJoin('akd_mreg', 'edom_soal.id_mreg', '=', 'akd_mreg.id_mreg');
+            
             $totalRecords = $query->count();
     
             $data = $query->get();
@@ -45,7 +46,7 @@ class SoalController extends Controller
             DB::table('edom_soal')->insert([
                 'pertanyaan' => $request->pertanyaan,
                 'id_komponen_penilaian' => $request->id_komponen_penilaian,
-                'id_mreg' => $id_mreg,
+                'id_mreg' => $request->id_mreg,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -72,7 +73,7 @@ class SoalController extends Controller
                 ->update([
                     'pertanyaan' => $request->pertanyaan,
                     'id_komponen_penilaian' => $request->id_komponen_penilaian,
-                    'id_mreg' => $id_mreg,
+                    'id_mreg' => $request->id_mreg,
                     'updated_at' => now()
                 ]);
 
@@ -99,21 +100,26 @@ class SoalController extends Controller
         }
     }
 
-    public function getKomponenPenilaianOptions()
+    public function getDataMreg()
     {
-        try {
-            $komponenPenilaian = DB::table('edom_komponen_penilaian')->get();
-            $totalRecords = DB::table('edom_komponen_penilaian')->count();
-    
-    
-            return response()->json([
-                'draw' => intval(request()->get('draw')),
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data' => $komponenPenilaian
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Data tidak tersedia.'], 500);
-        }
+    try {
+        $mreg = DB::table('akd_mreg')
+            ->select(DB::raw("*, IF(semester='1', CONCAT_WS(' ', tahun_akademik, 'Ganjil'), CONCAT_WS(' ', tahun_akademik, 'Genap')) AS tahun_ajaran"))
+            ->orderBy('tahun', 'DESC')
+            ->get();
+
+        $totalRecords = DB::table('akd_mreg')->count();
+
+        return response()->json([
+            'draw' => intval(request()->get('draw')),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords,
+            'data' => $mreg
+        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Data tidak tersedia.'], 500);
     }
+    }
+
+
 }

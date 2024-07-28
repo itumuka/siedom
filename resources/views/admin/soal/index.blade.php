@@ -31,6 +31,10 @@
                             <select class="form-control mt-2" id="soal-komponen">
                                 <option value="">Pilih Komponen Penilaian</option>
                             </select>
+
+                            <select class="form-control mt-2" id="soal-mreg">
+                                <option value="">Pilih Tahun Akademik</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -53,6 +57,7 @@
                         <th>Aksi</th>
                         <th>Pertanyaan</th>
                         <th>Komponen Penilaian</th>
+                        <th>Tahun Akademik</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,7 +95,8 @@
                         }
                     },
                     { data: 'pertanyaan' },
-                    { data: 'nama_komponen' }
+                    { data: 'nama_komponen' },
+                    { data: 'tahun_ajaran'}
                 ],
                 order: []
             });
@@ -119,6 +125,24 @@
         });
     }
 
+    function loadMregOptions(callback) {
+        $.ajax({
+            url: "{{ route('mreg.data') }}",
+            type: 'GET'
+        }).done(function(response) {
+            var select = $("#soal-mreg");
+            select.empty();
+            select.append('<option value="">Pilih Tahun Akademik</option>');
+            response.data.forEach(function(item) {
+                select.append(`<option value="${item.id_mreg}">${item.tahun_ajaran}</option>`);
+            });
+
+            if (callback) callback();
+        }).fail(function(xhr) {
+            alert('Gagal memuat data tahun akademik');
+        });
+    }
+
 
             $("#cancel-btn").click(function() {
                 $("#komponenModal").modal('hide');
@@ -131,6 +155,7 @@
                 $("#soalModalLabel").text('Add Soal');
                 $("#soalModal").modal('show');
                 loadKomponenOptions();
+                loadMregOptions();
             });
 
 
@@ -138,13 +163,14 @@
                 var id = $("#soal-id").val();
                 var pertanyaan = $("#soal-pertanyaan").val();
                 var id_komponen_penilaian = $("#soal-komponen").val();
+                var id_mreg = $("#soal-mreg").val();
 
                 if (id) {
                     // Update existing record
                     $.ajax({
                         url: "{{ url('/admin/soal') }}/" + id,
                         type: 'PUT',
-                        data: { pertanyaan: pertanyaan, id_komponen_penilaian: id_komponen_penilaian },
+                        data: { pertanyaan: pertanyaan, id_komponen_penilaian: id_komponen_penilaian, id_mreg: id_mreg },
                         success: function(response) {
                             table.ajax.reload();
                             $("#soalModal").modal('hide');
@@ -159,7 +185,7 @@
                     $.ajax({
                         url: "{{ route('soal.store') }}",
                         type: 'POST',
-                        data: { pertanyaan: pertanyaan, id_komponen_penilaian: id_komponen_penilaian },
+                        data: { pertanyaan: pertanyaan, id_komponen_penilaian: id_komponen_penilaian, id_mreg: id_mreg },
                         success: function(response) {
                             table.ajax.reload();
                             $("#soalModal").modal('hide');
@@ -178,19 +204,23 @@
                 url: "{{ url('/admin/soal') }}/" + id,
                 type: 'GET',
                 success: function(response) {
-                    loadKomponenOptions(function() {
-                        $("#soal-id").val(response.data.id_soal);
-                        $("#soal-pertanyaan").val(response.data.pertanyaan);
-                        $("#soal-komponen").val(response.data.id_komponen_penilaian);
-                        $("#soalModalLabel").text('Edit Soal');
-                        $("#soalModal").modal('show');
-                    });
-                },
+            loadKomponenOptions(function() {
+                loadMregOptions(function() {
+                    $("#soal-id").val(response.data.id_soal);
+                    $("#soal-pertanyaan").val(response.data.pertanyaan);
+                    $("#soal-komponen").val(response.data.id_komponen_penilaian);
+                    $("#soal-mreg").val(response.data.id_mreg);
+                    $("#soalModalLabel").text('Edit Soal');
+                    $("#soalModal").modal('show');
+                });
+            });
+        },
                 error: function(xhr) {
                     alert('Gagal mendapatkan data');
                 }
             });
         });
+        
 
             // Handle delete button click
             $(document).on('click', '.btn-delete', function() {
