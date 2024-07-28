@@ -2,22 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{{ URL::asset('template/css/vendors_css.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('template/css/style.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('template/css/skin_color.css') }}">
-    <link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet'>
-    <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,11 +12,11 @@
     <title> Log in </title>
 
     <!-- Vendors Style-->
-    <link rel="stylesheet" href="{{ url('css/vendors_css.css') }}">
+    <link rel="stylesheet" href="{{ url('semidark/css/vendors_css.css') }}">
 
     <!-- Style-->
-    <link rel="stylesheet" href="{{ url('css/style.css') }}">
-    <link rel="stylesheet" href="{{ url('css/skin_color.css') }}">
+    <link rel="stylesheet" href="{{ url('semidark/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url('semidark/css/skin_color.css') }}">
     <style>
         /* .bg-img{
         filter: blur(8px);
@@ -129,8 +113,8 @@
 
 
     <!-- Vendor JS -->
-    <script src="{{ url('js/vendors.min.js') }}"></script>
-    <script src="{{ url('js/pages/chat-popup.js') }}"></script>
+    <script src="{{ url('semidark/js/vendors.min.js') }}"></script>
+    <script src="{{ url('semidark/js/pages/chat-popup.js') }}"></script>
     <script src="{{ url('assets/icons/feather-icons/feather.min.js') }}"></script>
     <script src="{{ url('assets/vendor_components/jquery-toast-plugin-master/src/jquery.toast.js') }}"></script>
     <script>
