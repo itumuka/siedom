@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var idKelas = localStorage.getItem('selectedMatkulId');
     var allMatkulData = JSON.parse(localStorage.getItem('allMatkulData')) || [];
     var idMhs = localStorage.getItem('selectedMhsId');
-    var idMreg = localStorage.getItem('selectedMregId');
+    var idMreg = "{{ Session::get('id_mreg') }}";
 
     if (idKelas && allMatkulData.length > 0) {
         var matkulData = allMatkulData.find(item => item.id_kelas === parseInt(idKelas, 10));
@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var questionsPerPage = 5;
         var currentPage = 1;
         var totalPages = Math.ceil(soalData.length / questionsPerPage);
+        var answers = {};
 
         function renderQuestions(page) {
             var evaluationContent = '';
-            var questionCounter = 1;
             var startIndex = (page - 1) * questionsPerPage;
             var endIndex = Math.min(page * questionsPerPage, soalData.length);
 
@@ -113,15 +113,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="form-group">
                         <label>${questionCounter}. ${soal.pertanyaan}</label>
                         <div class="form-group ichack-input">
-                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_0" value="0" required>
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_0" value="0" ${answers[`soal_${soal.id_soal}`] == "0" ? "checked" : ""} required>
                             <label for="radio_${soal.id_soal}_0">Tidak Berlaku</label><br> 
-                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_1" value="1">
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_1" value="1" ${answers[`soal_${soal.id_soal}`] == "1" ? "checked" : ""}>
                             <label for="radio_${soal.id_soal}_1">Sangat Tidak Sesuai</label><br> 
-                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_2" value="2">
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_2" value="2" ${answers[`soal_${soal.id_soal}`] == "2" ? "checked" : ""}>
                             <label for="radio_${soal.id_soal}_2">Tidak Sesuai</label><br> 
-                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_3" value="3">
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_3" value="3" ${answers[`soal_${soal.id_soal}`] == "3" ? "checked" : ""}>
                             <label for="radio_${soal.id_soal}_3">Sesuai</label><br> 
-                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_4" value="4">
+                            <input type="radio" name="soal_${soal.id_soal}" id="radio_${soal.id_soal}_4" value="4" ${answers[`soal_${soal.id_soal}`] == "4" ? "checked" : ""}>
                             <label for="radio_${soal.id_soal}_4">Sangat Sesuai</label><br> 
                         </div>
                     </div>
@@ -137,6 +137,15 @@ document.addEventListener('DOMContentLoaded', function() {
         function updatePaginationControls() {
             document.getElementById('prev-button').disabled = (currentPage === 1);
             document.getElementById('next-button').disabled = (currentPage === totalPages);
+        }
+
+        function saveCurrentPageAnswers() {
+            var formData = new FormData(document.getElementById('evaluation-form'));
+            formData.forEach((value, key) => {
+                if (key.startsWith('soal_')) {
+                    answers[key] = value;
+                }
+            });
         }
 
         function checkAllAnswered() {
@@ -161,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('prev-button').addEventListener('click', function() {
             if (currentPage > 1) {
+                saveCurrentPageAnswers();
                 currentPage--;
                 renderQuestions(currentPage);
                 updatePaginationControls();
@@ -173,77 +183,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             if (currentPage < totalPages) {
+                saveCurrentPageAnswers();
                 currentPage++;
                 renderQuestions(currentPage);
                 updatePaginationControls();
             }
+        });
+
+        document.getElementById('evaluation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            saveCurrentPageAnswers();
+
+            var submitButton = document.getElementById('submit-button');
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Submitting...';
+
+            var finalAnswers = [];
+            for (var key in answers) {
+                finalAnswers.push({
+                    id_soal: key.split('_')[1],
+                    user_id: idMhs,
+                    id_mreg: idMreg,
+                    id_kelas: idKelas,
+                    jawaban: answers[key]
+                });
+            }
+
+            var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+            var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+
+            if (!csrfToken) {
+                console.error('CSRF token meta tag not found.');
+                return;
+            }
+
+            fetch('/submit-jawaban', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ answers: finalAnswers })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(JSON.stringify(data.errors));
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response from server:', data);
+                showToastr('success', 'Berhasil!', 'Jawaban Berhasil Disimpan');
+                    setTimeout(function() {
+                    window.location.href = '/home';
+                }, 4000);
+            })
+            .catch(error => {
+                console.error('Error submitting answers:', error);
+                showToastr('error', 'Error!', 'Error Saat Menyimpan Jawaban');
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit';
+            });
         });
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
 
-    document.getElementById('evaluation-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var submitButton = document.getElementById('submit-button');
-        submitButton.disabled = true;
-        submitButton.innerHTML = 'Submitting...';
-
-        var formData = new FormData(this);
-        var answers = [];
-
-        formData.forEach((value, key) => {
-            if (key.startsWith('soal_')) {
-                answers.push({
-                    id_soal: key.split('_')[1],
-                    user_id: idMhs,
-                    id_mreg: idMreg,
-                    id_kelas: idKelas,
-                    jawaban: value
-                });
-            }
-        });
-
-        var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-        var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
-
-        if (!csrfToken) {
-            console.error('CSRF token meta tag not found.');
-            return;
-        }
-
-        fetch('/submit-jawaban', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({ answers })
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(data => {
-                    throw new Error(JSON.stringify(data.errors));
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Response from server:', data);
-            showToastr('success', 'Berhasil!', 'Jawaban Berhasil Disimpan');
-                setTimeout(function() {
-                window.location.href = '/home';
-            }, 4000);
-        })
-        .catch(error => {
-            console.error('Error submitting answers:', error);
-            showToastr('error', 'Error!', 'Error Saat Menyimpan Jawaban');
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit';
-        });
-    });
-
 });
 </script>
+
 @endsection

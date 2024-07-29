@@ -70,9 +70,11 @@
         var idMhs = "{{ Session::get('id_mhs') }}";
         var idMreg = "{{ Session::get('id_mreg') }}";
         var completedClasses = [];
-
+        
         function initializeDataTable() {
-            $("#tbjadwalmakul").DataTable({
+            console.log('Initializing DataTable with completedClasses:', completedClasses);
+        
+            var table = $("#tbjadwalmakul").DataTable({
                 destroy: true,
                 processing: true,
                 lengthChange: true,
@@ -99,11 +101,17 @@
                         data: null,
                         className: 'text-center',
                         render: function(data, type, row, meta) {
-                            var isCompleted = completedClasses.includes(row.id_kelas);
+                            var rowIdKelas = String(row.id_kelas);
+                            var isCompleted = completedClasses.includes(rowIdKelas);
+        
                             var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
                             var buttonText = isCompleted ? 'Terisi' : 'Isi';
                             var classIsi = isCompleted ? '' : 'btn-detail';
-
+        
+                            console.log('Rendering row:', row);
+                            console.log('row.id_kelas:', row.id_kelas, 'Type:', typeof row.id_kelas);
+                            console.log('isCompleted:', isCompleted);
+        
                             return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
                         }
                     },
@@ -115,24 +123,26 @@
                 order: []
             });
         }
-
+        
         function fetchCompletedClasses() {
-            $.ajax({
+            return $.ajax({
                 url: "{{ route('check.kuisioner.status') }}",
                 type: "GET",
                 data: { nim: nim },
                 success: function(response) {
-                    completedClasses = response.completedClasses;
-                    console.log('Completed Classes:', completedClasses); // Debugging
-                    initializeDataTable();
+                    // Ensure the data type is consistent
+                    completedClasses = response.completedClasses.map(String);
+                    console.log('Completed Classes fetched:', completedClasses);
                 },
                 error: function(xhr) {
                     console.error('Failed to fetch completed classes');
                 }
             });
         }
-
-        fetchCompletedClasses();
+        
+        fetchCompletedClasses().then(initializeDataTable).catch(function(error) {
+            console.error('Error in fetchCompletedClasses or initializeDataTable:', error);
+        });
 
         $(document).on('click', '.btn-detail', function(event) {
             event.preventDefault();

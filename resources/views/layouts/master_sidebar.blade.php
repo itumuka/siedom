@@ -409,7 +409,8 @@
                     data: {
                         semester: a.smtta[0].semester,
                         tahun: a.smtta[0].tahun,
-                        tahun_ajaran: a.smtta[0].tahun_ajaran
+                        tahun_ajaran: a.smtta[0].tahun_ajaran,
+                        id_mreg: a.smtta[0].id_mreg
                     },
                     dataType: "json",
                     success: function(result) {

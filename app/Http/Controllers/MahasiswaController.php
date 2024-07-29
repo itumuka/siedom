@@ -99,7 +99,7 @@ class MahasiswaController extends Controller
             DB::table('edom_jawaban')->insert([
                 'id_soal' => $answer['id_soal'],
                 'user_id' => $answer['user_id'],
-                'id_mreg' => $answer['id_mreg'],
+                'id_mreg' => Session::get('id_mreg'),
                 'id_kelas' => $answer['id_kelas'],
                 'jawaban' => $answer['jawaban'],
                 'timestamp' => now()

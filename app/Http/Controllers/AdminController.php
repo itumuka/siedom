@@ -21,6 +21,7 @@ class AdminController extends Controller
         Session::put('session_tahun', $request->tahun);
         Session::put('session_semester', $request->semester);
         Session::put('session_nama_tahunakademik', $request->tahun_ajaran);
+        Session::put('id_mreg', $request->id_mreg);
 
         return true;
     }
