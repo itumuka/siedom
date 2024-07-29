@@ -61,103 +61,109 @@
 
 @section('script-master')
     <script type="text/javascript">
-        $(document).ready(function() {
-            var token = "{{ Session::get('token') }}";
-            var userlogin = "{{ Session::get('username') }}";
-            var nim = $('#nim').val();
-            var tahun = $('#tahun').val();
-            var semester = $('#semester').val();
-            var idMhs = "{{ Session::get('id_mhs') }}";
-            var idMreg = "{{ Session::get('id_mreg') }}";
-            var completedClasses = [];
+    $(document).ready(function() {
+        var token = "{{ Session::get('token') }}";
+        var userlogin = "{{ Session::get('username') }}";
+        var nim = $('#nim').val();
+        var tahun = $('#tahun').val();
+        var semester = $('#semester').val();
+        var idMhs = "{{ Session::get('id_mhs') }}";
+        var idMreg = "{{ Session::get('id_mreg') }}";
+        var completedClasses = [];
 
-            $.ajax({
+        function initializeDataTable() {
+            var table = $("#tbjadwalmakul").DataTable({
+                destroy: true,
+                processing: true,
+                lengthChange: true,
+                ajax: {
+                    type: "GET",
+                    url: "{{ config('setting.second_url') }}mahasiswa/tampil-presensi-makul",
+                    headers: {
+                        "Authorization": 'Bearer ' + token,
+                        "username": userlogin
+                    },
+                    data: {
+                        nim: nim,
+                        tahun: tahun,
+                        semester: semester
+                    },
+                    dataSrc: function(json) {
+                        window.allMatkulData = json;
+                        localStorage.setItem('allMatkulData', JSON.stringify(json));
+                        return json;
+                    }
+                },
+                columns: [
+                    {
+                        data: null,
+                        className: 'text-center',
+                        render: function(data, type, row, meta) {
+                            var isCompleted = completedClasses.includes(row.id_kelas);
+                            var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
+                            var buttonText = isCompleted ? 'Terisi' : 'Isi';
+                            var classIsi = isCompleted ? '' : 'btn-detail';
+
+                            return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
+                        }
+                    },
+                    { data: 'nama_matakuliah' },
+                    { data: 'kode_matakuliah' },
+                    { data: 'semester' },
+                    { data: 'dosen' }
+                ],
+                order: []
+            });
+        }
+
+        function fetchCompletedClasses() {
+            return $.ajax({
                 url: "{{ route('check.kuisioner.status') }}",
                 type: "GET",
                 data: { nim: nim },
                 success: function(response) {
                     completedClasses = response.completedClasses;
-                    initializeDataTable();
+                    console.log('Completed Classes:', completedClasses);
                 },
                 error: function(xhr) {
                     console.error('Failed to fetch completed classes');
                 }
             });
+        }
 
-            function initializeDataTable() {
-                var table = $("#tbjadwalmakul").DataTable({
-                    destroy: true,
-                    processing: true,
-                    lengthChange: true,
-                    ajax: {
-                        type: "GET",
-                        url: "{{ config('setting.second_url') }}mahasiswa/tampil-presensi-makul",
-                        headers: {
-                            "Authorization": 'Bearer ' + token,
-                            "username": userlogin
-                        },
-                        data: {
-                            nim: nim,
-                            tahun: tahun,
-                            semester: semester
-                        },
-                        dataSrc: function(json) {
-                            window.allMatkulData = json;
-                            localStorage.setItem('allMatkulData', JSON.stringify(json));
-                            return json;
-                        }
-                    },
-                    columns: [
-                        {
-                            data: null,
-                            className: 'text-center',
-                            render: function(data, type, row, meta) {
-                                var isCompleted = completedClasses.includes(row.id_kelas);
-                                var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
-                                var buttonText = isCompleted ? 'Terisi' : 'Isi';
-                                var classIsi = isCompleted ? '' : 'btn-detail';
 
-                                return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
-                            }
-                        },
-                        { data: 'nama_matakuliah' },
-                        { data: 'kode_matakuliah' },
-                        { data: 'semester' },
-                        { data: 'dosen' }
-                    ],
-                    order: []
-                });
+        fetchCompletedClasses().then(initializeDataTable);
 
-                $(document).on('click', '.btn-detail', function(event) {
-                    event.preventDefault();
-                    var idKelas = $(this).data('id_kelas');
-                    var selectedMatkulData = {
-                        id_kelas: idKelas,
-                        nama_matakuliah: $(this).data('makul') || '',
-                        kode_matakuliah: $(this).data('kode') || '',
-                        semester: $(this).data('semester') || '',
-                        dosen: $(this).data('dosen') || ''
-                    };
+        $(document).on('click', '.btn-detail', function(event) {
+            event.preventDefault();
+            var idKelas = $(this).data('id_kelas');
+            var selectedMatkulData = {
+                id_kelas: idKelas,
+                nama_matakuliah: $(this).data('makul') || '',
+                kode_matakuliah: $(this).data('kode') || '',
+                semester: $(this).data('semester') || '',
+                dosen: $(this).data('dosen') || ''
+            };
 
-                    localStorage.setItem('selectedMatkulId', idKelas);
-                    localStorage.setItem('selectedMhsId', idMhs);
-                    localStorage.setItem('selectedMregId', idMreg);
+            localStorage.setItem('selectedMatkulId', idKelas);
+            localStorage.setItem('selectedMhsId', idMhs);
+            localStorage.setItem('selectedMregId', idMreg);
 
-                    window.location.href = "/soal";
-                });
-            }
-
-            function showToastr(type, title, message) {
-                $.toast({
-                    heading: title,
-                    text: message,
-                    position: 'top-right',
-                    loaderBg: '#ff6849',
-                    icon: type,
-                    hideAfter: 3500,
-                    stack: 6
-                });
-            }
+            window.location.href = "/soal";
         });
+
+        function showToastr(type, title, message) {
+            $.toast({
+                heading: title,
+                text: message,
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: type,
+                hideAfter: 3500,
+                stack: 6
+            });
+        }
+    });
+
     </script>
 @stop
