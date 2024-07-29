@@ -72,7 +72,7 @@
         var completedClasses = [];
 
         function initializeDataTable() {
-            var table = $("#tbjadwalmakul").DataTable({
+            $("#tbjadwalmakul").DataTable({
                 destroy: true,
                 processing: true,
                 lengthChange: true,
@@ -117,13 +117,14 @@
         }
 
         function fetchCompletedClasses() {
-            return $.ajax({
+            $.ajax({
                 url: "{{ route('check.kuisioner.status') }}",
                 type: "GET",
                 data: { nim: nim },
                 success: function(response) {
                     completedClasses = response.completedClasses;
-                    console.log('Completed Classes:', completedClasses);
+                    console.log('Completed Classes:', completedClasses); // Debugging
+                    initializeDataTable();
                 },
                 error: function(xhr) {
                     console.error('Failed to fetch completed classes');
@@ -131,8 +132,7 @@
             });
         }
 
-
-        fetchCompletedClasses().then(initializeDataTable);
+        fetchCompletedClasses();
 
         $(document).on('click', '.btn-detail', function(event) {
             event.preventDefault();
@@ -164,6 +164,7 @@
             });
         }
     });
+
 
     </script>
 @stop
