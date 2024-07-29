@@ -9,6 +9,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 
 class MahasiswaController extends Controller
 {
@@ -75,8 +77,24 @@ class MahasiswaController extends Controller
     
     public function store(Request $request)
     {
-        $answers = $request->all();
-        
+        $validator = Validator::make($request->all(), [
+            'answers' => 'required|array',
+            'answers.*.id_soal' => 'required|integer',
+            'answers.*.user_id' => 'required|integer',
+            'answers.*.id_mreg' => 'required|integer',
+            'answers.*.id_kelas' => 'required|integer',
+            'answers.*.jawaban' => 'required|integer',
+        ], [
+            'required' => 'Harap isi semua jawaban.',
+            'integer' => 'Jawaban harus berupa angka.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        $answers = $request->input('answers');
         foreach ($answers as $answer) {
             DB::table('edom_jawaban')->insert([
                 'id_soal' => $answer['id_soal'],
@@ -87,7 +105,7 @@ class MahasiswaController extends Controller
                 'timestamp' => now()
             ]);
         }
-        
+
         return response()->json(['message' => 'Jawaban saved successfully']);
     }
 

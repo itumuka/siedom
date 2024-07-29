@@ -77,95 +77,87 @@
                 data: { nim: nim },
                 success: function(response) {
                     completedClasses = response.completedClasses;
-                    console.log('Completed Classes:', completedClasses); // Debugging
+                    initializeDataTable();
                 },
                 error: function(xhr) {
                     console.error('Failed to fetch completed classes');
                 }
             });
 
-            console.log("Token:", token);
-            console.log("ID:", idMhs);
-            console.log("Username:", userlogin);
-            console.log("NIM:", nim);
-            console.log("Tahun:", tahun);
-            console.log("Semester:", semester);
-            
-            var table = $("#tbjadwalmakul").DataTable({
-    destroy: true,
-    processing: true,
-    lengthChange: true,
-    ajax: {
-        type: "GET",
-        url: "{{ config('setting.second_url') }}mahasiswa/tampil-presensi-makul",
-        headers: {
-            "Authorization": 'Bearer ' + token,
-            "username": userlogin
-        },
-        data: {
-            nim: nim,
-            tahun: tahun,
-            semester: semester
-        },
-        dataSrc: function(json) {
-            console.log('Fetched data from API:', json); // Log the fetched data
-            window.allMatkulData = json;
-            localStorage.setItem('allMatkulData', JSON.stringify(json)); // Store data in localStorage
-            return json;
-        }
-    },
-    columns: [
-            {
-                data: null,
-                className: 'text-center',
-                render: function(data, type, row, meta) {
-                    var isCompleted = completedClasses.includes(row.id_kelas);
-                    var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
-                    var buttonText = isCompleted ? 'Terisi' : 'Isi';
-                    var classIsi = isCompleted ? '' : 'btn-detail';
+            function initializeDataTable() {
+                var table = $("#tbjadwalmakul").DataTable({
+                    destroy: true,
+                    processing: true,
+                    lengthChange: true,
+                    ajax: {
+                        type: "GET",
+                        url: "{{ config('setting.second_url') }}mahasiswa/tampil-presensi-makul",
+                        headers: {
+                            "Authorization": 'Bearer ' + token,
+                            "username": userlogin
+                        },
+                        data: {
+                            nim: nim,
+                            tahun: tahun,
+                            semester: semester
+                        },
+                        dataSrc: function(json) {
+                            window.allMatkulData = json;
+                            localStorage.setItem('allMatkulData', JSON.stringify(json));
+                            return json;
+                        }
+                    },
+                    columns: [
+                        {
+                            data: null,
+                            className: 'text-center',
+                            render: function(data, type, row, meta) {
+                                var isCompleted = completedClasses.includes(row.id_kelas);
+                                var buttonClass = isCompleted ? 'btn-success' : 'btn-primary';
+                                var buttonText = isCompleted ? 'Terisi' : 'Isi';
+                                var classIsi = isCompleted ? '' : 'btn-detail';
 
-                    return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
-                }
-            },
-            { data: 'nama_matakuliah' },
-            { data: 'kode_matakuliah' },
-            { data: 'semester' },
-            { data: 'dosen' }
-        ],
-                order: []
-            });
+                                return `<button type="button" class="btn btn-sm ${buttonClass} ${classIsi}" data-id_kelas="${row.id_kelas}">${buttonText}</button>`;
+                            }
+                        },
+                        { data: 'nama_matakuliah' },
+                        { data: 'kode_matakuliah' },
+                        { data: 'semester' },
+                        { data: 'dosen' }
+                    ],
+                    order: []
+                });
 
-            $(document).on('click', '.btn-detail', function(event) {
-                event.preventDefault();
-                var idKelas = $(this).data('id_kelas');
-                var idMhs = "{{ Session::get('id_mhs') }}";
-                var idMreg = "{{ Session::get('id_mreg') }}";
-                var selectedMatkulData = {
-                    id_kelas: idKelas,
-                    nama_matakuliah: $(this).data('makul') || '',
-                    kode_matakuliah: $(this).data('kode') || '',
-                    semester: $(this).data('semester') || '',
-                    dosen: $(this).data('dosen') || ''
-                };
+                $(document).on('click', '.btn-detail', function(event) {
+                    event.preventDefault();
+                    var idKelas = $(this).data('id_kelas');
+                    var selectedMatkulData = {
+                        id_kelas: idKelas,
+                        nama_matakuliah: $(this).data('makul') || '',
+                        kode_matakuliah: $(this).data('kode') || '',
+                        semester: $(this).data('semester') || '',
+                        dosen: $(this).data('dosen') || ''
+                    };
 
-                localStorage.setItem('selectedMatkulId', idKelas);
-                localStorage.setItem('selectedMhsId', idMhs);
-                localStorage.setItem('selectedMregId', idMreg);
+                    localStorage.setItem('selectedMatkulId', idKelas);
+                    localStorage.setItem('selectedMhsId', idMhs);
+                    localStorage.setItem('selectedMregId', idMreg);
 
-                window.location.href = "/soal";
-            });
+                    window.location.href = "/soal";
+                });
+            }
+
+            function showToastr(type, title, message) {
+                $.toast({
+                    heading: title,
+                    text: message,
+                    position: 'top-right',
+                    loaderBg: '#ff6849',
+                    icon: type,
+                    hideAfter: 3500,
+                    stack: 6
+                });
+            }
         });
-
-        function showToastr(type, title, message) {
-            $.toast({
-                heading: title,
-                text: message,
-                position: 'top-right',
-                loaderBg: '#ff6849',
-                icon: type,
-                hideAfter: 3500,
-                stack: 6
-            });
-        }
     </script>
 @stop

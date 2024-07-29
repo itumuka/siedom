@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var allMatkulData = JSON.parse(localStorage.getItem('allMatkulData')) || [];
     var idMhs = localStorage.getItem('selectedMhsId');
     var idMreg = localStorage.getItem('selectedMregId');
-    console.log("ID:", idMhs);
 
     if (idKelas && allMatkulData.length > 0) {
         var matkulData = allMatkulData.find(item => item.id_kelas === parseInt(idKelas, 10));
@@ -140,6 +139,23 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('next-button').disabled = (currentPage === totalPages);
         }
 
+        function checkAllAnswered() {
+            var allAnswered = true;
+            document.querySelectorAll('#evaluation-content .form-group').forEach(function(group) {
+                var radios = group.querySelectorAll('input[type="radio"]');
+                var oneChecked = false;
+                radios.forEach(function(radio) {
+                    if (radio.checked) {
+                        oneChecked = true;
+                    }
+                });
+                if (!oneChecked) {
+                    allAnswered = false;
+                }
+            });
+            return allAnswered;
+        }
+
         renderQuestions(currentPage);
         updatePaginationControls();
 
@@ -152,6 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         document.getElementById('next-button').addEventListener('click', function() {
+            if (!checkAllAnswered()) {
+                showToastr('error', 'Gagal!', 'Harap Isi Semua Jawaban');
+                return;
+            }
             if (currentPage < totalPages) {
                 currentPage++;
                 renderQuestions(currentPage);
@@ -165,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('evaluation-form').addEventListener('submit', function(event) {
         event.preventDefault();
-        
+
         var submitButton = document.getElementById('submit-button');
         submitButton.disabled = true;
         submitButton.innerHTML = 'Submitting...';
@@ -199,13 +219,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': csrfToken
             },
-            body: JSON.stringify(answers)
+            body: JSON.stringify({ answers })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(JSON.stringify(data.errors));
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Response from server:', data);
             showToastr('success', 'Berhasil!', 'Jawaban Berhasil Disimpan');
-            window.location.href = '/home';
+                setTimeout(function() {
+                window.location.href = '/home';
+            }, 4000);
         })
         .catch(error => {
             console.error('Error submitting answers:', error);
@@ -214,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.innerHTML = 'Submit';
         });
     });
+
 });
 </script>
 @endsection

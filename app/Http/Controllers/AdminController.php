@@ -11,7 +11,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-            return view('admin.dashboard');
+        $title = 'Dashboard'; 
+        $parent_breadcrumb = 'Dashboard';
+        return view('admin.dashboard', compact('title', 'parent_breadcrumb'));
     }
 
     public function change_session(Request $request)
