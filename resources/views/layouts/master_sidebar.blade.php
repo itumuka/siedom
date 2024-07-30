@@ -99,9 +99,9 @@
                 <a href="{{ route('home') }}" class="logo">
                     <!-- logo-->
                     <div class="logo-lg">
-                        <span class="light-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
+                        <span class="light-logo"><img src="{{ URL::asset('images/logo_siedom2.png') }}"
                                 alt="logo"></span>
-                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
+                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_siedom2.png') }}"
                                 alt="logo"></span>
                     </div>
                 </a>
@@ -274,9 +274,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <div class="container-full">
                 @yield('content')
-            </div>
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
