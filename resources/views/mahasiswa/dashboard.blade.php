@@ -27,12 +27,28 @@
         </div>
         <!-- Main content -->
         <section class="content">
-            <div class="box">
+            {{-- <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Selamat Datang {{ Session::get('nama') }}</h3>
                 </div>
-                <!-- /.box-header -->
-                <!-- /.box-body -->
+            </div> --}}
+            <div class="col-12">
+                <div class="box pull-up">
+                    <div class="box-body bg-img bg-primary-light">
+                        <div class="d-lg-flex align-items-center justify-content-between">
+                            <div class="d-lg-flex align-items-center mb-30 mb-xl-0 w-p100">
+                                <img src="../images/svg-icon/color-svg/custom-14.svg" class="img-fluid max-w-250" alt="" />
+                                <div class="ms-30">
+                                    <h2 class="mb-10">Selamat Datang {{ Session::get('nama') }}</h2>
+                                    <p class="mb-0 text-fade fs-18">Di Sistem Informasi Evaluasi Dosen Oleh Mahasiswa (SIEDOM), lakukan Penilaian Kuisioner Mata Kuliah {{ Session::get('session_nama_tahunakademik') }} </p>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="{{ route('home') }}" class="waves-effect waves-light w-p100 btn btn-primary btn-lg" style="white-space: nowrap;">Start Now!</a>
+                            </div>
+                        </div>							
+                    </div>
+                </div>
             </div>
         </section>
         <!-- /.content -->

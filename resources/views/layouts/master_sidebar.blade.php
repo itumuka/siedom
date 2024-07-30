@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{ URL::asset('images/logo.png') }}">
+    <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
 
     <title>Admin</title>
 
@@ -99,9 +99,9 @@
                 <a href="{{ route('home') }}" class="logo">
                     <!-- logo-->
                     <div class="logo-lg">
-                        <span class="light-logo"><img src="{{ URL::asset('images/logo_umuka_light_little.png') }}"
+                        <span class="light-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
                                 alt="logo"></span>
-                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_umuka_dark_little.png') }}"
+                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
                                 alt="logo"></span>
                     </div>
                 </a>
