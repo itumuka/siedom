@@ -99,9 +99,9 @@
                 <a href="{{ route('home') }}" class="logo">
                     <!-- logo-->
                     <div class="logo-lg">
-                        <span class="light-logo"><img src="{{ URL::asset('images/logo_siedom2.png') }}"
+                        <span class="light-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
                                 alt="logo"></span>
-                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_siedom2.png') }}"
+                        <span class="dark-logo"><img src="{{ URL::asset('images/logo_siedom.png') }}"
                                 alt="logo"></span>
                     </div>
                 </a>
