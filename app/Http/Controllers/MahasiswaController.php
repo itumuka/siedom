@@ -98,7 +98,7 @@ class MahasiswaController extends Controller
         foreach ($answers as $answer) {
             DB::table('edom_jawaban')->insert([
                 'id_soal' => $answer['id_soal'],
-                'user_id' => $answer['user_id'],
+                'user_id' => Session::get('id_mhs'),
                 'id_mreg' => Session::get('id_mreg'),
                 'id_kelas' => $answer['id_kelas'],
                 'jawaban' => $answer['jawaban'],
@@ -116,7 +116,7 @@ class MahasiswaController extends Controller
     
         $completedClasses = DB::table('edom_jawaban')
             ->where('user_id', $id_mhs)
-            ->orWhere('id_mreg', $id_mreg)
+            ->where('id_mreg', $id_mreg)
             ->select('id_kelas')
             ->distinct()
             ->pluck('id_kelas')
