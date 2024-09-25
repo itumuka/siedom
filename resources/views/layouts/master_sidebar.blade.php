@@ -258,8 +258,40 @@
                                             </i>
                                             <span>Soal</span>
                                         </a>
-                                    </li>
-                                </ul>                          
+                                    </li>	
+                                </ul>  
+                                <li class="treeview">
+                                    <a href="#">
+                                      <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                      <span>Reports</span>
+                                      <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                      </span>
+                                    </a>					
+                                    <ul class="treeview-menu">
+                                        <li class="{{ Route::is('kelas.index') ? 'active' : '' }}">
+                                            <a href="{{ route('kelas.index') }}">
+                                                <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Kelas">
+                                                    <span class="path1"></span><span class="path2"></span>
+                                                </i>
+                                                <span>Kelas</span>
+                                            </a>
+                                        </li>
+                                        <li class="treeview">
+                                            <a href="{{ route('admin.report') }}">
+                                                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Mahasiswa
+                                                <span class="pull-right-container">
+                                                    <i class="fa fa-angle-right pull-right"></i>
+                                                </span>
+                                            </a>
+                                            <ul class="treeview-menu">
+                                                <li class="{{ Route::is('jawaban.sudah') ? 'active' : '' }}"><a href="{{ route('jawaban.sudah') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Sudah Mengisi</a></li>
+                                                <li class="{{ Route::is('jawaban.belum') ? 'active' : '' }}"><a href="{{ route('jawaban.belum') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Belum Mengisi</a></li>
+                                                <li class="{{ Route::is('admin.report') ? 'active' : '' }}"><a href="{{ route('admin.report') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Chart</a></li>
+                                            </ul>
+                                        </li> 	 					
+                                    </ul>
+                                </li>                        
                             @endif
                         </ul>
                     </div>

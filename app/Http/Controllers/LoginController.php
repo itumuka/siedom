@@ -50,7 +50,6 @@ class LoginController extends Controller
         Session::put('nama', $request->nama);
         Session::put('kode_program_studi', $request->kode_program_studi);
         Session::put('token', $request->token);
-
         Session::put('id_mhs', $request->id_mhs);
         Session::put('id_mreg', $request->id_mreg);
 
@@ -69,6 +68,7 @@ class LoginController extends Controller
         Session::put('dosen_wali', $request->dosen_wali);
         Session::put('id_dosen', $request->id_dosen);
         Session::put('token', $request->token);
+        
 
         return true;
     }

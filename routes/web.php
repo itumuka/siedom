@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KomponenPenilaianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SoalController;
 
 // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -15,7 +18,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/makesession-pegawai', [LoginController::class, 'make_session_pegawa'])->name('makesession_pegawai');
 Route::get('/makesession-mahasiswa', [LoginController::class, 'make_session_mahasiswa'])->name('make_session_mahasiswa');
 Route::get('/makesession-dosen', [LoginController::class, 'make_session_dosen'])->name('make_session_dosen');
-
 
 
 Route::middleware(['cekmahasiswa'])->group(function () {
@@ -48,5 +50,27 @@ Route::get('/admin/soal/{id}', [SoalController::class, 'show']);
 Route::get('/admin/soal/komponen-options', [KomponenPenilaianController::class, 'getData'])->name('soal.komponen-options');
 Route::get('/admin/mreg/data', [SoalController::class, 'getDataMreg'])->name('mreg.data');
 
+//Jawaban Mahasiswa
+Route::get('/admin/jawaban/data', [JawabanController::class, 'getDataMahasiswaSudahMengisi'])->name('jawaban.data');
+Route::get('/admin/jawaban_belum/data', [JawabanController::class, 'getDataMahasiswaBelumMengisi'])->name('jawaban.belum.data');
+Route::get('/admin/jawaban/{id_mhs}', [JawabanController::class, 'getDetailMahasiswaJawaban']);
+
+
+//Kelas
+Route::get('/admin/kelas/data', [KelasController::class, 'getDataKelas'])->name('kelas.data');
+Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
+Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
+
+
+
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/report', [AdminController::class, 'reportIndex'])->name('admin.report');
+Route::get('/admin/sudah-jawab', [AdminController::class, 'sudahJawab'])->name('jawaban.sudah');
+Route::get('/admin/belum-jawab', [AdminController::class, 'belumJawab'])->name('jawaban.belum');
+Route::get('/admin/kelas', [AdminController::class, 'kelas_list'])->name('kelas.index');
+Route::get('/admin/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
+Route::get('/admin/kelas/average/{id_kelas}', [AdminController::class, 'averagePage'])->name('kelas.average');
+
+//Report
+Route::get('/admin/chart/data/jawaban', [ReportController::class, 'getMahasiswaJawabanChart']);
 });

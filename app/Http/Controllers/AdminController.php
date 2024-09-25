@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\KelasController;
 
 class AdminController extends Controller
 {
@@ -14,6 +16,21 @@ class AdminController extends Controller
         $title = 'Dashboard'; 
         $parent_breadcrumb = 'Dashboard';
         return view('admin.dashboard', compact('title', 'parent_breadcrumb'));
+    }
+
+    public function sudahJawab()
+    {
+        return view('admin.jawaban.index');
+    }
+    
+    public function belumJawab()
+    {
+        return view('admin.jawaban.belum_jawab');
+    }
+
+    public function kelas_list()
+    {
+        return view('admin.kelas.index');
     }
 
     public function change_session(Request $request)
@@ -34,4 +51,32 @@ class AdminController extends Controller
 
         // return response()->json(['ket' => $ket]);
     }
+
+    public function reportIndex()
+    {
+
+        return view('admin.report.index');
+    }
+
+    public function detailKelasChart($id_kelas)
+    {
+        try {
+            // Get instance of KelasController using dependency injection
+            $kelasController = App::make(KelasController::class);
+            $chartData = $kelasController->getJawabanKelasData($id_kelas);
+    
+            return view('admin.kelas.detail_kelas', [
+                'chartData' => $chartData,
+                'id_kelas' => $id_kelas
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function averagePage($id_kelas)
+    {
+        return view('admin.kelas.average', ['id_kelas' => $id_kelas]);
+    }
+    
 }
