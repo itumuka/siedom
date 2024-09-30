@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class KelasController extends Controller
 {
@@ -66,6 +67,7 @@ class KelasController extends Controller
     public function getJawabanKelasData($id_kelas)
     {
         try {
+            // Fetch data for chart and counts
             $chartData = DB::table('edom_jawaban')
                 ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
                 ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
@@ -79,8 +81,15 @@ class KelasController extends Controller
                 ->where('akd_kelas_kuliah.id_kelas', $id_kelas)
                 ->groupBy('akd_matakuliah.nama_matakuliah', 'akd_matakuliah.kode_matakuliah', 'edom_jawaban.jawaban')
                 ->get();
-
-                
+    
+            // Calculate total students who responded (based on unique student IDs in the class)
+            $total_students = DB::table('edom_jawaban')
+                ->where('id_kelas', $id_kelas)
+                ->distinct('user_id')
+                ->count('user_id'); // Count distinct students
+    
+            // Total number of responses (sum of all answers)
+            $total_responses = $chartData->sum('count');
     
             return response()->json([
                 'data' => $chartData->map(function ($item) {
@@ -90,12 +99,52 @@ class KelasController extends Controller
                         'jawaban' => $item->jawaban,
                         'count' => $item->count
                     ];
-                })
+                }),
+                'total_students' => $total_students,
+                'total_responses' => $total_responses
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
+
+    //Detail Kelas Login Dosen
+    public function getDosenCourses()
+    {
+        $id_pegawai = Session::get('id_pegawai');
+        try {
+            $query = DB::table('akd_kelas_kuliah')
+                ->select(
+                    'akd_kelas_kuliah.id_kelas',
+                    'akd_kelas_kuliah.nama_kelas',
+                    'akd_kelas_kuliah.kode_dosen',
+                    'akd_matakuliah.nama_matakuliah',
+                    'akd_matakuliah.kode_matakuliah',
+                    'akd_program_studi.nama_program_studi',
+                    'akd_penawaran_matakuliah.smt_matakuliah',
+                    'simpeg_pegawai.nama',
+                    DB::raw('COUNT(edom_jawaban.jawaban) as total_jawaban'),
+                    DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mahasiswa')
+                )
+                ->leftJoin('edom_jawaban', 'akd_kelas_kuliah.id_kelas', '=', 'edom_jawaban.id_kelas')
+                ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+                ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
+                ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+                ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+                // ->join('akd_program_studi', 'akd_mahasiswa.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+                ->where('simpeg_pegawai.id', $id_pegawai)
+                ->groupBy('akd_kelas_kuliah.id_kelas', 'akd_kelas_kuliah.nama_kelas', 'akd_kelas_kuliah.kode_dosen', 'akd_matakuliah.nama_matakuliah', 'akd_matakuliah.kode_matakuliah', 'simpeg_pegawai.nama', 'akd_program_studi.nama_program_studi', 'akd_penawaran_matakuliah.smt_matakuliah' )
+                ->get();
+
+            return response()->json([
+                'data' => $query
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        
+    }   
     
     
 

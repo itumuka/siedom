@@ -223,6 +223,22 @@
                                     <span>Kuisioner</span>
                                 </a>
                             </li>
+                            @elseif (Session::get('tipe') == "Dosen")
+                            <li class="header">Menu</li>
+                            <li class="{{ Route::is('dosen.dashboard') ? 'active' : '' }}">
+                                <a href="{{ route('dosen.dashboard') }}">
+                                    <i class="fa fa-dashcube"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::is('dosen.kelas') ? 'active' : '' }}">
+                                <a href="{{ route('dosen.kelas') }}">
+                                    <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Kelas">
+                                        <span class="path1"></span><span class="path2"></span>
+                                    </i>
+                                    <span>Kelas</span>
+                                </a>
+                            </li>
 
                             @elseif (Session::get('tipe') == "Pegawai")
                             <li class="header">Menu</li>

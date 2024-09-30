@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KomponenPenilaianController;
@@ -61,8 +62,6 @@ Route::get('/admin/kelas/data', [KelasController::class, 'getDataKelas'])->name(
 Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
 Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
 
-
-
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/report', [AdminController::class, 'reportIndex'])->name('admin.report');
 Route::get('/admin/sudah-jawab', [AdminController::class, 'sudahJawab'])->name('jawaban.sudah');
@@ -73,4 +72,13 @@ Route::get('/admin/kelas/average/{id_kelas}', [AdminController::class, 'averageP
 
 //Report
 Route::get('/admin/chart/data/jawaban', [ReportController::class, 'getMahasiswaJawabanChart']);
+});
+
+Route::middleware(['cekdosen'])->group(function () {
+    Route::get('/dosen/courses', [KelasController::class, 'getDosenCourses'])->name('dosen.data');
+    Route::get('/dosen/kelas', [DosenController::class, 'kelas'])->name('dosen.kelas');
+    Route::get('/dosen/dashboard', [DosenController::class, 'index'])->name('dosen.dashboard');
+    Route::get('/admin/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
+    Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
+
 });

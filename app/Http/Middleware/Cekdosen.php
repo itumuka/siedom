@@ -22,7 +22,7 @@ class Cekdosen
         if (Session::get('tipe') == "Dosen") {
             return $next($request);
         } else {
-            return redirect(route('home'));
+            return redirect(route('dosen.dashboard'));
         }
     }
 }
