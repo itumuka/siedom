@@ -1,6 +1,6 @@
 @extends('layouts.master_sidebar')
 
-@section('title', 'Kelas Overview')
+@section('title', 'Daftar Kelas')
 
 @section('css')
     <style type="text/css">
@@ -50,7 +50,7 @@
                         className: 'text-center',
                         render: function(data, type, row, meta) {
                             return `
-                            <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/detail/${row.id_kelas}'">
+                            <button type="button" class="btn btn-info" onclick="window.location.href='/dosen/kelas/detail/${row.id_kelas}'">
                                 <i class="fa fa-eye"></i>
                             </button>
                             `;

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
 
-    <title>Admin</title>
+    <title>@yield('title')</title>
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ URL::asset('semidark/css/vendors_css.css') }}">

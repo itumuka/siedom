@@ -78,7 +78,7 @@ Route::middleware(['cekdosen'])->group(function () {
     Route::get('/dosen/courses', [KelasController::class, 'getDosenCourses'])->name('dosen.data');
     Route::get('/dosen/kelas', [DosenController::class, 'kelas'])->name('dosen.kelas');
     Route::get('/dosen/dashboard', [DosenController::class, 'index'])->name('dosen.dashboard');
-    Route::get('/admin/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
+    Route::get('/dosen/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
     Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
 
 });

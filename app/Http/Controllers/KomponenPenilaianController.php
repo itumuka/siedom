@@ -72,7 +72,7 @@ class KomponenPenilaianController extends Controller
 
             return response()->json(['id' => $id, 'nama_komponen' => $validated['nama_komponen']]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal memperbarui data.'], 500);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
