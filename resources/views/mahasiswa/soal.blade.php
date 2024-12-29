@@ -152,18 +152,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var allAnswered = true;
             document.querySelectorAll('#evaluation-content .form-group').forEach(function(group) {
                 var radios = group.querySelectorAll('input[type="radio"]');
-                var oneChecked = false;
-                radios.forEach(function(radio) {
-                    if (radio.checked) {
-                        oneChecked = true;
-                    }
-                });
+                var oneChecked = Array.from(radios).some(radio => radio.checked);
                 if (!oneChecked) {
                     allAnswered = false;
                 }
             });
             return allAnswered;
         }
+
 
         renderQuestions(currentPage);
         updatePaginationControls();

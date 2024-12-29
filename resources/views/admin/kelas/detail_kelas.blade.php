@@ -3,37 +3,65 @@
 @section('title', 'Detail Kelas')
 
 @section('content')
-    <section class="content">
-        <div class="row">
-            <div class="col-12">
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="">
                 <div class="">
-                    <div class="">
-                        <div id="matakuliah-info" class="mb-4">
-                            <h4 id="matakuliah-nama"></h4>
-                            <h5 id="matakuliah-kode"></h5>
-                        </div>
+                    <div id="matakuliah-info" class="mb-4">
+                        <h4 id="matakuliah-nama"></h4>
+                        <h5 id="matakuliah-kode"></h5>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-xl-6 col-12">
-                                <div class="">
-                                    <div class="box-body analytics-info" id="no-answer">
-                                        <div id="basic-pie" style="height:400px; width:100%;"></div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-12">
+                            <div class="">
+                                <div class="box-body analytics-info" id="no-answer">
+                                    <div id="basic-pie" style="height:400px; width:100%;"></div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12">
-                                <div class="">
-                                    <div class="box-body analytics-info">
-                                        <div style="height:400px;"><h5 id="total-mhs"></h5><h5 id="total-jwb"></h5><h5 id="rata-jwb"></h5></div>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                            <div class="">
+                                <div class="box-body analytics-info">
+                                    <div style="height:400px;">
+                                        <h5 id="total-mhs"></h5>
+                                        <h5 id="total-jwb"></h5>
+                                        <h5 id="rata-jwb"></h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Tabel untuk detail jawaban -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="">
+                                <div class="box-body analytics-info">
+                                    <h4>Detail Jawaban</h4>
+                                    <table class="table table-striped table-bordered" id="jawaban-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Jawaban</th>
+                                                <th>Jumlah</th>
+                                                <th>Persentase</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Data akan diisi dengan JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Tabel -->
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
 
 @section('script-master')
@@ -64,24 +92,24 @@ function fetchChartData() {
                 var matakuliahKode = response.data[0].kode_matakuliah;
                 var totalStudents = response.total_students;
                 var totalResponses = response.total_responses;
-                var averageScore = calculateAverage(response.data);  // Calculate average score
+                var averageScore = calculateAverage(response.data); // Hitung rata-rata jawaban
 
                 response.data.forEach(function(item) {
                     answers[item.jawaban] = item.count;
                 });
 
-                // Display Matakuliah name, total students, total responses, and average score
+                // Tampilkan data Matakuliah
                 document.getElementById('matakuliah-nama').textContent = 'Matakuliah: ' + matakuliahNama;
                 document.getElementById('matakuliah-kode').textContent = 'Kode: ' + matakuliahKode;
                 document.getElementById('total-mhs').textContent = 'Total Mahasiswa: ' + totalStudents;
                 document.getElementById('total-jwb').textContent = 'Total Jawaban: ' + totalResponses;
-                document.getElementById('rata-jwb').textContent = 'Rata-rata Jawaban:' + averageScore.toFixed(2);
+                document.getElementById('rata-jwb').textContent = 'Rata-rata Jawaban: ' + averageScore.toFixed(2);
 
-                // Check if all answer counts are zero
                 if (answers.every(function(count) { return count === 0; })) {
                     showNoDataMessage();
                 } else {
                     renderCharts(answers);
+                    populateTable(answers); // Isi tabel
                 }
             } else {
                 showNoDataMessage();
@@ -93,7 +121,6 @@ function fetchChartData() {
         }
     });
 }
-
 
 function renderCharts(answers) {
     var pieChart = echarts.init(document.getElementById('basic-pie'));
@@ -135,6 +162,27 @@ function renderCharts(answers) {
     pieChart.setOption(pieOption);
 }
 
+function populateTable(answers) {
+    var totalAnswers = answers.reduce((a, b) => a + b, 0);
+    var tableBody = document.getElementById('jawaban-table').querySelector('tbody');
+
+    var jawabanLabels = ['Tidak Berlaku', 'Sangat Tidak Sesuai', 'Tidak Sesuai', 'Sesuai', 'Sangat Sesuai'];
+
+    tableBody.innerHTML = '';
+
+    answers.forEach(function(count, index) {
+        var percentage = totalAnswers === 0 ? 0 : (count / totalAnswers * 100).toFixed(2);
+        var row = `
+            <tr>
+                <td>${jawabanLabels[index]}</td>
+                <td>${count}</td>
+                <td>${percentage}%</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
 function showNoDataMessage() {
     document.getElementById('no-answer').innerHTML = '<h4 class="text-center">Matakuliah ini belum diisi jawaban.</h4>';
 }
@@ -142,7 +190,5 @@ function showNoDataMessage() {
 $(document).ready(function() {
     fetchChartData();
 });
-
 </script>
-
-@stop
+@endsection

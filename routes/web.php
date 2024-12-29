@@ -14,6 +14,12 @@ use App\Http\Controllers\SoalController;
 // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [AuthController::class, 'login']);
 // Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/dosen/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
+Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
+Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
+
+
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/makesession-pegawai', [LoginController::class, 'make_session_pegawa'])->name('makesession_pegawai');
@@ -59,8 +65,8 @@ Route::get('/admin/jawaban/{id_mhs}', [JawabanController::class, 'getDetailMahas
 
 //Kelas
 Route::get('/admin/kelas/data', [KelasController::class, 'getDataKelas'])->name('kelas.data');
-Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
-Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
+// Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
+// Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/report', [AdminController::class, 'reportIndex'])->name('admin.report');
@@ -78,7 +84,5 @@ Route::middleware(['cekdosen'])->group(function () {
     Route::get('/dosen/courses', [KelasController::class, 'getDosenCourses'])->name('dosen.data');
     Route::get('/dosen/kelas', [DosenController::class, 'kelas'])->name('dosen.kelas');
     Route::get('/dosen/dashboard', [DosenController::class, 'index'])->name('dosen.dashboard');
-    Route::get('/dosen/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
-    Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
 
 });

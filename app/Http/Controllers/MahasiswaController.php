@@ -16,7 +16,7 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $title = 'Kuisioner'; 
+        $title = 'Kuisioner';   
         $parent_breadcrumb = 'Kuisioner';
         return view('mahasiswa.kuisioner', compact('title', 'parent_breadcrumb'));
     }
