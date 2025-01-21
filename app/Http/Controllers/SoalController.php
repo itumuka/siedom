@@ -121,5 +121,39 @@ class SoalController extends Controller
     }
     }
 
+    public function duplicate(Request $request)
+    {
+        $sourceYear = $request->input('sourceYear');
+        $targetYear = $request->input('targetYear');
+    
+        if (!$sourceYear || !$targetYear) {
+            return response()->json(['message' => 'Tahun akademik asal dan tujuan harus dipilih'], 400);
+        }
+    
+        try {
+            // Ambil semua soal dari tahun akademik asal
+            $sourceSoal = DB::table('edom_soal')
+                ->where('id_mreg', $sourceYear)
+                ->get();
+    
+            // Loop untuk menyimpan soal ke tahun akademik tujuan
+            foreach ($sourceSoal as $soal) {
+                DB::table('edom_soal')->insert([
+                    'pertanyaan' => $soal->pertanyaan,
+                    'id_komponen_penilaian' => $soal->id_komponen_penilaian,
+                    'id_mreg' => $targetYear,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+    
+            return response()->json(['message' => 'Soal berhasil diduplikat'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+    }
+    
+
+
 
 }

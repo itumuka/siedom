@@ -14,8 +14,10 @@
 
         <!-- Create/Update Form -->
         <div class="clearfix">
-            <button type="button" class="waves-effect waves-light btn btn-rounded btn-primary mb-5" id="add-btn">Add Komponen</button>
+            <button type="button" class="waves-effect waves-light btn btn-rounded btn-primary mb-5" id="add-btn">Add Soal</button>
+            <button type="button" class="waves-effect waves-light btn btn-rounded btn-secondary mb-5" id="duplicate-btn">Duplikat Soal</button>
         </div>
+        
 
         <!-- Modal for Create/Update -->
         <div class="modal fade" id="soalModal" tabindex="-1" role="dialog" aria-labelledby="soalModalLabel" aria-hidden="true">
@@ -38,7 +40,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning me-1"  id="cancel-btn">
+                        <button type="button" class="btn btn-warning me-1"  id="cancel-btn" data-bs-dismiss="modal">
                             <i class="ti-trash"></i> Cancel
                           </button>
                           <button type="button" class="btn btn-primary" id="save-btn">
@@ -48,6 +50,36 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal for Duplikat -->
+        <div class="modal fade" id="duplicateModal" tabindex="-1" role="dialog" aria-labelledby="duplicateModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="duplicateModalLabel">Duplikat Soal</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="source-academic-year">Tahun Akademik Asal</label>
+                            <select class="form-control" id="source-academic-year">
+                                <option value="">Pilih Tahun Akademik</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="target-academic-year">Tahun Akademik Tujuan</label>
+                            <select class="form-control" id="target-academic-year">
+                                <option value="">Pilih Tahun Akademik</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i class="ti-trash"></i> Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirm-duplicate-btn"><i class="ti-save-alt" id="save-btn"></i> Duplikat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
         <!-- DataTable -->
         <div class="table-responsive">
@@ -221,6 +253,65 @@
             });
         });
         
+        $("#duplicate-btn").click(function() {
+    $("#source-academic-year").val('');
+    $("#target-academic-year").val('');
+    loadMregOptions(function() {
+        $("#duplicateModal").modal('show');
+    });
+});
+
+    // Duplikat
+    $('#duplicateModal').on('show.bs.modal', function() {
+        $.ajax({
+            url: "{{ route('mreg.data') }}", // Pastikan ini rute yang sama dengan Add Soal
+            type: "GET",
+            success: function(response) {
+                var options = '<option value="">Pilih Tahun Akademik</option>';
+                response.data.forEach(function(item) {
+                    options += `<option value="${item.id_mreg}">${item.tahun_ajaran}</option>`;
+                });
+
+                // Set options untuk dropdown di modal duplikasi
+                $('#source-academic-year').html(options);
+                $('#target-academic-year').html(options);
+            },
+            error: function(xhr) {
+                console.error('Error memuat data tahun akademik:', xhr.responseJSON.message);
+            }
+        });
+    });
+
+
+    $("#confirm-duplicate-btn").click(function() {
+        var sourceYear = $("#source-academic-year").val();
+        var targetYear = $("#target-academic-year").val();
+
+        if (!sourceYear || !targetYear) {
+            alert('Silakan pilih tahun akademik asal dan tujuan');
+            return;
+        }
+
+        $.ajax({
+            url: "{{ route('soal.duplicate') }}",
+            type: 'POST',
+            data: {
+                sourceYear: sourceYear,
+                targetYear: targetYear,
+            },
+            success: function(response) {
+                table.ajax.reload(); // Reload tabel setelah duplikasi
+                $("#duplicateModal").modal('hide');
+                showToastr('success', 'Berhasil!', response.message);
+            },
+            error: function(xhr) {
+                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Gagal menduplikat soal';
+                showToastr('error', 'Error!', errorMessage);
+            }
+        });
+    });
+
+
 
             // Handle delete button click
             $(document).on('click', '.btn-delete', function() {

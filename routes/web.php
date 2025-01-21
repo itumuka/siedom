@@ -56,6 +56,8 @@ Route::delete('/admin/soal/{id}', [SoalController::class, 'destroy']);
 Route::get('/admin/soal/{id}', [SoalController::class, 'show']);
 Route::get('/admin/soal/komponen-options', [KomponenPenilaianController::class, 'getData'])->name('soal.komponen-options');
 Route::get('/admin/mreg/data', [SoalController::class, 'getDataMreg'])->name('mreg.data');
+Route::post('/admin/soal/duplicate', [SoalController::class, 'duplicate'])->name('soal.duplicate');
+
 
 //Jawaban Mahasiswa
 Route::get('/admin/jawaban/data', [JawabanController::class, 'getDataMahasiswaSudahMengisi'])->name('jawaban.data');
