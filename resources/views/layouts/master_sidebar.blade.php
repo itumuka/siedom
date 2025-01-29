@@ -124,6 +124,7 @@
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
                         @if (Session::get('tipe') == 'Mahasiswa')
+                        
                         <li>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-right" title="Setting"
                                 class="waves-effect waves-light dropdown-toggle">
@@ -170,9 +171,9 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Tahun Akademik</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
+                                    {{-- <button type="button" class="close" data-bs-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    </button> --}}<span class="pull-right btn btn-circle btn-danger" data-bs-dismiss="modal"><i class="ion ion-close text-white" data-toggle="control-sidebar" ></i></span>
                                 </div>
         
                                 <div class="modal-body">
@@ -209,6 +210,18 @@
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
                             @if (Session::get('tipe') == 'Mahasiswa')
+                            <div class="media-list media-list-hover">
+                                <div class="media py-10 px-0 align-items-center">
+                                        <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <p>
+                                            <span class="font-size-12 text-white">{{ Session::get('nama') }}</span><br>
+                                            <span class="font-size-10 text-white">({{ Session::get('session_nim') }})</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                             <li class="header">Menu</li>
                             <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
                                 <a href="{{ route('dashboard') }}">
@@ -293,21 +306,20 @@
                                                 <span>Kelas</span>
                                             </a>
                                         </li>
-                                        <li class="treeview">
-                                            <a href="{{ route('admin.report') }}">
-                                                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Mahasiswa
-                                                <span class="pull-right-container">
-                                                    <i class="fa fa-angle-right pull-right"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="treeview-menu">
-                                                <li class="{{ Route::is('jawaban.sudah') ? 'active' : '' }}"><a href="{{ route('jawaban.sudah') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Sudah Mengisi</a></li>
-                                                <li class="{{ Route::is('jawaban.belum') ? 'active' : '' }}"><a href="{{ route('jawaban.belum') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Belum Mengisi</a></li>
-                                                <li class="{{ Route::is('admin.report') ? 'active' : '' }}"><a href="{{ route('admin.report') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Chart</a></li>
-                                            </ul>
-                                        </li> 	 					
                                     </ul>
                                 </li>                        
+                                <li class="treeview">
+                                    <a href="{{ route('admin.report') }}">
+                                        <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>Mahasiswa
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li class="{{ Route::is('jawaban.sudah') ? 'active' : '' }}"><a href="{{ route('jawaban.sudah') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Sudah Mengisi</a></li>
+                                        <li class="{{ Route::is('jawaban.belum') ? 'active' : '' }}"><a href="{{ route('jawaban.belum') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Belum Mengisi</a></li>
+                                    </ul>
+                                </li> 	 					
                             @endif
                         </ul>
                     </div>
@@ -326,7 +338,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            &copy; 2023 <a href="https://www.umuka.ac.id">UMUKA</a>. All Rights Reserved.
+            &copy; 2025 <a href="https://www.umuka.ac.id">UMUKA</a>. All Rights Reserved.
         </footer>
     </div>
     <!-- ./wrapper -->
