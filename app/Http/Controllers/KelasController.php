@@ -12,7 +12,8 @@ class KelasController extends Controller
     public function getDataKelas()
     {
         try {
-            $query = DB::table('akd_kelas_kuliah')
+            // Query untuk mengambil data kelas dan informasi terkait
+            $kelasData = DB::table('akd_kelas_kuliah')
                 ->select(
                     'akd_kelas_kuliah.id_kelas',
                     'akd_kelas_kuliah.nama_kelas',
@@ -21,26 +22,38 @@ class KelasController extends Controller
                     'akd_matakuliah.kode_matakuliah',
                     'akd_program_studi.nama_program_studi',
                     'akd_penawaran_matakuliah.smt_matakuliah',
-                    'simpeg_pegawai.nama',
-                    DB::raw('COUNT(edom_jawaban.jawaban) as total_jawaban'),
-                    DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mahasiswa')
+                    'simpeg_pegawai.nama'
                 )
-                ->leftJoin('edom_jawaban', 'akd_kelas_kuliah.id_kelas', '=', 'edom_jawaban.id_kelas')
                 ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
                 ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
                 ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
                 ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-                // ->join('akd_program_studi', 'akd_mahasiswa.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-                ->groupBy('akd_kelas_kuliah.id_kelas', 'akd_kelas_kuliah.nama_kelas', 'akd_kelas_kuliah.kode_dosen', 'akd_matakuliah.nama_matakuliah', 'akd_matakuliah.kode_matakuliah', 'simpeg_pegawai.nama', 'akd_program_studi.nama_program_studi', 'akd_penawaran_matakuliah.smt_matakuliah' )
                 ->get();
-
-            return response()->json([
-                'data' => $query
-            ]);
+    
+            // Query untuk mengambil total jawaban dan total mahasiswa dari tabel edom_jawaban
+            $totalJawaban = DB::table('edom_jawaban')
+                ->select(
+                    'id_kelas',
+                    DB::raw('COUNT(jawaban) as total_jawaban'),
+                    DB::raw('COUNT(DISTINCT user_id) as total_mahasiswa')
+                )
+                ->groupBy('id_kelas')
+                ->get();
+    
+            // Menggabungkan data kelas dengan data agregat berdasarkan id_kelas
+            $data = $kelasData->map(function ($kelas) use ($totalJawaban) {
+                $jawaban = $totalJawaban->firstWhere('id_kelas', $kelas->id_kelas);
+                $kelas->total_jawaban = $jawaban ? $jawaban->total_jawaban : 0;
+                $kelas->total_mahasiswa = $jawaban ? $jawaban->total_mahasiswa : 0;
+                return $kelas;
+            });
+    
+            return response()->json(['data' => $data]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
 
     public function getChartData($id_kelas)
     {
