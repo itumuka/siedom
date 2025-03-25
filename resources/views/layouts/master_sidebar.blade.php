@@ -212,8 +212,7 @@
                             @if (Session::get('tipe') == 'Mahasiswa')
                             <div class="media-list media-list-hover">
                                 <div class="media py-10 px-0 align-items-center">
-                                        <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
-                                    </a>
+                                    <i class="fa fa-table"><span class="path1"></span><span class="path2"></span></i>
                                     <div class="media-body">
                                         <p>
                                             <span class="font-size-12 text-white">{{ Session::get('nama') }}</span><br>
