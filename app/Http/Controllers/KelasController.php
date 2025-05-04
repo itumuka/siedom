@@ -12,7 +12,15 @@ class KelasController extends Controller
     public function getDataKelas()
     {
         try {
-            // Query untuk mengambil data kelas dan informasi terkait
+            $id_mreg = Session::get('id_mreg');
+    
+            // 1) Ambil tahun & semester dari akd_mreg
+            $mreg = DB::table('akd_mreg')
+                ->select('tahun', 'semester')
+                ->where('id_mreg', $id_mreg)
+                ->first();
+    
+            // 2) Data master kelas, difilter periode yang sama
             $kelasData = DB::table('akd_kelas_kuliah')
                 ->select(
                     'akd_kelas_kuliah.id_kelas',
@@ -25,26 +33,30 @@ class KelasController extends Controller
                     'simpeg_pegawai.nama'
                 )
                 ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-                ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
-                ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
-                ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+                ->join('akd_matakuliah',           'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
+                ->join('simpeg_pegawai',           'akd_penawaran_matakuliah.kode_dosen',   '=', 'simpeg_pegawai.id')
+                ->join('akd_program_studi',        'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+                // <<< Filter by active tahun & semester
+                ->where('akd_penawaran_matakuliah.tahun',   $mreg->tahun)
+                ->where('akd_penawaran_matakuliah.semester',$mreg->semester)
                 ->get();
     
-            // Query untuk mengambil total jawaban dan total mahasiswa dari tabel edom_jawaban
+            // 3) Ambil agregasi jawaban untuk periode itu
             $totalJawaban = DB::table('edom_jawaban')
                 ->select(
                     'id_kelas',
                     DB::raw('COUNT(jawaban) as total_jawaban'),
                     DB::raw('COUNT(DISTINCT user_id) as total_mahasiswa')
                 )
+                ->where('id_mreg', $id_mreg)
                 ->groupBy('id_kelas')
                 ->get();
     
-            // Menggabungkan data kelas dengan data agregat berdasarkan id_kelas
+            // 4) Merge
             $data = $kelasData->map(function ($kelas) use ($totalJawaban) {
                 $jawaban = $totalJawaban->firstWhere('id_kelas', $kelas->id_kelas);
-                $kelas->total_jawaban = $jawaban ? $jawaban->total_jawaban : 0;
-                $kelas->total_mahasiswa = $jawaban ? $jawaban->total_mahasiswa : 0;
+                $kelas->total_jawaban   = $jawaban->total_jawaban ?? 0;
+                $kelas->total_mahasiswa = $jawaban->total_mahasiswa ?? 0;
                 return $kelas;
             });
     
@@ -53,6 +65,7 @@ class KelasController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
     
 
     public function getChartData($id_kelas)
@@ -77,55 +90,82 @@ class KelasController extends Controller
         }
     }
 
+    public function getAllSoalData($id_kelas)
+    {
+        $id_mreg = Session::get('id_mreg');
+    
+        $raw = DB::table('edom_jawaban')
+            ->join('edom_soal', 'edom_jawaban.id_soal', '=', 'edom_soal.id_soal')
+            ->where('edom_jawaban.id_kelas', $id_kelas)
+            ->where('edom_jawaban.id_mreg',   $id_mreg)
+            ->select(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_jawaban.jawaban',
+                DB::raw('COUNT(*) as count')
+            )
+            ->groupBy(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_jawaban.jawaban'
+            )
+            ->orderBy('edom_soal.id_soal')
+            ->get();
+    
+        return response()->json(['data' => $raw]);
+    }
+    
     public function getJawabanKelasData($id_kelas)
     {
-        try {
-            // Fetch data for chart and counts
-            $chartData = DB::table('edom_jawaban')
-                ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
-                ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-                ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
-                ->select(
-                    'akd_matakuliah.nama_matakuliah',
-                    'akd_matakuliah.kode_matakuliah',
-                    'edom_jawaban.jawaban',
-                    DB::raw('COUNT(edom_jawaban.jawaban) as count')
-                )
-                ->where('akd_kelas_kuliah.id_kelas', $id_kelas)
-                ->groupBy('akd_matakuliah.nama_matakuliah', 'akd_matakuliah.kode_matakuliah', 'edom_jawaban.jawaban')
-                ->get();
+        $id_mreg = Session::get('id_mreg');
     
-            // Calculate total students who responded (based on unique student IDs in the class)
-            $total_students = DB::table('edom_jawaban')
-                ->where('id_kelas', $id_kelas)
-                ->distinct('user_id')
-                ->count('user_id'); // Count distinct students
+        $chartData = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
+            
+            ->select(
+                'akd_matakuliah.nama_matakuliah',
+                'akd_matakuliah.kode_matakuliah',
+                'edom_jawaban.jawaban',
+                DB::raw('COUNT(*) as count')
+            )
+            ->where('edom_jawaban.id_kelas', $id_kelas)
+            ->where('edom_jawaban.id_mreg',   $id_mreg)         // ← filter by session id_mreg
+            ->groupBy(
+                'akd_matakuliah.nama_matakuliah',
+                'akd_matakuliah.kode_matakuliah',
+                'edom_jawaban.jawaban'
+            )
+            ->get();
     
-            // Total number of responses (sum of all answers)
-            $total_responses = $chartData->sum('count');
+        $total_students = DB::table('edom_jawaban')
+            ->where('id_kelas', $id_kelas)
+            ->where('id_mreg',   $id_mreg)                       // ← sama di sini
+            ->distinct('user_id')
+            ->count('user_id');
     
-            return response()->json([
-                'data' => $chartData->map(function ($item) {
-                    return [
-                        'nama_matakuliah' => $item->nama_matakuliah,
-                        'kode_matakuliah' => $item->kode_matakuliah,
-                        'jawaban' => $item->jawaban,
-                        'count' => $item->count
-                    ];
-                }),
-                'total_students' => $total_students,
-                'total_responses' => $total_responses
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $total_responses = $chartData->sum('count');
+    
+        return response()->json([
+            'data'             => $chartData,
+            'total_students'   => $total_students,
+            'total_responses'  => $total_responses
+        ]);
     }
     
 
-    //Detail Kelas Login Dosen
     public function getDosenCourses()
     {
         $id_pegawai = Session::get('id_pegawai');
+        $id_mreg     = Session::get('id_mreg');
+    
+        // Ambil tahun & semester dari akd_mreg
+        $mreg = DB::table('akd_mreg')
+            ->select('tahun', 'semester')
+            ->where('id_mreg', $id_mreg)
+            ->first();
+    
         try {
             $query = DB::table('akd_kelas_kuliah')
                 ->select(
@@ -145,19 +185,30 @@ class KelasController extends Controller
                 ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
                 ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
                 ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-                // ->join('akd_program_studi', 'akd_mahasiswa.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+    
+                // HANYA untuk tahun & semester yang sama dengan mreg session
+                ->where('akd_penawaran_matakuliah.tahun',   $mreg->tahun)
+                ->where('akd_penawaran_matakuliah.semester',$mreg->semester)
+    
                 ->where('simpeg_pegawai.id', $id_pegawai)
-                ->groupBy('akd_kelas_kuliah.id_kelas', 'akd_kelas_kuliah.nama_kelas', 'akd_kelas_kuliah.kode_dosen', 'akd_matakuliah.nama_matakuliah', 'akd_matakuliah.kode_matakuliah', 'simpeg_pegawai.nama', 'akd_program_studi.nama_program_studi', 'akd_penawaran_matakuliah.smt_matakuliah' )
+                ->groupBy(
+                    'akd_kelas_kuliah.id_kelas',
+                    'akd_kelas_kuliah.nama_kelas',
+                    'akd_kelas_kuliah.kode_dosen',
+                    'akd_matakuliah.nama_matakuliah',
+                    'akd_matakuliah.kode_matakuliah',
+                    'simpeg_pegawai.nama',
+                    'akd_program_studi.nama_program_studi',
+                    'akd_penawaran_matakuliah.smt_matakuliah'
+                )
                 ->get();
-
-            return response()->json([
-                'data' => $query
-            ]);
+    
+            return response()->json(['data' => $query]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-        
-    }   
+    }
+      
     
     
 

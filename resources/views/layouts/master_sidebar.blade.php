@@ -123,7 +123,6 @@
 
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
-                        @if (Session::get('tipe') == 'Mahasiswa')
                         
                         <li>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-right" title="Setting"
@@ -135,7 +134,6 @@
                                 Launch demo modal
                               </button> --}}
                         </li>
-                        @endif
 
                         <!-- User Account-->
                         <li class="dropdown user user-menu">
@@ -163,7 +161,6 @@
 
             </nav>
         </header>
-             @if (Session::get('tipe') == 'Mahasiswa')
                         {{-- new --}}
                 <div class="modal modal-right fade" id="modal-right" tabindex="-1">
                     <div class="modal-dialog">
@@ -199,8 +196,6 @@
                         </form>
                     </div>
                 </div>
-                {{-- end new  --}}
-            @endif
 
         <aside class="main-sidebar">
             <!-- sidebar-->
@@ -248,7 +243,7 @@
                                     <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Kelas">
                                         <span class="path1"></span><span class="path2"></span>
                                     </i>
-                                    <span>Kelas</span>
+                                    <span>Laporan Per Kelas</span>
                                 </a>
                             </li>
 
@@ -262,9 +257,7 @@
                             </li>
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-table" data-bs-toggle="tooltip" title="Post Berita Terkini">
-                                        <span class="path1"></span><span class="path2"></span>
-                                    </i>
+                                    <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Data Master</span>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
@@ -273,17 +266,13 @@
                                 <ul class="treeview-menu">
                                     <li class="{{ Route::is('komponen-penilaian.index') ? 'active' : '' }}">
                                         <a href="{{ route('komponen-penilaian.index') }}">
-                                            <i class="fa fa-newspaper-o" data-bs-toggle="tooltip" title="Komponen Penilaian">
-                                                <span class="path1"></span><span class="path2"></span>
-                                            </i>
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
                                             <span>Komponen Penilaian</span>
                                         </a>
                                     </li>
                                     <li class="{{ Route::is('soal.index') ? 'active' : '' }}">
                                         <a href="{{ route('soal.index') }}">
-                                            <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Soal">
-                                                <span class="path1"></span><span class="path2"></span>
-                                            </i>
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
                                             <span>Soal</span>
                                         </a>
                                     </li>	
@@ -299,10 +288,8 @@
                                     <ul class="treeview-menu">
                                         <li class="{{ Route::is('kelas.index') ? 'active' : '' }}">
                                             <a href="{{ route('kelas.index') }}">
-                                                <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Kelas">
-                                                    <span class="path1"></span><span class="path2"></span>
-                                                </i>
-                                                <span>Kelas</span>
+                                                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+                                                <span>Report Per Kelas</span>
                                             </a>
                                         </li>
                                     </ul>

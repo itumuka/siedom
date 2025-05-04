@@ -15,8 +15,9 @@ use App\Http\Controllers\SoalController;
 // Route::post('login', [AuthController::class, 'login']);
 // Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dosen/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
+Route::get('/dosen/kelas/detail/{id_kelas}', [DosenController::class, 'detailKelasChart'])->name('dosen.kelas.detail');
 Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
+Route::get('/dosen/chart/data/jawaban-kelas/{id_kelas}', [DosenController::class, 'getJawabanKelasData'])->name('dosen_detail.data');
 Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
 
 
@@ -25,7 +26,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/makesession-pegawai', [LoginController::class, 'make_session_pegawa'])->name('makesession_pegawai');
 Route::get('/makesession-mahasiswa', [LoginController::class, 'make_session_mahasiswa'])->name('make_session_mahasiswa');
 Route::get('/makesession-dosen', [LoginController::class, 'make_session_dosen'])->name('make_session_dosen');
-
+Route::get('/admin/change_session', [AdminController::class, 'change_session'])->name('change_session');
+Route::get('/admin/getsession_ta', [AdminController::class, 'getsession_ta'])->name('getsession_ta');
 
 Route::middleware(['cekmahasiswa'])->group(function () {
 Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
@@ -34,8 +36,7 @@ Route::get('soal', [MahasiswaController::class, 'show'])->name('soal.page');
 Route::get('/get-komponen-penilaian', [MahasiswaController::class, 'getKomponenPenilaian']);
 Route::get('/get-soal', [MahasiswaController::class, 'getSoal']);
 Route::post('/submit-jawaban', [MahasiswaController::class, 'store']);
-Route::get('/admin/change_session', [AdminController::class, 'change_session'])->name('change_session');
-Route::get('/admin/getsession_ta', [AdminController::class, 'getsession_ta'])->name('getsession_ta');
+
 Route::get('/check-kuisioner-status', [MahasiswaController::class, 'checkKuisionerStatus'])->name('check.kuisioner.status');
 });
 
@@ -78,6 +79,10 @@ Route::get('/admin/kelas', [AdminController::class, 'kelas_list'])->name('kelas.
 Route::get('/admin/kelas/detail/{id_kelas}', [AdminController::class, 'detailKelasChart'])->name('kelas.detail');
 Route::get('/admin/kelas/average/{id_kelas}', [AdminController::class, 'averagePage'])->name('kelas.average');
 
+Route::get('/admin/kelas/{id_kelas}/soal', [JawabanController::class, 'overviewSoal'])->name('kelas.soal.overview');
+
+Route::get('/admin/kelas/{id_kelas}/soal/data', [JawabanController::class, 'getAllSoalData']);
+
 //Report
 Route::get('/admin/chart/data/jawaban', [ReportController::class, 'getMahasiswaJawabanChart']);
 });
@@ -86,5 +91,7 @@ Route::middleware(['cekdosen'])->group(function () {
     Route::get('/dosen/courses', [KelasController::class, 'getDosenCourses'])->name('dosen.data');
     Route::get('/dosen/kelas', [DosenController::class, 'kelas'])->name('dosen.kelas');
     Route::get('/dosen/dashboard', [DosenController::class, 'index'])->name('dosen.dashboard');
+    Route::get('/dosen/kelas/{id_kelas}/soal', [DosenController::class, 'overviewSoal'])->name('dosen.soal.overview');
+    Route::get('/dosen/kelas/{id_kelas}/soal/data', [DosenController::class, 'getAllSoalData']);
 
 });

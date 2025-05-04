@@ -50,7 +50,7 @@
                         className: 'text-center',
                         render: function(data, type, row, meta) {
                             return `
-                            <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/detail/${row.id_kelas}'">
+                            <button type="button" class="btn btn-sm btn-info" onclick="window.location.href='/admin/kelas/detail/${row.id_kelas}'">
                                 <i class="fa fa-eye"></i>
                             </button>
                             `;
@@ -60,9 +60,12 @@
                     { data: 'nama_matakuliah' },
                     { data: 'nama' },
                     { data: 'nama_program_studi' },
-                    { data: 'smt_matakuliah' },
-                    { data: 'total_mahasiswa' },
-                    { data: 'total_jawaban' }
+                    { data: 'smt_matakuliah' ,
+                    className: 'text-center'},
+                    { data: 'total_mahasiswa',
+                    className: 'text-center' },
+                    { data: 'total_jawaban',
+                    className: 'text-center' }
                 ],
                 order: []
             });

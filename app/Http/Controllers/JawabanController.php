@@ -321,7 +321,51 @@ class JawabanController extends Controller
         return $presensimakul;
     }
 
+    
+    public function overviewSoal($id_kelas)
+    {
+        return view('admin.kelas.overview_soal', ['id_kelas' => $id_kelas]);
+    }
 
+    public function getAllSoalData($id_kelas)
+    {
+        $id_mreg = Session::get('id_mreg');
+    
+        $raw = DB::table('edom_jawaban')
+            ->join('edom_soal', 'edom_jawaban.id_soal', '=', 'edom_soal.id_soal')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->where('edom_jawaban.id_kelas', $id_kelas)
+            ->where('edom_jawaban.id_mreg',   $id_mreg)
+            ->select(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_jawaban.jawaban',
+                DB::raw('COUNT(*) as count'),
+                'akd_matakuliah.nama_matakuliah',
+                'akd_matakuliah.kode_matakuliah',
+                'simpeg_pegawai.nama as nama_dosen'
+            )
+            ->groupBy(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_jawaban.jawaban',
+                'akd_matakuliah.nama_matakuliah',
+                'akd_matakuliah.kode_matakuliah',
+                'simpeg_pegawai.nama'
+            )
+            ->orderBy('edom_soal.id_soal')
+            ->get();
+    
+        return response()->json([
+            'data'             => $raw,
+            'nama_matakuliah'  => optional($raw->first())->nama_matakuliah,
+            'kode_matakuliah'  => optional($raw->first())->kode_matakuliah,
+            'nama_dosen'       => optional($raw->first())->nama_dosen,
+        ]);
+    }
     
 
 

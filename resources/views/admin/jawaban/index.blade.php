@@ -50,7 +50,7 @@
                         className: 'text-center',
                         render: function(data, type, row, meta) {
                             return `
-                            <button type="button" class="btn btn-info btn-edit" onclick="window.location.href='/admin/jawaban/${row.id_mhs}'">
+                            <button type="button" class="btn btn-sm btn-info btn-edit" onclick="window.location.href='/admin/jawaban/${row.id_mhs}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             `;

@@ -9,7 +9,7 @@
             <div class="">
                 <div class="">
                     <div class="mb-3">
-                        <a href="{{ route('kelas.soal.overview', $id_kelas) }}" class="btn btn-primary">
+                        <a href="{{ route('dosen.soal.overview', $id_kelas) }}" class="btn btn-primary">
                             <i class="fa fa-list"></i> Lihat Semua Soal
                         </a>
                     </div>
@@ -40,6 +40,7 @@
                         </div>
                     </div>
 
+                    <!-- Tabel untuk detail jawaban -->
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="">
@@ -54,13 +55,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <!-- Data akan diisi dengan JavaScript -->
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- End Tabel -->
                 </div>
             </div>
         </div>
@@ -86,13 +88,13 @@ function calculateAverage(data) {
 
 function fetchChartData() {
     return $.ajax({
-        url: "{{ url('/admin/chart/data/jawaban-kelas/' . $id_kelas) }}",
+        url: "{{ url('/dosen/chart/data/jawaban-kelas/' . $id_kelas) }}",
         method: 'GET',
         dataType: 'json',
         success: function(response) {
             if (response.data && response.data.length > 0) {
                 var answers = [0, 0, 0, 0, 0];
-                var nama = response.data[0].nama_dosen;
+                var dosenNama = response.data[0].nama_dosen;
                 var matakuliahNama = response.data[0].nama_matakuliah;
                 var matakuliahKode = response.data[0].kode_matakuliah;
                 var totalStudents = response.total_students;
@@ -103,7 +105,8 @@ function fetchChartData() {
                     answers[item.jawaban] = item.count;
                 });
 
-                document.getElementById('dosen-nama').textContent = 'Nama Dosen: ' + nama;
+                // Tampilkan data Matakuliah
+                document.getElementById('dosen-nama').textContent = 'Dosen: ' + dosenNama;
                 document.getElementById('matakuliah-nama').textContent = 'Matakuliah: ' + matakuliahNama;
                 document.getElementById('matakuliah-kode').textContent = 'Kode: ' + matakuliahKode;
                 document.getElementById('total-mhs').textContent = 'Total Mahasiswa: ' + totalStudents;
@@ -114,7 +117,7 @@ function fetchChartData() {
                     showNoDataMessage();
                 } else {
                     renderCharts(answers);
-                    populateTable(answers);
+                    populateTable(answers); // Isi tabel
                 }
             } else {
                 showNoDataMessage();

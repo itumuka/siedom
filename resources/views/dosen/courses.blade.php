@@ -34,6 +34,7 @@
 
 @section('script-master')
     <script type="text/javascript">
+        const detailUrlTemplate = "{{ route('dosen.kelas.detail', ['id_kelas' => '__ID__']) }}";
         $(document).ready(function() {
             var table = $("#kelasTable").DataTable({
                 destroy: true,
@@ -49,10 +50,11 @@
                         data: null,
                         className: 'text-center',
                         render: function(data, type, row, meta) {
+                            let detailUrl = detailUrlTemplate.replace('__ID__', row.id_kelas);
                             return `
-                            <button type="button" class="btn btn-info" onclick="window.location.href='/dosen/kelas/detail/${row.id_kelas}'">
-                                <i class="fa fa-eye"></i>
-                            </button>
+                                <button class="btn btn-sm btn-info" onclick="window.location.href='${detailUrl}'">
+                                    <i class="fa fa-eye"></i>
+                                </button>
                             `;
                         }
                     },
@@ -60,9 +62,12 @@
                     { data: 'nama_matakuliah' },
                     { data: 'nama' },
                     { data: 'nama_program_studi' },
-                    { data: 'smt_matakuliah' },
-                    { data: 'total_mahasiswa' },
-                    { data: 'total_jawaban' }
+                    { data: 'smt_matakuliah',
+                    className: 'text-center' },
+                    { data: 'total_mahasiswa',
+                    className: 'text-center' },
+                    { data: 'total_jawaban',
+                    className: 'text-center' }
                 ],
                 order: []
             });
