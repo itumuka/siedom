@@ -123,19 +123,21 @@ class KelasController extends Controller
             ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
             ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
             ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
-            
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
             ->select(
                 'akd_matakuliah.nama_matakuliah',
                 'akd_matakuliah.kode_matakuliah',
                 'edom_jawaban.jawaban',
-                DB::raw('COUNT(*) as count')
+                DB::raw('COUNT(*) as count'),
+                'simpeg_pegawai.nama as nama_dosen'
             )
             ->where('edom_jawaban.id_kelas', $id_kelas)
             ->where('edom_jawaban.id_mreg',   $id_mreg)         // ← filter by session id_mreg
             ->groupBy(
                 'akd_matakuliah.nama_matakuliah',
                 'akd_matakuliah.kode_matakuliah',
-                'edom_jawaban.jawaban'
+                'edom_jawaban.jawaban',
+                'simpeg_pegawai.nama'
             )
             ->get();
     
