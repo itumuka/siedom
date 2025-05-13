@@ -231,7 +231,8 @@
                                 semester: result.smtta[0].semester,
                                 tahun: result.smtta[0].tahun,
                                 tahun_ajaran: result.smtta[0].tahun_ajaran,
-                                token: result.token
+                                token: result.token,
+                                id_mreg: result.smtta[0].id_mreg,
                             },
                             success: function(result) {
                                 console.log(result);

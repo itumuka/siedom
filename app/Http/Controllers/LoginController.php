@@ -68,6 +68,7 @@ class LoginController extends Controller
         Session::put('dosen_wali', $request->dosen_wali);
         Session::put('id_pegawai', $request->id_pegawai);
         Session::put('token', $request->token);
+        Session::put('id_mreg', $request->id_mreg);
         
 
         return true;
