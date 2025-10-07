@@ -11,7 +11,6 @@
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
 
     <title>@yield('title')</title>
-
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ URL::asset('semidark/css/vendors_css.css') }}">
 
@@ -78,6 +77,15 @@
         z-index: 1050 !important;
     }
         /* End Reduce vertical spacing */
+    /* Batasi lebar nama dosen dan tampilkan ellipsis jika terlalu panjang */
+    .sidebar .media-body .font-size-14 {
+        max-width: 160px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
     </style>
     @yield('css')
 </head>
@@ -227,10 +235,27 @@
                             <li class="{{ Route::is('home') ? 'active' : '' }}">
                                 <a href="{{ route('home') }}">
                                     <i class="fa fa-table"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Kuisioner</span>
+                                    <span>Kuesioner</span>
                                 </a>
                             </li>
                             @elseif (Session::get('tipe') == "Dosen")
+                                @php
+                                    $kode_prodi = Session::get('kode_program_studi');
+                                    $nama_prodi = '';
+                                    if($kode_prodi) {
+                                        $prodi = DB::table('akd_program_studi')->where('kode_program_studi', $kode_prodi)->first();
+                                        $nama_prodi = $prodi ? $prodi->nama_program_studi : '';
+                                    }
+                                @endphp
+                                <div class="media-list media-list-hover mb-2">
+                                    <div class="media py-10 px-0 align-items-center">
+                                        <i class="fa fa-user-circle fa-2x text-primary me-2"></i>
+                                        <div class="media-body">
+                                            <span class="font-size-14 text-white">{{ Session::get('nama') }}</span><br>
+                                            <span class="font-size-12 text-white">{{$nama_prodi}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             <li class="header">Menu</li>
                             <li class="{{ Route::is('dosen.dashboard') ? 'active' : '' }}">
                                 <a href="{{ route('dosen.dashboard') }}">
@@ -243,11 +268,19 @@
                                     <i class="fa fa-calendar" data-bs-toggle="tooltip" title="Kelas">
                                         <span class="path1"></span><span class="path2"></span>
                                     </i>
-                                    <span>Laporan Per Kelas</span>
+                                    <span>Laporan</span>
                                 </a>
                             </li>
 
                             @elseif (Session::get('tipe') == "Pegawai")
+                            <div class="media-list media-list-hover mb-2">
+                                <div class="media py-10 px-0 align-items-center">
+                                    <i class="fa fa-user-circle fa-2x text-primary me-2"></i>
+                                    <div class="media-body">
+                                        <span class="font-size-14 text-white">Admin Siedom</span>
+                                    </div>
+                                </div>
+                            </div>
                             <li class="header">Menu</li>
                             <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}">
                                 <a href="{{ route('admin.dashboard') }}">
@@ -273,14 +306,14 @@
                                     <li class="{{ Route::is('soal.index') ? 'active' : '' }}">
                                         <a href="{{ route('soal.index') }}">
                                             <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
-                                            <span>Soal</span>
+                                            <span>Bank Soal</span>
                                         </a>
                                     </li>	
                                 </ul>  
                                 <li class="treeview">
                                     <a href="#">
                                       <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                                      <span>Reports</span>
+                                      <span>Laporan</span>
                                       <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                       </span>
@@ -289,7 +322,7 @@
                                         <li class="{{ Route::is('kelas.index') ? 'active' : '' }}">
                                             <a href="{{ route('kelas.index') }}">
                                                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
-                                                <span>Report Per Kelas</span>
+                                                <span>Laporan Kelas</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -302,8 +335,8 @@
                                         </span>
                                     </a>
                                     <ul class="treeview-menu">
-                                        <li class="{{ Route::is('jawaban.sudah') ? 'active' : '' }}"><a href="{{ route('jawaban.sudah') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Sudah Mengisi</a></li>
-                                        <li class="{{ Route::is('jawaban.belum') ? 'active' : '' }}"><a href="{{ route('jawaban.belum') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Belum Mengisi</a></li>
+                                        <li class="{{ Route::is('jawaban.sudah') ? 'active' : '' }}"><a href="{{ route('jawaban.sudah') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Responden</a></li>
+                                        <li class="{{ Route::is('jawaban.belum') ? 'active' : '' }}"><a href="{{ route('jawaban.belum') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Non-Responden</a></li>
                                     </ul>
                                 </li> 	 					
                             @endif

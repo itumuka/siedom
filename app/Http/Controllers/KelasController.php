@@ -210,6 +210,93 @@ class KelasController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
+    //CHANGE
+
+    public function getJawabanPerSoalDosenPaginated(Request $request)
+    {
+        $id_pegawai = Session::get('id_pegawai');
+        $id_mreg    = Session::get('id_mreg');
+        $perPage    = $request->input('per_page', 10);
+        $page       = $request->input('page', 1);
+
+        // Ambil tahun & semester dari akd_mreg
+        $mreg = DB::table('akd_mreg')
+            ->select('tahun', 'semester')
+            ->where('id_mreg', $id_mreg)
+            ->first();
+
+        // Ambil semua soal yang punya jawaban (gabungan semua matkul dosen login)
+        $soalList = DB::table('edom_soal')
+            ->join('edom_jawaban', 'edom_soal.id_soal', '=', 'edom_jawaban.id_soal')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->where('akd_penawaran_matakuliah.kode_dosen', $id_pegawai)
+            ->where('akd_penawaran_matakuliah.tahun', $mreg->tahun)
+            ->where('akd_penawaran_matakuliah.semester', $mreg->semester)
+            ->select('edom_soal.id_soal', 'edom_soal.pertanyaan')
+            ->distinct()
+            ->get();
+
+        $total = $soalList->count();
+        $lastPage = ceil($total / $perPage);
+        $offset = ($page - 1) * $perPage;
+        $currentSoal = $soalList->slice($offset, $perPage)->values();
+
+        $soalIds = $currentSoal->pluck('id_soal')->toArray();
+
+        $jawabanData = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->where('akd_penawaran_matakuliah.kode_dosen', $id_pegawai)
+            ->where('akd_penawaran_matakuliah.tahun', $mreg->tahun)
+            ->where('akd_penawaran_matakuliah.semester', $mreg->semester)
+            ->whereIn('edom_jawaban.id_soal', $soalIds)
+            ->select(
+                'edom_jawaban.id_soal',
+                'edom_jawaban.jawaban',
+                DB::raw('COUNT(*) as count')
+            )
+            ->groupBy('edom_jawaban.id_soal', 'edom_jawaban.jawaban')
+            ->get();
+
+        $result = [];
+        foreach ($currentSoal as $soal) {
+            $jawabanBreakdown = $jawabanData->where('id_soal', $soal->id_soal);
+
+            $totalScore = 0;
+            $totalCount = 0;
+            $answers = [0, 0, 0, 0, 0];
+
+            foreach ($jawabanBreakdown as $row) {
+                $answers[$row->jawaban] = $row->count;
+                $totalScore += $row->jawaban * $row->count;
+                $totalCount += $row->count;
+            }
+            $average = $totalCount ? $totalScore / $totalCount : 0;
+            $totalPercentage = $totalCount ? ($average / 4) * 100 : 0;
+
+            $result[] = [
+                'id_soal'        => $soal->id_soal,
+                'pertanyaan'     => $soal->pertanyaan,
+                'answers'        => $answers,
+                'total_count'    => $totalCount,
+                'average'        => round($average, 2),
+                'total_percentage' => round($totalPercentage, 2)
+            ];
+        }
+
+        return response()->json([
+            'data' => $result,
+            'pagination' => [
+                'current_page' => $page,
+                'last_page'    => $lastPage,
+                'per_page'     => $perPage,
+                'total'        => $total
+            ]
+        ]);
+    }
       
     
     

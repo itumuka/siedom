@@ -3,175 +3,193 @@
 @section('title','Dashboard')
 
 @section('css')
-<style type="text/css">
-    #basic-pie {
-        width: 100%;
-        height: 100%;
-        min-height: 300px;
-        max-height: 400px;
+<style>
+    .container-full {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
     }
-    .analytics-info {
-        overflow: hidden; /* Menghindari elemen terpotong */
-        height: auto;
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+    .dashboard-filter-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    .dashboard-filter-group select {
+        min-width: 120px;
+    }
+    .dashboard-filter-group .btn {
+        padding: 6px 12px;
+        font-size: 16px;
     }
 </style>
-@stop
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+@endsection
 
 @section('content')
 <div class="container-full">
-    <!-- Main content -->
-    <section class="content">
-        <div class="row align-items-end">
-            <div class="col-xl-9 col-12">
-                <div class="box bg-primary-light pull-up">
-                    <div class="box-body p-xl-0">							
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-3"><img src="../images/svg-icon/color-svg/custom-14.svg" alt=""></div>
-                            <div class="col-12 col-lg-9">
-                                <h2>Selamat Datang, Admin!</h2>
-                                <p class="text-dark mb-0 fs-16">
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-12">
-                <div class="box bg-transparent no-shadow">
-                    <div class="box-body p-xl-0 text-center">
-                        <h3 class="px-30 mb-20">Lihat Report Kelas</h3>
-                        <a href="{{ route('kelas.index') }}" class="waves-effect waves-light w-p100 btn btn-primary">
-                            <i class="fa fa-file me-15"></i> Lihat Report
-                        </a>
-                    </div>
-                </div>
-            </div>            
+    <div class="dashboard-header">
+        <h2 class="mb-0">Dashboard</h2>
+        <div class="dashboard-filter-group">
+            <select id="filter-type" class="form-control">
+                <option value="universal">Universal (Semua)</option>
+                <option value="fakultas">Fakultas</option>
+                <option value="prodi">Prodi</option>
+            </select>
+            <select id="filter-fakultas" class="form-control" style="display:none;">
+                <!-- Fakultas options, isi dari JS -->
+            </select>
+            <select id="filter-prodi" class="form-control" style="display:none;">
+                <!-- Prodi options, isi dari JS -->
+            </select>
+            <button class="btn btn-primary" onclick="fetchDashboardData()" title="Terapkan Filter">
+                <i class="fas fa-magnifying-glass"></i>
+            </button>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="box">
-                    <div class="box-body analytics-info">
-                        <p class="text-fade">Jumlah Mahasiswa</p>
-                        <div id="basic-pie"></div>
-                    </div>
-                </div>
-            </div>
-        </div>        
-    </section>
-    <!-- /.content -->
-  </div>
-    {{-- <div class="container-full">
-        <div class="content-header">
-            <div class="d-flex align-items-center">
-                <div class="mr-auto">
-                    <h3 class="page-title">{{ $title }}</h3>
-                    <div class="d-inline-block align-items-center">
-                        <nav>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-                                <li class="breadcrumb-item" aria-current="page">{{ $parent_breadcrumb }}</li>
-                                <li class="breadcrumb-item active" aria-current="page"></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+    </div>
+
+    <!-- Chart General -->
+    <div class="box mb-4">
+        <div class="box-header"><h4>Tahun Ajaran {{ $tahun_ajaran }}</h4></div>
+        <div class="box-body">
+            <div id="general-chart" style="height:350px;"></div>
+            <div id="pie-explanation" class="mt-3"></div>
         </div>
-        <!-- Main content -->
-        <section class="content">
+    </div>
+
+    <!-- Top & Bottom List -->
+    <div class="row top-bottom-list">
+        <div class="col-md-6">
             <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Selamat Datang</h3>
+                <div class="box-header"><h5>Top 3 Nilai Tertinggi (Dosen)</h5></div>
+                <div class="box-body">
+                    <ul id="top-list" class="list-group"></ul>
                 </div>
-                <!-- /.box-header -->
-                <!-- /.box-body -->
             </div>
-        </section>
-        <!-- /.content -->
-    </div> --}}
+        </div>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header"><h5>Bottom 3 Nilai Terendah (Dosen)</h5></div>
+                <div class="box-body">
+                    <ul id="bottom-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script-master')
 <script src="{{ URL::asset('assets/vendor_components/echarts/dist/echarts-en.min.js') }}"></script>
-<script type="text/javascript">
+<script>
+function fetchDashboardData() {
+    var type = $('#filter-type').val();
+    var fakultas = $('#filter-fakultas').val();
+    var prodi = $('#filter-prodi').val();
 
-    function fetchChartData() {
-        return $.ajax({
-            url: "{{ url('/admin/chart/data/jawaban') }}",
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                if (response.error) {
-                    console.error(response.error);
-                    return;
-                }
-                var completed = response.completed_students;
-                var notCompleted = response.not_completed_students;
-
-                renderCharts(completed, notCompleted);
-            },
-            error: function(xhr) {
-                console.error('Error fetching data:', xhr);
-            }
-        });
-    }
-
-    function renderCharts(completed, notCompleted) {
-    var pieChart = echarts.init(document.getElementById('basic-pie'));
-
-    var pieOption = {
-        title: {
-            text: 'Questionnaire Completion',
-            left: 'center',
-            textStyle: {
-                fontSize: 16,
-                fontWeight: 'bold'
-            }
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        series: [{
-            name: 'Students',
-            type: 'pie',
-            radius: '60%',
-            center: ['50%', '50%'],
-            data: [
-                { value: completed, name: 'Sudah Mengisi' },
-                { value: notCompleted, name: 'Belum Mengisi' }
-            ],
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            },
-            label: {
-                formatter: '{b}: {c} ({d}%)',
-                position: 'outside',
-                fontSize: 12
-            },
-            labelLine: {
-                length: 10,
-                length2: 15
-            }
-        }]
-    };
-
-    pieChart.setOption(pieOption);
-
-    // Pastikan chart responsif
-    $(window).on('resize', function() {
-        pieChart.resize();
+    $.get('/dashboard/general-dashboard', {
+        type: type,
+        fakultas: fakultas,
+        prodi: prodi
+    }, function(res) {
+        renderGeneralChart(res.pieData);
+        renderPieExplanation(res.pieData, res.total);
+        renderTopBottomList(res.topList, res.bottomList);
     });
 }
 
-
-
-    $(document).ready(function() {
-        fetchChartData();
+function renderGeneralChart(pieData) {
+    var chart = echarts.init(document.getElementById('general-chart'));
+    chart.setOption({
+        title: { text: 'Rekap Semua Jawaban', left: 'center' },
+        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+        series: [{
+            type: 'pie',
+            radius: '60%',
+            data: pieData.map(function(item){
+                return {value: item.value, name: item.name};
+            })
+        }]
     });
+}
+
+function renderPieExplanation(pieData, total) {
+    // Hitung totalScore dan totalCount untuk persentase
+    var totalScore = 0;
+    var totalCount = 0;
+    pieData.forEach(function(item, idx){
+        totalScore += idx * item.value;
+        totalCount += item.value;
+    });
+    var average = totalCount ? (totalScore / totalCount) : 0;
+    var totalPercentage = totalCount ? ((average / 4) * 100).toFixed(2) : 0;
+
+    var html = '<table class="table table-bordered"><thead><tr><th>Label</th><th>Jumlah</th><th>Persentase</th></tr></thead><tbody>';
+    pieData.forEach(function(item){
+        html += `<tr>
+            <td>${item.name}</td>
+            <td>${item.value}</td>
+            <td>${item.percentage}%</td>
+        </tr>`;
+    });
+    // Satu baris untuk total jawaban dan total persentase
+    html += `<tr class="table-success font-weight-bold">
+        <td>Total</td>
+        <td>${total}</td>
+        <td>${totalPercentage}%</td>
+    </tr>`;
+    html += '</tbody></table>';
+    $('#pie-explanation').html(html);
+}
+
+function renderTopBottomList(topList, bottomList) {
+    var top = $('#top-list'), bottom = $('#bottom-list');
+    top.empty(); bottom.empty();
+    topList.forEach(function(item) {
+        top.append(`<li class="list-group-item">${item.nama} (${item.nip}) - ${item.nilai}</li>`);
+    });
+    bottomList.forEach(function(item) {
+        bottom.append(`<li class="list-group-item">${item.nama} (${item.nip}) - ${item.nilai}</li>`);
+    });
+}
+
+// Dropdown dinamis (isi fakultas/prodi dari endpoint, contoh AJAX)
+function loadFakultas() {
+    $.get('/api/fakultas', function(res){
+        var select = $('#filter-fakultas');
+        select.empty();
+        res.forEach(function(item){
+            select.append(`<option value="${item.kode_fakultas}">${item.nama_fakultas}</option>`);
+        });
+    });
+}
+function loadProdi() {
+    $.get('/api/prodi', function(res){
+        var select = $('#filter-prodi');
+        select.empty();
+        res.forEach(function(item){
+            select.append(`<option value="${item.kode_program_studi}">${item.nama_program_studi}</option>`);
+        });
+    });
+}
+
+$('#filter-type').on('change', function() {
+    var val = $(this).val();
+    $('#filter-fakultas').toggle(val === 'fakultas');
+    $('#filter-prodi').toggle(val === 'prodi');
+    if(val === 'fakultas') loadFakultas();
+    if(val === 'prodi') loadProdi();
+});
+
+// Panggil data awal
+$(document).ready(function() {
+    fetchDashboardData();
+});
 </script>
-@stop
+@endsection

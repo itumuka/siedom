@@ -11,11 +11,13 @@ class DosenController extends Controller
 {
     public function index()
     {
-        $title = 'Dashboard'; 
+        $title = 'Dashboard';
         $parent_breadcrumb = 'Dashboard';
-        return view('dosen.dashboard', compact('title', 'parent_breadcrumb'));
-    }
+        $tahun_ajaran = Session::get('session_nama_tahunakademik'); // misal: "2023/2024"
+        $semester = Session::get('session_semester') == '1' ? 'Ganjil' : 'Genap';
 
+        return view('dosen.dashboard', compact('title', 'parent_breadcrumb', 'tahun_ajaran', 'semester'));
+    }
     public function kelas()
     {
         $title = 'Kelas'; 
@@ -166,6 +168,8 @@ class DosenController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
 
  
     

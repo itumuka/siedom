@@ -15,7 +15,8 @@ class AdminController extends Controller
     {
         $title = 'Dashboard'; 
         $parent_breadcrumb = 'Dashboard';
-        return view('admin.dashboard', compact('title', 'parent_breadcrumb'));
+        $tahun_ajaran = Session::get('session_nama_tahunakademik');
+        return view('admin.dashboard', compact('title', 'parent_breadcrumb', 'tahun_ajaran'));
     }
 
     public function sudahJawab()
@@ -79,4 +80,15 @@ class AdminController extends Controller
         return view('admin.kelas.average', ['id_kelas' => $id_kelas]);
     }
     
+    public function getFakultas()
+    {
+        $data = DB::table('akd_fakultas')->select('kode_fakultas', 'nama_fakultas')->get();
+        return response()->json($data);
+    }
+
+    public function getProdi()
+    {
+        $data = DB::table('akd_program_studi')->select('kode_program_studi', 'nama_program_studi')->get();
+        return response()->json($data);
+    }
 }

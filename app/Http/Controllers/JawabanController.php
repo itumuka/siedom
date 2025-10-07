@@ -366,6 +366,107 @@ class JawabanController extends Controller
             'nama_dosen'       => optional($raw->first())->nama_dosen,
         ]);
     }
+
+
+
+    public function getGeneralDashboard(Request $request)
+    {
+        $type = $request->input('type', 'universal');
+        $fakultas = $request->input('fakultas');
+        $prodi = $request->input('prodi');
+        $id_mreg = Session::get('id_mreg');
+
+        // Query dasar
+        $query = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->where('edom_jawaban.id_mreg', $id_mreg);
+
+        // Filter
+        if ($type == 'fakultas' && $fakultas) {
+            $query->where('akd_program_studi.kode_fakultas', $fakultas);
+        }
+        if ($type == 'prodi' && $prodi) {
+            $query->where('akd_program_studi.kode_program_studi', $prodi);
+        }
+
+        // Pie chart data
+        $pieRaw = $query
+            ->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('edom_jawaban.jawaban')
+            ->get();
+
+        $labels = [
+            0 => 'Tidak Berlaku',
+            1 => 'Sangat Tidak Sesuai',
+            2 => 'Tidak Sesuai',
+            3 => 'Sesuai',
+            4 => 'Sangat Sesuai'
+        ];
+
+        $total = $pieRaw->sum('count');
+        $pieData = [];
+        foreach ($labels as $key => $label) {
+            $found = $pieRaw->firstWhere('jawaban', $key);
+            $count = $found ? $found->count : 0;
+            $percentage = $total ? round(($count / $total) * 100, 2) : 0;
+            $pieData[] = [
+                'name' => $label,
+                'value' => $count,
+                'percentage' => $percentage
+            ];
+        }
+
+        // Top & Bottom List (rata-rata per dosen)
+        $scoreQuery = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->where('edom_jawaban.id_mreg', $id_mreg);
+
+        if ($type == 'fakultas' && $fakultas) {
+            $scoreQuery->where('akd_program_studi.kode_fakultas', $fakultas);
+        }
+        if ($type == 'prodi' && $prodi) {
+            $scoreQuery->where('akd_program_studi.kode_program_studi', $prodi);
+        }
+
+        $scoreRaw = $scoreQuery
+            ->select(
+                'simpeg_pegawai.nama',
+                'simpeg_pegawai.nip',
+                DB::raw('AVG(edom_jawaban.jawaban) as avg_score')
+            )
+            ->groupBy('simpeg_pegawai.id', 'simpeg_pegawai.nama', 'simpeg_pegawai.nip')
+            ->orderBy('avg_score', 'desc')
+            ->get();
+
+        $topList = $scoreRaw->take(3)->map(function($row){
+            return [
+                'nama' => $row->nama,
+                'nip' => $row->nip,
+                'nilai' => round($row->avg_score,2)
+            ];
+        })->values();
+
+        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(function($row){
+            return [
+                'nama' => $row->nama,
+                'nip' => $row->nip,
+                'nilai' => round($row->avg_score,2)
+            ];
+        })->values();
+
+        return response()->json([
+            'pieData' => $pieData,
+            'total' => $total,
+            'topList' => $topList,
+            'bottomList' => $bottomList
+        ]);
+    }
     
 
 

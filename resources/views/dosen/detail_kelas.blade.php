@@ -105,6 +105,9 @@ function fetchChartData() {
                     answers[item.jawaban] = item.count;
                 });
 
+                 // Hitung persentase total nilai (skala 0-100)
+                var totalPercentage = (averageScore / 4) * 100;
+
                 // Tampilkan data Matakuliah
                 document.getElementById('dosen-nama').textContent = 'Dosen: ' + dosenNama;
                 document.getElementById('matakuliah-nama').textContent = 'Matakuliah: ' + matakuliahNama;
@@ -112,12 +115,14 @@ function fetchChartData() {
                 document.getElementById('total-mhs').textContent = 'Total Mahasiswa: ' + totalStudents;
                 document.getElementById('total-jwb').textContent = 'Total Jawaban: ' + totalResponses;
                 document.getElementById('rata-jwb').textContent = 'Rata-rata Jawaban: ' + averageScore.toFixed(2);
+                document.getElementById('rata-jwb').textContent = 'Rata-rata Jawaban: ' + averageScore.toFixed(2) + 
+                    ' (' + totalPercentage.toFixed(2) + '%)';
 
                 if (answers.every(function(count) { return count === 0; })) {
                     showNoDataMessage();
                 } else {
                     renderCharts(answers);
-                    populateTable(answers); // Isi tabel
+                    populateTable(answers, totalPercentage); // Isi tabel
                 }
             } else {
                 showNoDataMessage();
@@ -170,7 +175,7 @@ function renderCharts(answers) {
     pieChart.setOption(pieOption);
 }
 
-function populateTable(answers) {
+function populateTable(answers, totalPercentage) {
     var totalAnswers = answers.reduce((a, b) => a + b, 0);
     var tableBody = document.getElementById('jawaban-table').querySelector('tbody');
 
@@ -189,7 +194,17 @@ function populateTable(answers) {
         `;
         tableBody.innerHTML += row;
     });
+
+    // Tambahkan baris total nilai
+    var totalRow = `
+        <tr class="table-info font-weight-bold">
+            <td colspan="2" class="text-end">Total Nilai</td>
+            <td>${totalPercentage.toFixed(2)}%</td>
+        </tr>
+    `;
+    tableBody.innerHTML += totalRow;
 }
+
 
 function showNoDataMessage() {
     document.getElementById('no-answer').innerHTML = '<h4 class="text-center">Matakuliah ini belum diisi jawaban.</h4>';
