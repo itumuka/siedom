@@ -16,6 +16,9 @@
         <div class="clearfix">
             <button type="button" class="waves-effect waves-light btn btn-rounded btn-primary mb-5" id="add-btn">Add Soal</button>
             <button type="button" class="waves-effect waves-light btn btn-rounded btn-secondary mb-5" id="duplicate-btn">Duplikat Soal</button>
+            <button type="button" class="waves-effect waves-light btn btn-rounded btn-danger mb-5" id="open-delete-mreg-modal">
+                Hapus Semua Soal Tahun Akademik
+            </button>
         </div>
         
 
@@ -46,6 +49,37 @@
                           <button type="button" class="btn btn-primary" id="save-btn">
                             <i class="ti-save-alt" id="save-btn"></i> Save
                           </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Hapus Semua Soal Tahun Akademik -->
+        <div class="modal fade" id="deleteMregModal" tabindex="-1" role="dialog" aria-labelledby="deleteMregModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteMregModalLabel">Hapus Semua Soal Tahun Akademik</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="delete-mreg-modal-select">Pilih Tahun Akademik</label>
+                            <select class="form-control" id="delete-mreg-modal-select">
+                                <option value="">Pilih Tahun Akademik</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-danger mt-3" style="font-size:0.95em;">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            Semua soal pada tahun akademik yang dipilih akan dihapus secara permanen. Lanjutkan?
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
+                            <i class="ti-trash"></i> Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger" id="confirm-delete-mreg-btn">
+                            <i class="ti-trash"></i> Hapus
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,6 +136,7 @@
 @section('script-master')
     <script type="text/javascript">
         $(document).ready(function() {
+            loadDeleteMregOptions();
             var table = $("#soalTable").DataTable({
                 destroy: true,
                 processing: true,
@@ -156,6 +191,67 @@
             alert('Gagal memuat data komponen penilaian');
         });
     }
+
+    $("#delete-mreg-btn").click(function() {
+        var id_mreg = $("#delete-mreg-select").val();
+        if (!id_mreg) {
+            alert('Pilih tahun akademik terlebih dahulu!');
+            return;
+        }
+        if (confirm('Yakin ingin menghapus semua soal pada tahun akademik ini?')) {
+            $.ajax({
+                url: '/admin/soal/mreg/' + id_mreg,
+                type: 'DELETE',
+                success: function(response) {
+                    showToastr('success', 'Berhasil!', response.message);
+                    $("#soalTable").DataTable().ajax.reload();
+                },
+                error: function(xhr) {
+                    showToastr('error', 'Error!', xhr.responseJSON.error || 'Gagal menghapus');
+                }
+            });
+        }
+    });
+
+    // Buka modal hapus
+        $("#open-delete-mreg-modal").click(function() {
+            // Isi dropdown tahun akademik di modal
+            $.ajax({
+                url: "{{ route('mreg.data') }}",
+                type: 'GET'
+            }).done(function(response) {
+                var select = $("#delete-mreg-modal-select");
+                select.empty();
+                select.append('<option value="">Pilih Tahun Akademik</option>');
+                response.data.forEach(function(item) {
+                    select.append(`<option value="${item.id_mreg}">${item.tahun_ajaran}</option>`);
+                });
+                $("#deleteMregModal").modal('show');
+            }).fail(function(xhr) {
+                alert('Gagal memuat data tahun akademik');
+            });
+        });
+
+        // Konfirmasi hapus
+        $("#confirm-delete-mreg-btn").click(function() {
+            var id_mreg = $("#delete-mreg-modal-select").val();
+            if (!id_mreg) {
+                alert('Pilih tahun akademik terlebih dahulu!');
+                return;
+            }
+            $.ajax({
+                url: '/admin/soal/mreg/' + id_mreg,
+                type: 'DELETE',
+                success: function(response) {
+                    showToastr('success', 'Berhasil!', response.message);
+                    $("#soalTable").DataTable().ajax.reload();
+                    $("#deleteMregModal").modal('hide');
+                },
+                error: function(xhr) {
+                    showToastr('error', 'Error!', xhr.responseJSON.error || 'Gagal menghapus');
+                }
+            });
+        });
 
     function loadMregOptions(callback) {
         $.ajax({
@@ -331,5 +427,21 @@
                 }
             });
         });
+
+        function loadDeleteMregOptions() {
+        $.ajax({
+            url: "{{ route('mreg.data') }}",
+            type: 'GET'
+        }).done(function(response) {
+            var select = $("#delete-mreg-select");
+            select.empty();
+            select.append('<option value="">Pilih Tahun Akademik</option>');
+            response.data.forEach(function(item) {
+                select.append(`<option value="${item.id_mreg}">${item.tahun_ajaran}</option>`);
+            });
+        }).fail(function(xhr) {
+            alert('Gagal memuat data tahun akademik');
+        });
+    }
     </script>
 @endsection

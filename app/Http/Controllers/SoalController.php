@@ -152,7 +152,101 @@ class SoalController extends Controller
             return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
     }
+
+    public function destroyByMreg($id_mreg)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Hapus jawaban yang terkait soal di tahun akademik ini
+            $soalIds = DB::table('edom_soal')->where('id_mreg', $id_mreg)->pluck('id_soal');
+            DB::table('edom_jawaban')->whereIn('id_soal', $soalIds)->delete();
+
+            // Hapus soal
+            DB::table('edom_soal')->where('id_mreg', $id_mreg)->delete();
+
+            DB::commit();
+            return response()->json(['message' => 'Semua soal pada tahun akademik ini berhasil dihapus']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
     
+    
+    public function reportPerSoal(Request $request)
+    {
+        $id_soal = $request->input('id_soal');
+        if (!$id_soal) {
+            return response()->json(['error' => 'ID soal wajib diisi'], 400);
+        }
+
+        // Pie chart data
+        $labels = [
+            0 => 'Tidak Berlaku',
+            1 => 'Sangat Tidak Sesuai',
+            2 => 'Tidak Sesuai',
+            3 => 'Sesuai',
+            4 => 'Sangat Sesuai'
+        ];
+
+        $pieRaw = DB::table('edom_jawaban')
+            ->where('id_soal', $id_soal)
+            ->select('jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('jawaban')
+            ->get();
+
+        $total = $pieRaw->sum('count');
+        $pieData = [];
+        foreach ($labels as $key => $label) {
+            $found = $pieRaw->firstWhere('jawaban', $key);
+            $count = $found ? $found->count : 0;
+            $percentage = $total ? round(($count / $total) * 100, 2) : 0;
+            $pieData[] = [
+                'name' => $label,
+                'value' => $count,
+                'percentage' => $percentage
+            ];
+        }
+
+        // Top & Bottom List (rata-rata per dosen untuk soal ini)
+        $scoreRaw = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'pegawai.id_pegawai')
+            ->where('edom_jawaban.id_soal', $id_soal)
+            ->select(
+                'pegawai.nama_pegawai',
+                'pegawai.nip',
+                DB::raw('AVG(edom_jawaban.jawaban) as avg_score')
+            )
+            ->groupBy('pegawai.id_pegawai', 'pegawai.nama_pegawai', 'pegawai.nip')
+            ->orderBy('avg_score', 'desc')
+            ->get();
+
+        $topList = $scoreRaw->take(3)->map(function($row){
+            return [
+                'nama' => $row->nama_pegawai,
+                'nip' => $row->nip,
+                'nilai' => round($row->avg_score,2)
+            ];
+        })->values();
+
+        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(function($row){
+            return [
+                'nama' => $row->nama_pegawai,
+                'nip' => $row->nip,
+                'nilai' => round($row->avg_score,2)
+            ];
+        })->values();
+
+        return response()->json([
+            'pieData' => $pieData,
+            'total' => $total,
+            'topList' => $topList,
+            'bottomList' => $bottomList
+        ]);
+    }
 
 
 

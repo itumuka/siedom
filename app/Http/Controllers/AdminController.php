@@ -59,6 +59,12 @@ class AdminController extends Controller
         return view('admin.report.index');
     }
 
+    public function reportSoal()
+    {
+
+        return view('admin.report.persoal');
+    }
+
     public function detailKelasChart($id_kelas)
     {
         try {

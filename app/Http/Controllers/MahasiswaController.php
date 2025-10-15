@@ -67,12 +67,12 @@ class MahasiswaController extends Controller
 
     public function getSoal(Request $request)
     {
-        try {
-            $soal = DB::table('edom_soal')->get();
-            return response()->json($soal);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Data tidak tersedia.'], 500);
-        }
+        $id_mreg = Session::get('id_mreg');
+        $soal = DB::table('edom_soal')
+            ->where('id_mreg', $id_mreg)
+            ->get();
+
+        return response()->json($soal);
     }
     
     public function store(Request $request)

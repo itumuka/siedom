@@ -63,7 +63,7 @@ Route::get('/admin/soal/{id}', [SoalController::class, 'show']);
 Route::get('/admin/soal/komponen-options', [KomponenPenilaianController::class, 'getData'])->name('soal.komponen-options');
 Route::get('/admin/mreg/data', [SoalController::class, 'getDataMreg'])->name('mreg.data');
 Route::post('/admin/soal/duplicate', [SoalController::class, 'duplicate'])->name('soal.duplicate');
-
+Route::delete('/admin/soal/mreg/{id_mreg}', [SoalController::class, 'destroyByMreg'])->name('soal.destroyByMreg');
 
 //Jawaban Mahasiswa
 Route::get('/admin/jawaban/data', [JawabanController::class, 'getDataMahasiswaSudahMengisi'])->name('jawaban.data');
@@ -78,6 +78,7 @@ Route::get('/admin/kelas/data', [KelasController::class, 'getDataKelas'])->name(
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/report', [AdminController::class, 'reportIndex'])->name('admin.report');
+Route::get('/admin/report/soal', [AdminController::class, 'reportSoal'])->name('admin.reportpersoal');
 Route::get('/admin/sudah-jawab', [AdminController::class, 'sudahJawab'])->name('jawaban.sudah');
 Route::get('/admin/belum-jawab', [AdminController::class, 'belumJawab'])->name('jawaban.belum');
 Route::get('/admin/kelas', [AdminController::class, 'kelas_list'])->name('kelas.index');
@@ -91,6 +92,7 @@ Route::get('/admin/kelas/{id_kelas}/soal/data', [JawabanController::class, 'getA
 
 //Report
 Route::get('/admin/chart/data/jawaban', [ReportController::class, 'getMahasiswaJawabanChart']);
+Route::get('/report/persoal', [SoalController::class, 'reportPerSoal']);
 
 
 });
