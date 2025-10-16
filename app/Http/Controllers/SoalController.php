@@ -213,20 +213,20 @@ class SoalController extends Controller
         $scoreRaw = DB::table('edom_jawaban')
             ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
             ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-            ->join('pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'pegawai.id_pegawai')
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
             ->where('edom_jawaban.id_soal', $id_soal)
             ->select(
-                'pegawai.nama_pegawai',
-                'pegawai.nip',
+                'simpeg_pegawai.nama',
+                'simpeg_pegawai.nip',
                 DB::raw('AVG(edom_jawaban.jawaban) as avg_score')
             )
-            ->groupBy('pegawai.id_pegawai', 'pegawai.nama_pegawai', 'pegawai.nip')
+            ->groupBy('simpeg_pegawai.id', 'simpeg_pegawai.nama', 'simpeg_pegawai.nip')
             ->orderBy('avg_score', 'desc')
             ->get();
 
         $topList = $scoreRaw->take(3)->map(function($row){
             return [
-                'nama' => $row->nama_pegawai,
+                'nama' => $row->nama,
                 'nip' => $row->nip,
                 'nilai' => round($row->avg_score,2)
             ];
@@ -234,7 +234,7 @@ class SoalController extends Controller
 
         $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(function($row){
             return [
-                'nama' => $row->nama_pegawai,
+                'nama' => $row->nama,
                 'nip' => $row->nip,
                 'nilai' => round($row->avg_score,2)
             ];
@@ -246,6 +246,18 @@ class SoalController extends Controller
             'topList' => $topList,
             'bottomList' => $bottomList
         ]);
+    }
+
+    public function getSoalForReport(Request $request)
+    {
+        $id_mreg = Session::get('id_mreg');
+        $soal = DB::table('edom_soal')
+            ->where('id_mreg', $id_mreg)
+            ->orderBy('id_soal', 'asc')
+            ->select('id_soal', 'pertanyaan')
+            ->get();
+
+        return response()->json($soal);
     }
 
 

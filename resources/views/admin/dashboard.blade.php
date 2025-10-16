@@ -152,10 +152,12 @@ function renderTopBottomList(topList, bottomList) {
     var top = $('#top-list'), bottom = $('#bottom-list');
     top.empty(); bottom.empty();
     topList.forEach(function(item) {
-        top.append(`<li class="list-group-item">${item.nama} (${item.nip}) - ${item.nilai}</li>`);
+        var persen = ((item.nilai / 4) * 100).toFixed(2);
+        top.append(`<li class="list-group-item">${item.nama} - ${item.nilai} (${persen}%)</li>`);
     });
     bottomList.forEach(function(item) {
-        bottom.append(`<li class="list-group-item">${item.nama} (${item.nip}) - ${item.nilai}</li>`);
+        var persen = ((item.nilai / 4) * 100).toFixed(2);
+        bottom.append(`<li class="list-group-item">${item.nama} - ${item.nilai} (${persen}%)</li>`);
     });
 }
 
