@@ -325,8 +325,6 @@
                                                 <span>Laporan Kelas</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                    <ul class="treeview-menu">
                                         <li class="{{ Route::is('admin.reportpersoal') ? 'active' : '' }}">
                                             <a href="{{ route('admin.reportpersoal') }}">
                                                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
