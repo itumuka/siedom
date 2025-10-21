@@ -9,8 +9,17 @@
 @stop
 
 @section('content')
-    <div class="container">
-        <h1>Soal</h1>
+        <div class="container">
+        @php
+            $id_mreg = Session::get('id_mreg');
+            $mreg = null;
+            if ($id_mreg) {
+                $mreg = DB::table('akd_mreg')->where('id_mreg', $id_mreg)->first();
+            }
+            $tahun_ajaran = $mreg ? ($mreg->tahun_akademik . ' ' . ($mreg->semester == '1' ? 'Ganjil' : 'Genap')) : 'Tahun Akademik (tidak dipilih)';
+        @endphp
+
+        <h1>Soal - {{ $tahun_ajaran }}</h1>
 
         <!-- Create/Update Form -->
         <div class="clearfix">

@@ -171,4 +171,12 @@ $(document).ready(function() {
     $('#soal-select').on('change', fetchPerSoalData);
 });
 </script>
+<script>
+    var isKaprodi = {{ Session::get('is_kaprodi') ? 'true' : 'false' }};
+    if (isKaprodi) {
+        // contoh: sembunyikan elemen filter jika ada
+        $('#filter-type, #filter-fakultas, #filter-prodi').hide();
+        // atau non-aktifkan fungsi filter
+    }
+</script>
 @endsection

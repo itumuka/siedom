@@ -271,7 +271,16 @@
                                     <span>Laporan</span>
                                 </a>
                             </li>
-
+                            @if (Session::get('kaprodi'))
+                                <li class="header">Kaprodi</li>
+                                <li class="{{ Request::is('admin/report/soal') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.reportpersoal') }}">
+                                        <i class="fa fa-chart-pie"></i>
+                                        <span>Lihat Report Prodi</span>
+                                    </a>
+                                </li>
+                            @endif
+                            
                             @elseif (Session::get('tipe') == "Pegawai")
                             <div class="media-list media-list-hover mb-2">
                                 <div class="media py-10 px-0 align-items-center">
