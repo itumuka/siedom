@@ -1,0 +1,1090 @@
+[28-Feb-2025 12:52:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:52:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:52:56 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:53:07 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:53:08 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:53:17 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:53:34 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:54:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:54:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:54:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:55:24 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:55:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:56:57 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:57:38 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:58:10 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:58:13 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:58:16 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:58:51 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:58:51 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:59:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 12:59:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:02:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:02:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:02:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:03:16 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:03:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:04:28 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:04:45 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:04:49 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:04:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:05:18 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:05:18 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:05:21 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:05:49 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:05:49 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:06:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:07:47 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:07:47 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:07:48 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:08:15 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:08:22 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:08:22 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:08:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:08:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:10:01 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:11:32 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:11:32 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:11:32 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:12:10 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:14:01 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:15:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:16:48 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:16:49 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:16:53 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:17:10 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:17:10 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:17:10 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:00 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:57 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:58 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:59 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:59 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:18:59 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:19:02 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:19:02 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:19:24 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:24:08 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:27:13 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:27:13 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:29:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:32:58 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:32:58 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:32:58 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:34:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:35:16 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:36:16 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:36:33 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:36:34 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:37:21 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:37:42 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:37:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:37:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:39:37 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:39:38 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:39:38 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:39:51 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:40:12 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:40:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:40:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:40:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:41:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[28-Feb-2025 13:41:28 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Interface 'JsonSerializable' not found in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:11
+Stack trace:
+#0 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include()
+#1 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#3 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(12): spl_autoload_call('Illuminate\\Supp...')
+#4 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(478): include('/home2/umu43661...')
+#5 /home2/umu43661/apisiaumuka/vendor/composer/ClassLoader.php(346): Composer\Autoload\includeFile('/home2/umu43661...')
+#6 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#7 /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/helpers.php(15): spl_autoload_ca in /home2/umu43661/apisiaumuka/vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php on line 11
+[14-Mar-2025 01:57:44 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 07:01:55 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:13:22 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:13:22 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:14:30 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:14:39 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:14:48 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:14:51 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:15:40 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:15:41 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:15:45 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[14-Mar-2025 09:17:29 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.33. in /home2/umu43661/siedom/vendor/composer/platform_check.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:11:29 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:31 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:35 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:35 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:35 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:35 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:41 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:41 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:42 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:42 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:51 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:51 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:52 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:16:52 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:28:46 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:28:46 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:48:02 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:48:02 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 19:49:36 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 20:10:44 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:00 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:00 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:03 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:03 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:06 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:06 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:25 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:25 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:27 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: No such file or directory in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 21:31:27 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 22:04:46 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: Permission denied in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 22:04:46 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 22:05:03 Asia/Jakarta] PHP Warning:  require(/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php): Failed to open stream: Permission denied in /home2/umu43661/public_html/siedom/index.php on line 24
+[23-Sep-2025 22:05:03 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/umu43661/public_html/siedom/../../siedom/vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/umu43661/public_html/siedom/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home2/umu43661/public_html/siedom/index.php on line 24
