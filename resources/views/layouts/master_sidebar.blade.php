@@ -271,7 +271,16 @@
                                     <span>Laporan</span>
                                 </a>
                             </li>
-
+                            @if (Session::get('is_kaprodi') || Session::get('pimpinan_prodi'))
+                                <li class="header">Program Studi</li>
+                                <li class="{{ Request::is('admin/report/prodi') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.report.prodi') }}">
+                                        <i class="fa fa-university"></i>
+                                        <span>Lihat Report Prodi</span>
+                                    </a>
+                                </li>
+                            @endif
+                            
                             @elseif (Session::get('tipe') == "Pegawai")
                             <div class="media-list media-list-hover mb-2">
                                 <div class="media py-10 px-0 align-items-center">
@@ -325,8 +334,6 @@
                                                 <span>Laporan Kelas</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                    <ul class="treeview-menu">
                                         <li class="{{ Route::is('admin.reportpersoal') ? 'active' : '' }}">
                                             <a href="{{ route('admin.reportpersoal') }}">
                                                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>

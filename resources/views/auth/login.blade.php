@@ -229,6 +229,7 @@
                                 dosen_wali: result.data.dosen_wali,
                                 id_pegawai: result.data.id_pegawai,
                                 semester: result.smtta[0].semester,
+                                kaprodi: result.data.pimpinan_prodi,
                                 tahun: result.smtta[0].tahun,
                                 tahun_ajaran: result.smtta[0].tahun_ajaran,
                                 token: result.token,

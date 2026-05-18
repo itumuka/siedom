@@ -15,15 +15,15 @@ return [
     |
     */
 
-    'paths' => ['*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','*'],
+    'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://siadev.umuka.ac.id','https://sia.umuka.ac.id','*'], // Tambahkan domain pengirim request
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Content-Type', 'X-Custom-Header', 'X-CSRF-TOKEN', 'Authorization','*'], // Pastikan X-CSRF-TOKEN ada di sini
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 

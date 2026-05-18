@@ -17,10 +17,17 @@ class SoalController extends Controller
     public function getData()
     {
         try {
+            $id_mreg = Session::get('id_mreg'); // ambil dari session
+
             $query = DB::table('edom_soal')
             ->select('edom_soal.*', 'edom_komponen_penilaian.nama_komponen', DB::raw("CONCAT_WS(' ', akd_mreg.tahun_akademik, IF(akd_mreg.semester = '1', 'Ganjil', 'Genap')) AS tahun_ajaran"))
             ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian')
             ->leftJoin('akd_mreg', 'edom_soal.id_mreg', '=', 'akd_mreg.id_mreg');
+
+            // tambahkan filter id_mreg agar hanya menampilkan soal untuk session aktif
+            if ($id_mreg) {
+                $query->where('edom_soal.id_mreg', $id_mreg);
+            }
             
             $totalRecords = $query->count();
     
@@ -29,13 +36,14 @@ class SoalController extends Controller
             return response()->json([
                 'draw' => intval(request()->get('draw')),
                 'recordsTotal' => $totalRecords,
-                'records    Filtered' => $totalRecords,
-                'data' => $query->get()
+                'recordsFiltered' => $totalRecords,
+                'data' => $data
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Data tidak tersedia.'], 500);
         }
     }
+// ...existing code...
     
 
     public function store(Request $request)
@@ -174,6 +182,7 @@ class SoalController extends Controller
     }
     
     
+
     public function reportPerSoal(Request $request)
     {
         $id_soal = $request->input('id_soal');
@@ -181,20 +190,22 @@ class SoalController extends Controller
             return response()->json(['error' => 'ID soal wajib diisi'], 400);
         }
 
-        // Pie chart data
-        $labels = [
-            0 => 'Tidak Berlaku',
-            1 => 'Sangat Tidak Sesuai',
-            2 => 'Tidak Sesuai',
-            3 => 'Sesuai',
-            4 => 'Sangat Sesuai'
-        ];
+        $kode_prodi_kaprodi = Session::get('is_kaprodi') ? Session::get('kode_program_studi') : null;
 
-        $pieRaw = DB::table('edom_jawaban')
-            ->where('id_soal', $id_soal)
-            ->select('jawaban', DB::raw('COUNT(*) as count'))
-            ->groupBy('jawaban')
-            ->get();
+        $labels = [0=>'Tidak Berlaku',1=>'Sangat Tidak Sesuai',2=>'Tidak Sesuai',3=>'Sesuai',4=>'Sangat Sesuai'];
+
+        // pie: gabungkan join ke tabel penawaran untuk bisa filter prodi jika kaprodi
+        $pieQuery = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah','edom_jawaban.id_kelas','=','akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah','akd_kelas_kuliah.id_tawar','=','akd_penawaran_matakuliah.id_tawar')
+            ->where('edom_jawaban.id_soal', $id_soal);
+
+        if ($kode_prodi_kaprodi) {
+            $pieQuery->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi_kaprodi);
+        }
+
+        $pieRaw = $pieQuery->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('edom_jawaban.jawaban')->get();
 
         $total = $pieRaw->sum('count');
         $pieData = [];
@@ -202,50 +213,28 @@ class SoalController extends Controller
             $found = $pieRaw->firstWhere('jawaban', $key);
             $count = $found ? $found->count : 0;
             $percentage = $total ? round(($count / $total) * 100, 2) : 0;
-            $pieData[] = [
-                'name' => $label,
-                'value' => $count,
-                'percentage' => $percentage
-            ];
+            $pieData[] = ['name'=>$label,'value'=>$count,'percentage'=>$percentage];
         }
 
-        // Top & Bottom List (rata-rata per dosen untuk soal ini)
-        $scoreRaw = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
-            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
-            ->where('edom_jawaban.id_soal', $id_soal)
-            ->select(
-                'simpeg_pegawai.nama',
-                'simpeg_pegawai.nip',
-                DB::raw('AVG(edom_jawaban.jawaban) as avg_score')
-            )
-            ->groupBy('simpeg_pegawai.id', 'simpeg_pegawai.nama', 'simpeg_pegawai.nip')
-            ->orderBy('avg_score', 'desc')
-            ->get();
+        // top/bottom per dosen, apply same prodi filter if kaprodi
+        $scoreQuery = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah','edom_jawaban.id_kelas','=','akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah','akd_kelas_kuliah.id_tawar','=','akd_penawaran_matakuliah.id_tawar')
+            ->join('simpeg_pegawai','akd_penawaran_matakuliah.kode_dosen','=','simpeg_pegawai.id')
+            ->where('edom_jawaban.id_soal', $id_soal);
 
-        $topList = $scoreRaw->take(3)->map(function($row){
-            return [
-                'nama' => $row->nama,
-                'nip' => $row->nip,
-                'nilai' => round($row->avg_score,2)
-            ];
-        })->values();
+        if ($kode_prodi_kaprodi) {
+            $scoreQuery->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi_kaprodi);
+        }
 
-        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(function($row){
-            return [
-                'nama' => $row->nama,
-                'nip' => $row->nip,
-                'nilai' => round($row->avg_score,2)
-            ];
-        })->values();
+        $scoreRaw = $scoreQuery->select('simpeg_pegawai.nama','simpeg_pegawai.nip', DB::raw('AVG(edom_jawaban.jawaban) as avg_score'))
+            ->groupBy('simpeg_pegawai.id','simpeg_pegawai.nama','simpeg_pegawai.nip')
+            ->orderBy('avg_score','desc')->get();
 
-        return response()->json([
-            'pieData' => $pieData,
-            'total' => $total,
-            'topList' => $topList,
-            'bottomList' => $bottomList
-        ]);
+        $topList = $scoreRaw->take(3)->map(fn($r)=>['nama'=>$r->nama,'nip'=>$r->nip,'nilai'=>round($r->avg_score,2)])->values();
+        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(fn($r)=>['nama'=>$r->nama,'nip'=>$r->nip,'nilai'=>round($r->avg_score,2)])->values();
+
+        return response()->json(['pieData'=>$pieData,'total'=>$total,'topList'=>$topList,'bottomList'=>$bottomList]);
     }
 
     public function getSoalForReport(Request $request)

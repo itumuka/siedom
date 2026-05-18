@@ -1,0 +1,25 @@
+services:
+  laravel-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: siedom-fe
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "true"
+      APP_KEY: "base64:gWPyx4GYcMtiiqFcvZkm5Vb/1uSDpmZmz//HcbW1K/A="
+      APP_URL: "http://210.79.191.206:8002"
+      SECOND_URL: "https://api-sia.umuka.ac.id/api/"
+      THIRD_URL: "https://api-sia.umuka.ac.id/"
+      SIEDOM_URL: "https://siedom.umuka.ac.id/"
+    networks:
+      - siedom-net
+
+networks:
+  siedom-net:
+    driver: bridge

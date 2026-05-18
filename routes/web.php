@@ -19,7 +19,13 @@ Route::get('/dosen/kelas/detail/{id_kelas}', [DosenController::class, 'detailKel
 Route::get('/admin/chart/data/jawaban-kelas/{id_kelas}', [KelasController::class, 'getJawabanKelasData'])->name('kelas_detail.data');
 Route::get('/dosen/chart/data/jawaban-kelas/{id_kelas}', [DosenController::class, 'getJawabanKelasData'])->name('dosen_detail.data');
 Route::get('/admin/report/average-scores/{id_kelas}', [JawabanController::class, 'getAverageScores']);
+Route::get('/admin/report/soal', [AdminController::class, 'reportSoal'])->name('admin.reportpersoal');
+Route::get('/report/getsoal', [SoalController::class, 'getSoalForReport']);
 
+Route::get('/admin/report/prodi', [ReportController::class, 'prodiReportView'])->name('admin.report.prodi');
+Route::get('/report/prodi/universal', [ReportController::class, 'reportProdiUniversal']);
+Route::get('/report/prodi/dosen', [ReportController::class, 'reportProdiPerDosen']);
+Route::get('/report/prodi/kelas', [ReportController::class, 'reportProdiPerKelas']);
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -78,8 +84,7 @@ Route::get('/admin/kelas/data', [KelasController::class, 'getDataKelas'])->name(
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/report', [AdminController::class, 'reportIndex'])->name('admin.report');
-Route::get('/admin/report/soal', [AdminController::class, 'reportSoal'])->name('admin.reportpersoal');
-Route::get('/report/getsoal', [SoalController::class, 'getSoalForReport']);
+
 Route::get('/admin/sudah-jawab', [AdminController::class, 'sudahJawab'])->name('jawaban.sudah');
 Route::get('/admin/belum-jawab', [AdminController::class, 'belumJawab'])->name('jawaban.belum');
 Route::get('/admin/kelas', [AdminController::class, 'kelas_list'])->name('kelas.index');
