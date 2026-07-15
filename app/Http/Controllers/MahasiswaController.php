@@ -95,18 +95,29 @@ class MahasiswaController extends Controller
             ], 422);
         }
         $answers = $request->input('answers');
-        foreach ($answers as $answer) {
-            DB::table('edom_jawaban')->insert([
-                'id_soal' => $answer['id_soal'],
-                'user_id' => Session::get('id_mhs'),
-                'id_mreg' => Session::get('id_mreg'),
-                'id_kelas' => $answer['id_kelas'],
-                'jawaban' => $answer['jawaban'],
-                'timestamp' => now()
-            ]);
+        
+        DB::beginTransaction();
+        try {
+            foreach ($answers as $answer) {
+                DB::table('edom_jawaban')->updateOrInsert(
+                    [
+                        'id_soal' => $answer['id_soal'],
+                        'user_id' => Session::get('id_mhs'),
+                        'id_mreg' => Session::get('id_mreg'),
+                        'id_kelas' => $answer['id_kelas']
+                    ],
+                    [
+                        'jawaban' => $answer['jawaban'],
+                        'timestamp' => now()
+                    ]
+                );
+            }
+            DB::commit();
+            return response()->json(['message' => 'Jawaban saved successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Gagal menyimpan jawaban.'], 500);
         }
-
-        return response()->json(['message' => 'Jawaban saved successfully']);
     }
 
     public function checkKuisionerStatus(Request $request)
@@ -114,13 +125,20 @@ class MahasiswaController extends Controller
         $id_mhs = Session::get('id_mhs');
         $id_mreg = Session::get('id_mreg');
     
-        $completedClasses = DB::table('edom_jawaban')
-            ->where('user_id', $id_mhs)
-            ->where('id_mreg', $id_mreg)
-            ->select('id_kelas')
-            ->distinct()
-            ->pluck('id_kelas')
-            ->toArray();
+        $total_soal = DB::table('edom_soal')->where('id_mreg', $id_mreg)->count();
+
+        if ($total_soal > 0) {
+            $completedClasses = DB::table('edom_jawaban')
+                ->where('user_id', $id_mhs)
+                ->where('id_mreg', $id_mreg)
+                ->select('id_kelas')
+                ->groupBy('id_kelas')
+                ->havingRaw('COUNT(DISTINCT id_soal) >= ?', [$total_soal])
+                ->pluck('id_kelas')
+                ->toArray();
+        } else {
+            $completedClasses = [];
+        }
     
         return response()->json([
             'completedClasses' => $completedClasses

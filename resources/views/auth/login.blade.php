@@ -218,7 +218,7 @@
                         })
 
                     } else if (result.success == 'Dosen') {
-                            $.ajax({
+                        $.ajax({
                             type: 'GET',
                             url: "{{ url('makesession-dosen') }}",
                             data: {
@@ -227,17 +227,17 @@
                                 nama: result.data.nama_dosen,
                                 kode_program_studi: result.data.kode_prodi,
                                 dosen_wali: result.data.dosen_wali,
-                                id_dosen: result.data.id_pegawai,
-                                nidn: result.data.nidn,
-                                kaprodi: result.data.pimpinan_prodi,
+                                id_pegawai: result.data.id_pegawai,
                                 semester: result.smtta[0].semester,
+                                kaprodi: result.data.pimpinan_prodi,
                                 tahun: result.smtta[0].tahun,
                                 tahun_ajaran: result.smtta[0].tahun_ajaran,
-                                token: result.token
+                                token: result.token,
+                                id_mreg: result.smtta[0].id_mreg,
                             },
                             success: function(result) {
                                 console.log(result);
-                                document.location.href = "{{ route('home') }}";
+                                document.location.href = "{{ route('dosen.dashboard') }}";
                             }
                         })
 

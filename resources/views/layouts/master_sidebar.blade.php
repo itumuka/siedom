@@ -271,11 +271,11 @@
                                     <span>Laporan</span>
                                 </a>
                             </li>
-                            @if (Session::get('kaprodi'))
-                                <li class="header">Kaprodi</li>
-                                <li class="{{ Request::is('admin/report/soal') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.reportpersoal') }}">
-                                        <i class="fa fa-chart-pie"></i>
+                            @if (Session::get('is_kaprodi') || Session::get('pimpinan_prodi'))
+                                <li class="header">Program Studi</li>
+                                <li class="{{ Request::is('admin/report/prodi') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.report.prodi') }}">
+                                        <i class="fa fa-university"></i>
                                         <span>Lihat Report Prodi</span>
                                     </a>
                                 </li>

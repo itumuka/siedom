@@ -22,7 +22,7 @@ class Cekmahasiswa
         if (Session::get('tipe') == "Mahasiswa") {
             return $next($request);
         } else {
-            return redirect(route('dashboard'));
+            return redirect(route('login'));
         }
     }
 }

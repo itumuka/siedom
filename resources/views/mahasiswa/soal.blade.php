@@ -40,7 +40,7 @@
                 <button type="button" class="btn btn-warning" id="prev-button">
                     <i class=""></i> Previous
                 </button>
-                <button type="submit" class="btn btn-success" id="next-button">
+                <button type="button" class="btn btn-success" id="next-button">
                     <i class=""></i> Next
                 </button>
                 <button type="submit" class="btn btn-primary" id="submit-button" style="display: none;">
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function checkAllAnswered() {
             var allAnswered = true;
-            document.querySelectorAll('#evaluation-content .form-group').forEach(function(group) {
+            document.querySelectorAll('.ichack-input').forEach(function(group) {
                 var radios = group.querySelectorAll('input[type="radio"]');
                 var oneChecked = Array.from(radios).some(radio => radio.checked);
                 if (!oneChecked) {

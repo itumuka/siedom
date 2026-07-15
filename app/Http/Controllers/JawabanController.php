@@ -25,7 +25,10 @@ class JawabanController extends Controller
                     DB::raw('COUNT(edom_jawaban.jawaban) as total_jawaban'),
                     DB::raw('COUNT(DISTINCT edom_jawaban.id_kelas) as total_kelas')
                 )
-                ->join('edom_jawaban', 'akd_mahasiswa.id_mhs', '=', 'edom_jawaban.user_id')
+                ->join('edom_jawaban', function ($join) {
+                    $join->on('akd_mahasiswa.id_mhs', '=', 'edom_jawaban.user_id')
+                         ->where('edom_jawaban.id_mreg', Session::get('id_mreg'));
+                })
                 ->join('akd_program_studi', 'akd_mahasiswa.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
                 ->groupBy(
                     'akd_mahasiswa.id_mhs',
@@ -64,7 +67,11 @@ class JawabanController extends Controller
                     DB::raw("CONCAT_WS(' ', akd_mahasiswa.tahun_angkatan, IF(akd_mahasiswa.semester = '1', 'Ganjil', 'Genap')) AS tahun_ajaran")
                 )
                 ->join('akd_program_studi', 'akd_mahasiswa.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-                ->leftJoin('edom_jawaban', 'akd_mahasiswa.id_mhs', '=', 'edom_jawaban.user_id')
+                ->leftJoin('edom_jawaban', function ($join) {
+                    $join->on('akd_mahasiswa.id_mhs', '=', 'edom_jawaban.user_id')
+                         ->where('edom_jawaban.id_mreg', Session::get('id_mreg'));
+                })
+                ->where('akd_mahasiswa.status_mhs', 'A')
                 ->whereNull('edom_jawaban.user_id')
                 ->groupBy(
                     'akd_mahasiswa.id_mhs',
@@ -208,6 +215,8 @@ class JawabanController extends Controller
     public function getDetailMahasiswaJawaban($id_mhs)
     {
         try {
+            $id_mreg = Session::get('id_mreg');
+            
             $query = DB::table('edom_jawaban')
                 ->select(
                     'edom_jawaban.id_kelas',
@@ -218,14 +227,16 @@ class JawabanController extends Controller
                 ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
                 ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
                 ->where('edom_jawaban.user_id', $id_mhs)
+                ->where('edom_jawaban.id_mreg', $id_mreg)
                 ->groupBy('edom_jawaban.id_kelas', 'akd_matakuliah.nama_matakuliah')
                 ->get();
     
             $totalMatkul = DB::table('edom_jawaban')
                 ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
                 ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-                ->distinct()
                 ->where('edom_jawaban.user_id', $id_mhs)
+                ->where('edom_jawaban.id_mreg', $id_mreg)
+                ->distinct()
                 ->count('akd_penawaran_matakuliah.id_matakuliah');
     
             $student = DB::table('akd_mahasiswa')
