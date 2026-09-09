@@ -92,9 +92,13 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    public function getProdi()
+    public function getProdi(Request $request)
     {
-        $data = DB::table('akd_program_studi')->select('kode_program_studi', 'nama_program_studi')->get();
+        $query = DB::table('akd_program_studi')->select('kode_program_studi', 'nama_program_studi');
+        if ($request->filled('kode_fakultas')) {
+            $query->where('kode_fakultas', $request->kode_fakultas);
+        }
+        $data = $query->get();
         return response()->json($data);
     }
 }

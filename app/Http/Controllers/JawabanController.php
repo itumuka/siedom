@@ -387,24 +387,41 @@ class JawabanController extends Controller
         $prodi = $request->input('prodi');
         $id_mreg = Session::get('id_mreg');
 
-        // Query dasar
-        $query = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
-            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-            ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+        if (!$id_mreg) {
+            return response()->json([
+                'session_active' => false,
+                'message' => 'Tahun akademik belum dipilih di session.',
+                'pieData' => [],
+                'total' => 0,
+                'total_valid' => 0,
+                'total_na' => 0,
+                'total_mhs' => 0,
+                'total_dosen' => 0,
+                'overall_avg' => 0,
+                'overall_percent' => 0,
+                'topList' => [],
+                'bottomList' => []
+            ]);
+        }
+
+        // Query dasar menggunakan LEFT JOIN agar data jawaban sah mahasiswa tidak hilang jika data master dosen/prodi belum lengkap
+        $baseQuery = DB::table('edom_jawaban')
+            ->leftJoin('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->leftJoin('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->leftJoin('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->leftJoin('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
             ->where('edom_jawaban.id_mreg', $id_mreg);
 
-        // Filter
+        // Filter fakultas / prodi
         if ($type == 'fakultas' && $fakultas) {
-            $query->where('akd_program_studi.kode_fakultas', $fakultas);
+            $baseQuery->where('akd_program_studi.kode_fakultas', $fakultas);
         }
         if ($type == 'prodi' && $prodi) {
-            $query->where('akd_program_studi.kode_program_studi', $prodi);
+            $baseQuery->where('akd_program_studi.kode_program_studi', $prodi);
         }
 
-        // Pie chart data
-        $pieRaw = $query
+        // Pie chart data (distribusi jawaban)
+        $pieRaw = (clone $baseQuery)
             ->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
             ->groupBy('edom_jawaban.jawaban')
             ->get();
@@ -419,63 +436,117 @@ class JawabanController extends Controller
 
         $total = $pieRaw->sum('count');
         $pieData = [];
+        $totalValid = 0;
+        $totalNa = 0;
+
         foreach ($labels as $key => $label) {
             $found = $pieRaw->firstWhere('jawaban', $key);
-            $count = $found ? $found->count : 0;
-            $percentage = $total ? round(($count / $total) * 100, 2) : 0;
+            $count = $found ? (int)$found->count : 0;
+            $percentage = $total > 0 ? round(($count / $total) * 100, 2) : 0;
+            
+            if ($key == 0) {
+                $totalNa += $count;
+            } else {
+                $totalValid += $count;
+            }
+
             $pieData[] = [
                 'name' => $label,
+                'key' => $key,
                 'value' => $count,
                 'percentage' => $percentage
             ];
         }
 
-        // Top & Bottom List (rata-rata per dosen)
-        $scoreQuery = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
-            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
-            ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
-            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
-            ->where('edom_jawaban.id_mreg', $id_mreg);
-
-        if ($type == 'fakultas' && $fakultas) {
-            $scoreQuery->where('akd_program_studi.kode_fakultas', $fakultas);
-        }
-        if ($type == 'prodi' && $prodi) {
-            $scoreQuery->where('akd_program_studi.kode_program_studi', $prodi);
-        }
-
-        $scoreRaw = $scoreQuery
+        // Metrik Eksekutif: Partisipasi Mahasiswa, Dosen Tervalidasi, dan Skor Keseluruhan
+        $summaryStats = (clone $baseQuery)
             ->select(
+                DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mhs'),
+                DB::raw('COUNT(DISTINCT akd_penawaran_matakuliah.kode_dosen) as total_dosen'),
+                DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as overall_avg')
+            )
+            ->first();
+
+        $overallAvg = $summaryStats && $summaryStats->overall_avg !== null ? round((float)$summaryStats->overall_avg, 2) : 0;
+        $overallPercent = round(($overallAvg / 4) * 100, 2);
+        $totalMhs = $summaryStats ? (int)$summaryStats->total_mhs : 0;
+        $totalDosen = $summaryStats ? (int)$summaryStats->total_dosen : 0;
+
+        // Top & Bottom List (rata-rata per dosen, exclude jawaban 0 = Tidak Berlaku)
+        $scoreQuery = (clone $baseQuery)
+            ->whereNotNull('simpeg_pegawai.id')
+            ->whereNotNull('simpeg_pegawai.nama')
+            ->select(
+                'simpeg_pegawai.id',
                 'simpeg_pegawai.nama',
                 'simpeg_pegawai.nip',
-                DB::raw('AVG(edom_jawaban.jawaban) as avg_score')
+                DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as avg_score'),
+                DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_responden'),
+                DB::raw('COUNT(CASE WHEN edom_jawaban.jawaban > 0 THEN 1 END) as valid_responses')
             )
             ->groupBy('simpeg_pegawai.id', 'simpeg_pegawai.nama', 'simpeg_pegawai.nip')
-            ->orderBy('avg_score', 'desc')
-            ->get();
+            ->havingRaw('COUNT(CASE WHEN edom_jawaban.jawaban > 0 THEN 1 END) > 0');
 
-        $topList = $scoreRaw->take(3)->map(function($row){
+        $allScores = $scoreQuery->get();
+
+        // Terapkan kuorum responden jika data mencukupi (misal: min 3 responden), jika belum ada yang memenuhi kuorum, fallback ke semua dosen
+        $quorumThreshold = 3;
+        $qualifiedScores = $allScores->filter(function($row) use ($quorumThreshold) {
+            return (int)$row->total_responden >= $quorumThreshold;
+        });
+
+        $activeScoreList = $qualifiedScores->count() >= 3 ? $qualifiedScores : $allScores;
+
+        // Sort secara numerik berdasarkan avg_score DESC
+        $sortedDesc = $activeScoreList->sortByDesc(function($row) {
+            return (float)$row->avg_score;
+        })->values();
+
+        $topList = $sortedDesc->take(3)->map(function($row){
+            $avg = round((float)$row->avg_score, 2);
             return [
+                'id' => $row->id,
                 'nama' => $row->nama,
-                'nip' => $row->nip,
-                'nilai' => round($row->avg_score,2)
+                'nip' => $row->nip ?: '-',
+                'nilai' => $avg,
+                'persen' => round(($avg / 4) * 100, 2),
+                'total_responden' => (int)$row->total_responden,
+                'valid_responses' => (int)$row->valid_responses
             ];
         })->values();
 
-        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(function($row){
-            return [
-                'nama' => $row->nama,
-                'nip' => $row->nip,
-                'nilai' => round($row->avg_score,2)
-            ];
-        })->values();
+        // Bottom list: Cegah tumpang tindih jika total dosen <= 3
+        if ($sortedDesc->count() > 3) {
+            $sortedAsc = $sortedDesc->reverse()->take(3)->values();
+            $bottomList = $sortedAsc->map(function($row){
+                $avg = round((float)$row->avg_score, 2);
+                return [
+                    'id' => $row->id,
+                    'nama' => $row->nama,
+                    'nip' => $row->nip ?: '-',
+                    'nilai' => $avg,
+                    'persen' => round(($avg / 4) * 100, 2),
+                    'total_responden' => (int)$row->total_responden,
+                    'valid_responses' => (int)$row->valid_responses
+                ];
+            });
+        } else {
+            $bottomList = collect([]);
+        }
 
         return response()->json([
+            'session_active' => true,
             'pieData' => $pieData,
             'total' => $total,
+            'total_valid' => $totalValid,
+            'total_na' => $totalNa,
+            'total_mhs' => $totalMhs,
+            'total_dosen' => $totalDosen,
+            'overall_avg' => $overallAvg,
+            'overall_percent' => $overallPercent,
             'topList' => $topList,
-            'bottomList' => $bottomList
+            'bottomList' => $bottomList,
+            'quorum_applied' => $qualifiedScores->count() >= 3
         ]);
     }
     
