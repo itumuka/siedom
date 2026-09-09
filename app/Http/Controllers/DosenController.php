@@ -169,8 +169,153 @@ class DosenController extends Controller
         }
     }
 
+    public function getDashboardData(Request $request)
+    {
+        $id_pegawai = Session::get('id_pegawai');
+        $id_mreg    = Session::get('id_mreg');
 
+        if (!$id_pegawai || !$id_mreg) {
+            return response()->json([
+                'session_active'  => false,
+                'message'         => 'Sesi login dosen atau tahun akademik tidak ditemukan.',
+                'pieData'         => [],
+                'total'           => 0,
+                'total_valid'     => 0,
+                'total_na'        => 0,
+                'total_mhs'       => 0,
+                'total_kelas'     => 0,
+                'overall_avg'     => 0,
+                'overall_percent' => 0,
+                'kelasList'       => []
+            ]);
+        }
 
- 
-    
+        // 1. Ambil data mreg untuk filter tahun & semester
+        $mreg = DB::table('akd_mreg')
+            ->select('tahun', 'semester')
+            ->where('id_mreg', $id_mreg)
+            ->first();
+
+        // 2. Query dasar jawaban untuk dosen yang sedang login
+        $baseQuery = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->where('akd_penawaran_matakuliah.kode_dosen', $id_pegawai)
+            ->where('edom_jawaban.id_mreg', $id_mreg);
+
+        // 3. Distribusi Jawaban (Pie / Donut Chart)
+        $pieRaw = (clone $baseQuery)
+            ->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('edom_jawaban.jawaban')
+            ->get();
+
+        $labels = [
+            0 => 'Tidak Berlaku',
+            1 => 'Sangat Tidak Sesuai',
+            2 => 'Tidak Sesuai',
+            3 => 'Sesuai',
+            4 => 'Sangat Sesuai'
+        ];
+
+        $total = $pieRaw->sum('count');
+        $pieData = [];
+        $totalValid = 0;
+        $totalNa = 0;
+
+        foreach ($labels as $key => $label) {
+            $found = $pieRaw->firstWhere('jawaban', $key);
+            $count = $found ? (int)$found->count : 0;
+            $percentage = $total > 0 ? round(($count / $total) * 100, 2) : 0;
+
+            if ($key == 0) {
+                $totalNa += $count;
+            } else {
+                $totalValid += $count;
+            }
+
+            $pieData[] = [
+                'name'       => $label,
+                'key'        => $key,
+                'value'      => $count,
+                'percentage' => $percentage
+            ];
+        }
+
+        // 4. Ringkasan Metrik Kinerja Dosen (Eksklusikan 0 = Tidak Berlaku)
+        $stats = (clone $baseQuery)
+            ->select(
+                DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mhs'),
+                DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as overall_avg')
+            )
+            ->first();
+
+        $overallAvg     = $stats && $stats->overall_avg !== null ? round((float)$stats->overall_avg, 2) : 0;
+        $overallPercent = round(($overallAvg / 4) * 100, 2);
+        $totalMhs       = $stats ? (int)$stats->total_mhs : 0;
+
+        // 5. Daftar Kelas yang Diampu Dosen pada Periode ini beserta Nilainya
+        $kelasQuery = DB::table('akd_kelas_kuliah')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
+            ->join('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->where('akd_penawaran_matakuliah.kode_dosen', $id_pegawai);
+
+        if ($mreg) {
+            $kelasQuery->where('akd_penawaran_matakuliah.tahun', $mreg->tahun)
+                       ->where('akd_penawaran_matakuliah.semester', $mreg->semester);
+        }
+
+        $kelasListRaw = $kelasQuery->select(
+            'akd_kelas_kuliah.id_kelas',
+            'akd_kelas_kuliah.nama_kelas',
+            'akd_matakuliah.nama_matakuliah',
+            'akd_matakuliah.kode_matakuliah',
+            'akd_program_studi.nama_program_studi',
+            'akd_penawaran_matakuliah.smt_matakuliah as semester'
+        )->get();
+
+        // Ambil data agregasi per kelas untuk dosen ini
+        $kelasIds = $kelasListRaw->pluck('id_kelas')->toArray() ?: [0];
+        $kelasStats = DB::table('edom_jawaban')
+            ->whereIn('id_kelas', $kelasIds)
+            ->where('id_mreg', $id_mreg)
+            ->select(
+                'id_kelas',
+                DB::raw('COUNT(DISTINCT user_id) as total_mahasiswa'),
+                DB::raw('COUNT(jawaban) as total_jawaban'),
+                DB::raw('AVG(CASE WHEN jawaban > 0 THEN jawaban ELSE NULL END) as avg_score')
+            )
+            ->groupBy('id_kelas')
+            ->get();
+
+        $kelasList = $kelasListRaw->map(function($item) use ($kelasStats) {
+            $stat = $kelasStats->firstWhere('id_kelas', $item->id_kelas);
+            $avg = $stat && $stat->avg_score !== null ? round((float)$stat->avg_score, 2) : 0;
+            return [
+                'id_kelas'           => $item->id_kelas,
+                'nama_kelas'         => $item->nama_kelas,
+                'nama_matakuliah'    => $item->nama_matakuliah,
+                'kode_matakuliah'    => $item->kode_matakuliah,
+                'nama_program_studi' => $item->nama_program_studi,
+                'semester'           => $item->semester,
+                'total_mhs'          => $stat ? (int)$stat->total_mahasiswa : 0,
+                'total_jawaban'      => $stat ? (int)$stat->total_jawaban : 0,
+                'avg_score'          => $avg,
+                'percent'            => round(($avg / 4) * 100, 2)
+            ];
+        });
+
+        return response()->json([
+            'session_active'  => true,
+            'pieData'         => $pieData,
+            'total'           => $total,
+            'total_valid'     => $totalValid,
+            'total_na'        => $totalNa,
+            'total_mhs'       => $totalMhs,
+            'total_kelas'     => $kelasListRaw->count(),
+            'overall_avg'     => $overallAvg,
+            'overall_percent' => $overallPercent,
+            'kelasList'       => $kelasList
+        ]);
+    }
 }

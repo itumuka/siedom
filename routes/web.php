@@ -108,10 +108,9 @@ Route::middleware(['cekdosen'])->group(function () {
     Route::get('/dosen/courses', [KelasController::class, 'getDosenCourses'])->name('dosen.data');
     Route::get('/dosen/kelas', [DosenController::class, 'kelas'])->name('dosen.kelas');
     Route::get('/dosen/dashboard', [DosenController::class, 'index'])->name('dosen.dashboard');
+    Route::get('/dosen/dashboard/data', [DosenController::class, 'getDashboardData'])->name('dosen.dashboard.data');
     Route::get('/dosen/kelas/{id_kelas}/soal', [DosenController::class, 'overviewSoal'])->name('dosen.soal.overview');
     Route::get('/dosen/kelas/{id_kelas}/soal/data', [DosenController::class, 'getAllSoalData']);
     //CHANGE
     Route::get('/dosen/chart/data/jawaban-per-soal-paginated', [KelasController::class, 'getJawabanPerSoalDosenPaginated']);
-
-
 });
