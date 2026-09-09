@@ -23,6 +23,7 @@ Route::get('/admin/report/soal', [AdminController::class, 'reportSoal'])->name('
 Route::get('/report/getsoal', [SoalController::class, 'getSoalForReport']);
 
 Route::get('/admin/report/prodi', [ReportController::class, 'prodiReportView'])->name('admin.report.prodi');
+Route::get('/admin/report/prodi/data', [ReportController::class, 'getProdiReportData'])->name('admin.report.prodi.data');
 Route::get('/report/prodi/universal', [ReportController::class, 'reportProdiUniversal']);
 Route::get('/report/prodi/dosen', [ReportController::class, 'reportProdiPerDosen']);
 Route::get('/report/prodi/kelas', [ReportController::class, 'reportProdiPerKelas']);

@@ -334,6 +334,12 @@
                                                 <span>Laporan Kelas</span>
                                             </a>
                                         </li>
+                                        <li class="{{ Route::is('admin.report.prodi') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.report.prodi') }}">
+                                                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+                                                <span>Laporan Per Prodi</span>
+                                            </a>
+                                        </li>
                                         <li class="{{ Route::is('admin.reportpersoal') ? 'active' : '' }}">
                                             <a href="{{ route('admin.reportpersoal') }}">
                                                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
