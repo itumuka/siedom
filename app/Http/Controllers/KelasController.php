@@ -119,40 +119,81 @@ class KelasController extends Controller
     {
         $id_mreg = Session::get('id_mreg');
     
-        $chartData = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+        // 1. Ambil informasi master kelas & dosen (tetap ada meskipun belum ada jawaban mahasiswa)
+        $kelasInfo = DB::table('akd_kelas_kuliah')
             ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
             ->join('akd_matakuliah', 'akd_penawaran_matakuliah.id_matakuliah', '=', 'akd_matakuliah.id_matakuliah')
-            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->leftJoin('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->leftJoin('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->where('akd_kelas_kuliah.id_kelas', $id_kelas)
             ->select(
+                'akd_kelas_kuliah.id_kelas',
+                'akd_kelas_kuliah.nama_kelas',
                 'akd_matakuliah.nama_matakuliah',
                 'akd_matakuliah.kode_matakuliah',
-                'edom_jawaban.jawaban',
-                DB::raw('COUNT(*) as count'),
-                'simpeg_pegawai.nama as nama_dosen'
+                'akd_penawaran_matakuliah.smt_matakuliah as semester',
+                'akd_program_studi.nama_program_studi',
+                'simpeg_pegawai.nama as nama_dosen',
+                'simpeg_pegawai.nip as nip_dosen'
             )
+            ->first();
+
+        // 2. Query agregasi frekuensi per jawaban dari edom_jawaban
+        $chartData = DB::table('edom_jawaban')
             ->where('edom_jawaban.id_kelas', $id_kelas)
-            ->where('edom_jawaban.id_mreg',   $id_mreg)         // ← filter by session id_mreg
-            ->groupBy(
-                'akd_matakuliah.nama_matakuliah',
-                'akd_matakuliah.kode_matakuliah',
-                'edom_jawaban.jawaban',
-                'simpeg_pegawai.nama'
-            )
+            ->where('edom_jawaban.id_mreg', $id_mreg)
+            ->select('jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('jawaban')
             ->get();
-    
+
+        // Format objek backward-compatible untuk chartData
+        $namaMatkul = $kelasInfo ? $kelasInfo->nama_matakuliah : '-';
+        $kodeMatkul = $kelasInfo ? $kelasInfo->kode_matakuliah : '-';
+        $namaDosen  = $kelasInfo ? ($kelasInfo->nama_dosen ?: '-') : '-';
+
+        $compatibleChartData = $chartData->map(function($item) use ($namaMatkul, $kodeMatkul, $namaDosen) {
+            return (object)[
+                'nama_matakuliah' => $namaMatkul,
+                'kode_matakuliah' => $kodeMatkul,
+                'jawaban'         => (int)$item->jawaban,
+                'count'           => (int)$item->count,
+                'nama_dosen'      => $namaDosen
+            ];
+        });
+
+        // 3. Statistik Validasi & Rata-rata Skor (Eksklusikan 0 = Tidak Berlaku)
         $total_students = DB::table('edom_jawaban')
             ->where('id_kelas', $id_kelas)
-            ->where('id_mreg',   $id_mreg)                       // ← sama di sini
+            ->where('id_mreg', $id_mreg)
             ->distinct('user_id')
             ->count('user_id');
     
-        $total_responses = $chartData->sum('count');
-    
+        $total_responses = (int)$chartData->sum('count');
+
+        $stats = DB::table('edom_jawaban')
+            ->where('id_kelas', $id_kelas)
+            ->where('id_mreg', $id_mreg)
+            ->select(
+                DB::raw('COUNT(CASE WHEN jawaban > 0 THEN 1 END) as total_valid'),
+                DB::raw('COUNT(CASE WHEN jawaban = 0 THEN 1 END) as total_na'),
+                DB::raw('AVG(CASE WHEN jawaban > 0 THEN jawaban ELSE NULL END) as avg_score')
+            )
+            ->first();
+
+        $avgScore   = $stats && $stats->avg_score !== null ? round((float)$stats->avg_score, 2) : 0;
+        $percent    = round(($avgScore / 4) * 100, 2);
+        $totalValid = $stats ? (int)$stats->total_valid : 0;
+        $totalNa    = $stats ? (int)$stats->total_na : 0;
+
         return response()->json([
-            'data'             => $chartData,
+            'data'             => $compatibleChartData,
+            'kelas_info'       => $kelasInfo,
             'total_students'   => $total_students,
-            'total_responses'  => $total_responses
+            'total_responses'  => $total_responses,
+            'total_valid'      => $totalValid,
+            'total_na'         => $totalNa,
+            'avg_score'        => $avgScore,
+            'percent'          => $percent
         ]);
     }
     
