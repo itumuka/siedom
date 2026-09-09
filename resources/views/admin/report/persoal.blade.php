@@ -48,14 +48,18 @@
         flex-wrap: wrap;
         gap: 12px;
     }
-    .dashboard-card-header h5 {
+    .dashboard-card-header h5,
+    .dashboard-card-header h6 {
         margin: 0;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 15px;
         color: #1e293b;
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+    .dashboard-card-body {
+        background: #ffffff;
     }
 
     /* Selected Soal Banner */
@@ -391,25 +395,25 @@
         <!-- Donut Chart & Distribution Table -->
         <div class="row">
             <div class="col-lg-5 col-md-12 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="mb-0 font-weight-bold text-dark">
+                <div class="dashboard-card mb-0" style="min-height: 420px;">
+                    <div class="dashboard-card-header">
+                        <h5>
                             <i class="fa fa-chart-pie text-success mr-1"></i> Proporsi Persepsi Mahasiswa
                         </h5>
                     </div>
-                    <div class="card-body">
-                        <div id="chart-soal-donut" style="width: 100%; height: 280px;"></div>
+                    <div class="dashboard-card-body p-3 d-flex align-items-center justify-content-center">
+                        <div id="chart-soal-donut" style="width: 100%; height: 320px;"></div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-7 col-md-12 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="mb-0 font-weight-bold text-dark">
+                <div class="dashboard-card mb-0" style="min-height: 420px;">
+                    <div class="dashboard-card-header">
+                        <h5>
                             <i class="fa fa-list-check text-info mr-1"></i> Distribusi Frekuensi Skala Jawaban
                         </h5>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="dashboard-card-body p-0">
                         <div class="table-responsive">
                             <table class="table custom-table mb-0">
                                 <thead>
@@ -430,17 +434,17 @@
         </div>
 
         <!-- Top & Bottom Dosen on this question -->
-        <div class="row">
+        <div class="row mt-4">
             <!-- Top 5 Dosen -->
             <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0 font-weight-bold text-success">
+                <div class="dashboard-card mb-0">
+                    <div class="dashboard-card-header">
+                        <h6 class="text-success mb-0">
                             <i class="fa fa-trophy mr-1"></i> 5 Dosen Nilai Tertinggi (Kuorum &ge; 3 Mhs)
                         </h6>
                         <span class="badge badge-success">Top Performers</span>
                     </div>
-                    <div class="card-body p-0" id="list-top-dosen">
+                    <div class="dashboard-card-body p-0" id="list-top-dosen">
                         <div class="text-center py-4 text-muted">Belum ada data.</div>
                     </div>
                 </div>
@@ -448,14 +452,14 @@
 
             <!-- Bottom 5 Dosen -->
             <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0 font-weight-bold text-danger">
+                <div class="dashboard-card mb-0">
+                    <div class="dashboard-card-header">
+                        <h6 class="text-danger mb-0">
                             <i class="fa fa-triangle-exclamation mr-1"></i> 5 Dosen Prioritas Pembinaan (Kuorum &ge; 3 Mhs)
                         </h6>
                         <span class="badge badge-warning">Perlu Evaluasi</span>
                     </div>
-                    <div class="card-body p-0" id="list-bottom-dosen">
+                    <div class="dashboard-card-body p-0" id="list-bottom-dosen">
                         <div class="text-center py-4 text-muted">Belum ada data.</div>
                     </div>
                 </div>
@@ -599,21 +603,32 @@ $(function(){
             tbody.append(tr);
         });
 
-        // Click handler to select question
-        $('#tbody-matrix-soal tr').on('click', function(e){
-            var id = $(this).find('.btn-select-soal').data('id');
-            if(id){
-                loadDetailSoal(id, true);
-            }
-        });
+        // Highlight current active row
+        if(currentActiveSoalId){
+            $('#row-soal-' + currentActiveSoalId).addClass('selected-soal-row');
+            $('#row-soal-' + currentActiveSoalId).find('.btn-select-soal').removeClass('btn-outline-primary').addClass('btn-primary');
+        }
     }
+
+    // Delegated click handler to select question from matrix table
+    $(document).off('click', '#tbody-matrix-soal tr').on('click', '#tbody-matrix-soal tr', function(e){
+        var id = $(this).find('.btn-select-soal').data('id');
+        if(id){
+            loadDetailSoal(id, true);
+        }
+    });
 
     function loadDetailSoal(idSoal, shouldScroll) {
         currentActiveSoalId = idSoal;
 
         // Highlight selected row in table
         $('#tbody-matrix-soal tr').removeClass('selected-soal-row');
-        $('#row-soal-' + idSoal).addClass('selected-soal-row');
+        $('#tbody-matrix-soal .btn-select-soal').removeClass('btn-primary').addClass('btn-outline-primary');
+        var selRow = $('#row-soal-' + idSoal);
+        if(selRow.length){
+            selRow.addClass('selected-soal-row');
+            selRow.find('.btn-select-soal').removeClass('btn-outline-primary').addClass('btn-primary');
+        }
 
         var idMreg = $('#select-mreg').val();
         var kodeFakultas = $('#select-fakultas').val();
@@ -657,10 +672,18 @@ $(function(){
             renderRankLists(topList, bottomList);
 
             if(shouldScroll){
-                $('html, body').animate({
-                    scrollTop: $('#section-detail-soal').offset().top - 70
-                }, 500);
+                var target = $('#section-detail-soal');
+                if(target.length){
+                    var targetOffset = Math.max(0, target.offset().top - 95);
+                    $('html, body').stop().animate({
+                        scrollTop: targetOffset
+                    }, 400);
+                }
             }
+
+            setTimeout(function(){
+                if(chartDonut) chartDonut.resize();
+            }, 100);
         });
     }
 

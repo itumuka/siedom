@@ -442,7 +442,7 @@
             <div class="row">
                 <!-- Donut Chart Distribusi Skala -->
                 <div class="col-lg-6 col-md-12 mb-4">
-                    <div class="card shadow-sm border-0 h-100">
+                    <div class="card shadow-sm border-0">
                         <div class="card-header bg-white py-3">
                             <h5 class="mb-0 font-weight-bold text-dark">
                                 <i class="fa fa-chart-pie text-success mr-1"></i> Distribusi Skala Jawaban Mahasiswa
@@ -468,7 +468,7 @@
 
                 <!-- Capaian Aspek Komponen Penilaian -->
                 <div class="col-lg-6 col-md-12 mb-4">
-                    <div class="card shadow-sm border-0 h-100">
+                    <div class="card shadow-sm border-0">
                         <div class="card-header bg-white py-3">
                             <h5 class="mb-0 font-weight-bold text-dark">
                                 <i class="fa fa-chart-bar text-primary mr-1"></i> Capaian Nilai Per Aspek / Komponen Penilaian
