@@ -493,17 +493,37 @@
                 </div>
             </div>
         </div>
-        <!-- Bottom 3 Rekomendasi Pembinaan -->
+        <!-- Bottom 3 Rekomendasi Pembinaan (Collapsed by default for meeting privacy) -->
         <div class="col-lg-6">
             <div class="dashboard-box">
-                <div class="box-header">
-                    <h5><i class="fas fa-bullseye text-danger"></i> Prioritas Pendampingan & Pembinaan (Monev)</h5>
-                    <span class="badge-chip chip-warning"><i class="fas fa-clipboard-check"></i> Rencana Tindak Lanjut</span>
-                </div>
-                <div class="box-body">
-                    <div id="bottom-list-container">
-                        <div class="spinner-box"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data pembinaan...</div>
+                <div class="box-header" style="cursor: pointer;" onclick="toggleMonevCollapse()">
+                    <h5>
+                        <i class="fas fa-user-shield text-danger"></i> Prioritas Pendampingan & Pembinaan (Monev)
+                        <span class="badge badge-light border text-muted ml-1" style="font-size: 11px; font-weight: normal;">
+                            <i class="fas fa-eye-slash mr-1"></i> Data Tertutup
+                        </span>
+                    </h5>
+                    <div class="d-flex align-items-center">
+                        <span class="badge-chip chip-warning mr-2"><i class="fas fa-lock"></i> Khusus Pimpinan</span>
+                        <button class="btn btn-sm btn-outline-secondary py-0 px-2" type="button" id="btn-toggle-monev" title="Buka / Sembunyikan">
+                            <i class="fas fa-chevron-down" id="monev-chevron"></i>
+                        </button>
                     </div>
+                </div>
+                <!-- Collapsible body: default collapsed / hidden -->
+                <div class="collapse" id="collapse-monev">
+                    <div class="box-body">
+                        <div class="alert alert-danger py-2 px-3 mb-3 d-flex align-items-center justify-content-between" style="font-size: 12px; background: #fff5f5; border: 1px dashed #fca5a5; color: #991b1b;">
+                            <span><i class="fas fa-shield-halved mr-2"></i><strong>Privasi Terjaga:</strong> Bagian ini disembunyikan secara bawaan untuk menjaga kerahasiaan saat presentasi layar rapat pimpinan/umum.</span>
+                        </div>
+                        <div id="bottom-list-container">
+                            <div class="spinner-box"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data pembinaan...</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Notice when collapsed -->
+                <div id="monev-preview-notice" class="p-3 text-center text-muted" style="font-size: 12px; background: #fafafa; border-top: 1px solid #f1f5f9; cursor: pointer;" onclick="toggleMonevCollapse()">
+                    <i class="fas fa-eye-slash text-secondary mr-1"></i> Panel ini disembunyikan secara default demi privasi. <a href="javascript:void(0)" class="text-danger font-weight-bold ml-1">Klik untuk membuka rincian dosen &raquo;</a>
                 </div>
             </div>
         </div>
@@ -837,6 +857,20 @@ $('#filter-fakultas').on('change', function() {
         loadProdi(kodeFakultas);
     }
 });
+
+function toggleMonevCollapse() {
+    var collapseEl = $('#collapse-monev');
+    var isShown = collapseEl.hasClass('show');
+    if (isShown) {
+        collapseEl.collapse('hide');
+        $('#monev-chevron').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $('#monev-preview-notice').slideDown(150);
+    } else {
+        collapseEl.collapse('show');
+        $('#monev-chevron').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        $('#monev-preview-notice').slideUp(150);
+    }
+}
 
 function resetFilter() {
     $('#filter-type').val('universal').trigger('change');
