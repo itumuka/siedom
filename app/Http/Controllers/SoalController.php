@@ -190,63 +190,268 @@ class SoalController extends Controller
             return response()->json(['error' => 'ID soal wajib diisi'], 400);
         }
 
-        $kode_prodi_kaprodi = Session::get('is_kaprodi') ? Session::get('kode_program_studi') : null;
+        $id_mreg        = $request->input('id_mreg', Session::get('id_mreg'));
+        $kode_fakultas  = $request->input('kode_fakultas');
+        $kode_prodi     = $request->input('kode_prodi');
 
-        $labels = [0=>'Tidak Berlaku',1=>'Sangat Tidak Sesuai',2=>'Tidak Sesuai',3=>'Sesuai',4=>'Sangat Sesuai'];
-
-        // pie: gabungkan join ke tabel penawaran untuk bisa filter prodi jika kaprodi
-        $pieQuery = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah','edom_jawaban.id_kelas','=','akd_kelas_kuliah.id_kelas')
-            ->join('akd_penawaran_matakuliah','akd_kelas_kuliah.id_tawar','=','akd_penawaran_matakuliah.id_tawar')
-            ->where('edom_jawaban.id_soal', $id_soal);
-
-        if ($kode_prodi_kaprodi) {
-            $pieQuery->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi_kaprodi);
+        if (Session::get('is_kaprodi')) {
+            $kode_prodi = Session::get('kode_program_studi');
         }
 
-        $pieRaw = $pieQuery->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
-            ->groupBy('edom_jawaban.jawaban')->get();
+        if (!$id_mreg) {
+            $id_mreg = DB::table('akd_mreg')->orderBy('id_mreg', 'desc')->value('id_mreg');
+        }
+
+        // Ambil info soal & komponen
+        $soalInfo = DB::table('edom_soal')
+            ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian')
+            ->where('edom_soal.id_soal', $id_soal)
+            ->select(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_soal.id_komponen_penilaian',
+                DB::raw('COALESCE(edom_komponen_penilaian.nama_komponen, "Umum") as nama_komponen')
+            )
+            ->first();
+
+        $labels = [
+            0 => 'Tidak Berlaku',
+            1 => 'Sangat Tidak Sesuai',
+            2 => 'Tidak Sesuai',
+            3 => 'Sesuai',
+            4 => 'Sangat Sesuai'
+        ];
+
+        // Base Query untuk jawaban soal ini
+        $baseQuery = DB::table('edom_jawaban')
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->leftJoin('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->where('edom_jawaban.id_soal', $id_soal)
+            ->when($id_mreg, function($q) use ($id_mreg) {
+                return $q->where('edom_jawaban.id_mreg', $id_mreg);
+            })
+            ->when($kode_prodi, function($q) use ($kode_prodi) {
+                return $q->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi);
+            })
+            ->when($kode_fakultas, function($q) use ($kode_fakultas) {
+                return $q->where('akd_program_studi.kode_fakultas', $kode_fakultas);
+            });
+
+        // 1. Distribusi Frekuensi Jawaban
+        $pieRaw = (clone $baseQuery)
+            ->select('edom_jawaban.jawaban', DB::raw('COUNT(*) as count'))
+            ->groupBy('edom_jawaban.jawaban')
+            ->get();
 
         $total = $pieRaw->sum('count');
         $pieData = [];
+        $totalValid = 0;
+        $totalNa = 0;
+
         foreach ($labels as $key => $label) {
             $found = $pieRaw->firstWhere('jawaban', $key);
-            $count = $found ? $found->count : 0;
-            $percentage = $total ? round(($count / $total) * 100, 2) : 0;
-            $pieData[] = ['name'=>$label,'value'=>$count,'percentage'=>$percentage];
+            $count = $found ? (int)$found->count : 0;
+            $percentage = $total > 0 ? round(($count / $total) * 100, 2) : 0;
+
+            if ($key == 0) {
+                $totalNa += $count;
+            } else {
+                $totalValid += $count;
+            }
+
+            $pieData[] = [
+                'jawaban'    => $key,
+                'name'       => $label,
+                'value'      => $count,
+                'count'      => $count,
+                'percentage' => $percentage
+            ];
         }
 
-        // top/bottom per dosen, apply same prodi filter if kaprodi
+        // 2. Metrik Ringkasan (Eksklusi 0 = Tidak Berlaku)
+        $statQuery = (clone $baseQuery)->select(
+            DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mhs'),
+            DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as avg_score')
+        )->first();
+
+        $avgScore = $statQuery && $statQuery->avg_score !== null ? round((float)$statQuery->avg_score, 2) : 0;
+        $mutuPercent = round(($avgScore / 4) * 100, 2);
+        $totalMhs = $statQuery ? (int)$statQuery->total_mhs : 0;
+
+        $predikat = 'Kurang';
+        $badgeClass = 'danger';
+        if ($avgScore >= 3.50) {
+            $predikat = 'Sangat Sesuai';
+            $badgeClass = 'success';
+        } elseif ($avgScore >= 3.00) {
+            $predikat = 'Sesuai';
+            $badgeClass = 'info';
+        } elseif ($avgScore >= 2.00) {
+            $predikat = 'Cukup';
+            $badgeClass = 'warning';
+        }
+
+        // 3. Top & Bottom Dosen (Dengan Kuorum >= 3 responden)
         $scoreQuery = DB::table('edom_jawaban')
-            ->join('akd_kelas_kuliah','edom_jawaban.id_kelas','=','akd_kelas_kuliah.id_kelas')
-            ->join('akd_penawaran_matakuliah','akd_kelas_kuliah.id_tawar','=','akd_penawaran_matakuliah.id_tawar')
-            ->join('simpeg_pegawai','akd_penawaran_matakuliah.kode_dosen','=','simpeg_pegawai.id')
-            ->where('edom_jawaban.id_soal', $id_soal);
+            ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+            ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+            ->join('simpeg_pegawai', 'akd_penawaran_matakuliah.kode_dosen', '=', 'simpeg_pegawai.id')
+            ->leftJoin('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+            ->where('edom_jawaban.id_soal', $id_soal)
+            ->when($id_mreg, function($q) use ($id_mreg) {
+                return $q->where('edom_jawaban.id_mreg', $id_mreg);
+            })
+            ->when($kode_prodi, function($q) use ($kode_prodi) {
+                return $q->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi);
+            })
+            ->when($kode_fakultas, function($q) use ($kode_fakultas) {
+                return $q->where('akd_program_studi.kode_fakultas', $kode_fakultas);
+            })
+            ->select(
+                'simpeg_pegawai.id as id_pegawai',
+                'simpeg_pegawai.nama as nama',
+                'simpeg_pegawai.nip as nip',
+                DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_responden'),
+                DB::raw('COUNT(*) as total_responses'),
+                DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as avg_score')
+            )
+            ->groupBy('simpeg_pegawai.id', 'simpeg_pegawai.nama', 'simpeg_pegawai.nip');
 
-        if ($kode_prodi_kaprodi) {
-            $scoreQuery->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi_kaprodi);
-        }
+        $allDosenScores = $scoreQuery->get();
 
-        $scoreRaw = $scoreQuery->select('simpeg_pegawai.nama','simpeg_pegawai.nip', DB::raw('AVG(edom_jawaban.jawaban) as avg_score'))
-            ->groupBy('simpeg_pegawai.id','simpeg_pegawai.nama','simpeg_pegawai.nip')
-            ->orderBy('avg_score','desc')->get();
+        // Filter kuorum >= 3 (fallback jika data sedikit)
+        $quorumDosen = $allDosenScores->filter(fn($d) => $d->total_responden >= 3);
+        $dosenPool = $quorumDosen->count() >= 3 ? $quorumDosen : $allDosenScores;
 
-        $topList = $scoreRaw->take(3)->map(fn($r)=>['nama'=>$r->nama,'nip'=>$r->nip,'nilai'=>round($r->avg_score,2)])->values();
-        $bottomList = $scoreRaw->sortBy('avg_score')->take(3)->map(fn($r)=>['nama'=>$r->nama,'nip'=>$r->nip,'nilai'=>round($r->avg_score,2)])->values();
+        $topList = $dosenPool->sortByDesc('avg_score')->take(5)->map(function($r) {
+            $avg = round($r->avg_score, 2);
+            return [
+                'id_pegawai' => $r->id_pegawai,
+                'nama'       => $r->nama,
+                'nip'        => $r->nip ?: '-',
+                'nilai'      => $avg,
+                'percent'    => round(($avg / 4) * 100, 2),
+                'responden'  => (int)$r->total_responden
+            ];
+        })->values();
 
-        return response()->json(['pieData'=>$pieData,'total'=>$total,'topList'=>$topList,'bottomList'=>$bottomList]);
+        $bottomList = $dosenPool->sortBy('avg_score')->take(5)->map(function($r) {
+            $avg = round($r->avg_score, 2);
+            return [
+                'id_pegawai' => $r->id_pegawai,
+                'nama'       => $r->nama,
+                'nip'        => $r->nip ?: '-',
+                'nilai'      => $avg,
+                'percent'    => round(($avg / 4) * 100, 2),
+                'responden'  => (int)$r->total_responden
+            ];
+        })->values();
+
+        return response()->json([
+            'soal_info' => $soalInfo,
+            'summary' => [
+                'total_answers'   => $total,
+                'total_valid'     => $totalValid,
+                'total_na'        => $totalNa,
+                'total_mhs'       => $totalMhs,
+                'avg_score'       => $avgScore,
+                'percent'         => $mutuPercent,
+                'predikat'        => $predikat,
+                'badge'           => $badgeClass
+            ],
+            'pieData'    => $pieData,
+            'total'      => $total,
+            'topList'    => $topList,
+            'bottomList' => $bottomList
+        ]);
     }
 
     public function getSoalForReport(Request $request)
     {
-        $id_mreg = Session::get('id_mreg');
-        $soal = DB::table('edom_soal')
-            ->where('id_mreg', $id_mreg)
-            ->orderBy('id_soal', 'asc')
-            ->select('id_soal', 'pertanyaan')
+        $id_mreg       = $request->input('id_mreg', Session::get('id_mreg'));
+        $kode_fakultas = $request->input('kode_fakultas');
+        $kode_prodi    = $request->input('kode_prodi');
+
+        if (Session::get('is_kaprodi')) {
+            $kode_prodi = Session::get('kode_program_studi');
+        }
+
+        if (!$id_mreg) {
+            $id_mreg = DB::table('akd_mreg')->orderBy('id_mreg', 'desc')->value('id_mreg');
+        }
+
+        // 1. Ambil daftar butir soal
+        $soalList = DB::table('edom_soal')
+            ->leftJoin('edom_komponen_penilaian', 'edom_soal.id_komponen_penilaian', '=', 'edom_komponen_penilaian.id_komponen_penilaian')
+            ->where('edom_soal.id_mreg', $id_mreg)
+            ->orderBy('edom_soal.id_soal', 'asc')
+            ->select(
+                'edom_soal.id_soal',
+                'edom_soal.pertanyaan',
+                'edom_soal.id_komponen_penilaian',
+                DB::raw('COALESCE(edom_komponen_penilaian.nama_komponen, "Umum") as nama_komponen')
+            )
             ->get();
 
-        return response()->json($soal);
+        // 2. Agregasikan rata-rata nilai untuk setiap soal (jika with_stats diminta)
+        if ($request->boolean('with_stats', true)) {
+            $statsRaw = DB::table('edom_jawaban')
+                ->join('akd_kelas_kuliah', 'edom_jawaban.id_kelas', '=', 'akd_kelas_kuliah.id_kelas')
+                ->join('akd_penawaran_matakuliah', 'akd_kelas_kuliah.id_tawar', '=', 'akd_penawaran_matakuliah.id_tawar')
+                ->leftJoin('akd_program_studi', 'akd_penawaran_matakuliah.kode_program_studi', '=', 'akd_program_studi.kode_program_studi')
+                ->where('edom_jawaban.id_mreg', $id_mreg)
+                ->when($kode_prodi, function($q) use ($kode_prodi) {
+                    return $q->where('akd_penawaran_matakuliah.kode_program_studi', $kode_prodi);
+                })
+                ->when($kode_fakultas, function($q) use ($kode_fakultas) {
+                    return $q->where('akd_program_studi.kode_fakultas', $kode_fakultas);
+                })
+                ->select(
+                    'edom_jawaban.id_soal',
+                    DB::raw('COUNT(DISTINCT edom_jawaban.user_id) as total_mhs'),
+                    DB::raw('COUNT(CASE WHEN edom_jawaban.jawaban > 0 THEN 1 END) as valid_count'),
+                    DB::raw('COUNT(CASE WHEN edom_jawaban.jawaban = 0 THEN 1 END) as na_count'),
+                    DB::raw('AVG(CASE WHEN edom_jawaban.jawaban > 0 THEN edom_jawaban.jawaban ELSE NULL END) as avg_score')
+                )
+                ->groupBy('edom_jawaban.id_soal')
+                ->get();
+
+            $soalList = $soalList->map(function($s) use ($statsRaw) {
+                $stat = $statsRaw->firstWhere('id_soal', $s->id_soal);
+                $avg = $stat && $stat->avg_score !== null ? round((float)$stat->avg_score, 2) : 0;
+                $percent = round(($avg / 4) * 100, 2);
+
+                $predikat = 'Kurang';
+                $badge = 'danger';
+                if ($avg >= 3.50) {
+                    $predikat = 'Sangat Sesuai';
+                    $badge = 'success';
+                } elseif ($avg >= 3.00) {
+                    $predikat = 'Sesuai';
+                    $badge = 'info';
+                } elseif ($avg >= 2.00) {
+                    $predikat = 'Cukup';
+                    $badge = 'warning';
+                }
+
+                return [
+                    'id_soal'        => $s->id_soal,
+                    'pertanyaan'     => $s->pertanyaan,
+                    'id_komponen'    => $s->id_komponen_penilaian,
+                    'nama_komponen'  => $s->nama_komponen,
+                    'total_mhs'      => $stat ? (int)$stat->total_mhs : 0,
+                    'valid_count'    => $stat ? (int)$stat->valid_count : 0,
+                    'na_count'       => $stat ? (int)$stat->na_count : 0,
+                    'avg_score'      => $avg,
+                    'percent'        => $percent,
+                    'predikat'       => $predikat,
+                    'badge'          => $badge
+                ];
+            });
+        }
+
+        return response()->json($soalList);
     }
 
 

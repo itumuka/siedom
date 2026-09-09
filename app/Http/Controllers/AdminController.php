@@ -61,8 +61,11 @@ class AdminController extends Controller
 
     public function reportSoal()
     {
+        $fakultas = DB::table('akd_fakultas')->select('kode_fakultas', 'nama_fakultas')->get();
+        $prodi = DB::table('akd_program_studi')->select('kode_program_studi', 'nama_program_studi', 'kode_fakultas')->get();
+        $mregList = DB::table('akd_mreg')->orderBy('id_mreg', 'desc')->take(10)->get();
 
-        return view('admin.report.persoal');
+        return view('admin.report.persoal', compact('fakultas', 'prodi', 'mregList'));
     }
 
     public function detailKelasChart($id_kelas)
